@@ -10,3 +10,5 @@ export COUNTRY="MX"
 export CUSTOMER="outpostnosara"
 export COVERAGE_MIN=80
 export COVERAGE_PRECISION=2
+export OPTIONS="--load=multi_pms_properties"
+export INSTALL_OPTIONS="--load=multi_pms_properties"
