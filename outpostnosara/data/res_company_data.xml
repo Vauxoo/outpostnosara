@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+    <record id="data_res_partner_invoice_address_outpostnosara" model="res.partner">
+        <field name="type">invoice</field>
+        <field name="parent_id" ref="base.main_partner"/>
+        <field name="street">Guanacaste</field>
+        <field name="city">Nosara</field>
+        <field name="zip">50206</field>
+        <field name="phone">+1 727 3853653</field>
+        <field name="email">sarah@outpostnosara.com</field>
+        <field name="state_id" ref="base.state_G"/>
+        <field name="country_id" eval="ref('base.cr')"/>
+    </record>
+
+    <record id="base.main_company" model="res.company">
+        <field name="name">Outpost Nosara</field>
+        <field name="street">Guanacaste</field>
+        <field name="zip">50206</field>
+        <field name="city">Nosara</field>
+        <field name="phone">+1 727 3853653</field>
+        <field name="vat">3102807669</field>
+        <field name="email">sarah@outpostnosara.com</field>
+        <field name="website">https://outpostnosara.com/</field>
+        <field name="currency_id" ref="base.CRC"/>
+        <field name="state_id" ref="base.state_G"/>
+        <field name="country_id" ref="base.cr"/>
+        <field name="logo" type="base64" file="outpostnosara/static/img/logo.png"/>
+    </record>
+
+</odoo>
