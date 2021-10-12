@@ -9,3 +9,7 @@
 	path = costarica
 	url = git@git.vauxoo.com:vauxoo/costarica.git
 	branch = 14.0
+[submodule "pms"]
+	path = pms
+	url = git@github.com:Vauxoo/pms.git
+	branch = 14.0
