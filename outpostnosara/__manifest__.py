@@ -29,11 +29,13 @@
         'report_xlsx_helper',
         'pms_housekeeping',
         'pms_rooming_xls',
+        'maintenance',
     ],
     'test': [
     ],
     'data': [
         'data/res_company_data.xml',
+        'views/hr_employee_views.xml',
     ],
     'demo': [
     ],
