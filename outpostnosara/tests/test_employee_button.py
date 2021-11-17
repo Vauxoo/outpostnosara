@@ -37,8 +37,8 @@ class TestButtonEmployee(TransactionCase):
         self.test_hk_employee = self.env['hr.employee'].search([('name', '=', 'Jon Doe')])
         count_empl = self.test_hk_employee.housekeeping_task
         self.assertEqual(count_empl, 2)
-        housekeeper_id = self.env['pms.housekeeping'].search(
-            self.test_hk_employee.activities_housekeeping()['domain']).employee_id.id
+        hk_act = self.test_hk_employee.activities_housekeeping().get('domain')
+        housekeeper_id = self.env['pms.housekeeping'].search(hk_act).employee_id.id
         employee_id = self.test_hk_employee.id
         self.assertEqual(housekeeper_id, employee_id)
 
@@ -52,26 +52,7 @@ class TestButtonEmployee(TransactionCase):
         self.test_mt_employee = self.env['hr.employee'].search([('name', '=', 'Jon Doe')])
         count_empl = self.test_mt_employee.maintenance_task
         self.assertEqual(count_empl, 1)
-        maintainer_id = self.env['maintenance.request'].search(
-            self.test_mt_employee.activities_maintenance()['domain']).user_id.id
+        mt_act = self.test_mt_employee.activities_maintenance().get('domain')
+        maintainer_id = self.env['maintenance.request'].search(mt_act).user_id.id
         employee_id = self.test_mt_employee.user_id.id
         self.assertEqual(maintainer_id, employee_id)
-
-    def test_003_project_button(self):
-        """ Testing the number of tasks assigned to the employee on the account.analytic.line model.
-        """
-        self.pt_account = self.env['account.analytic.account'].create({
-            'name': 'account #1',
-        })
-        self.pt_task = self.env['account.analytic.line'].create({
-            'name': 'task #1',
-            'account_id': self.pt_account.id,
-            'employee_id': self.employee.id,
-        })
-        self.test_pt_employee = self.env['hr.employee'].search([('name', '=', 'Jon Doe')])
-        count_empl = self.test_pt_employee.project_task
-        self.assertEqual(count_empl, 1)
-        projector_id = self.env['account.analytic.line'].search(
-            self.test_pt_employee.activities_project()['domain']).employee_id.id
-        employee_id = self.test_pt_employee.id
-        self.assertEqual(projector_id, employee_id)

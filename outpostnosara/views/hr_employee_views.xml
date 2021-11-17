@@ -13,12 +13,6 @@
                         <span class="o_stat_text">Housekeeping Task</span>
                     </div>
                 </button>
-                <button name="activities_project" type="object" class="oe_stat_button" icon="fa-calendar">
-                    <div class="o_stat_info">
-                        <field name="project_task" class="o_stat_value"/>
-                        <span class="o_stat_text">Project Task</span>
-                    </div>
-                </button>
                 <button name="activities_maintenance" type="object" class="oe_stat_button" icon="fa-calendar">
                     <div class="o_stat_info">
                         <field name="maintenance_task" class="o_stat_value"/>

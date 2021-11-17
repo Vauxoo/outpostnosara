@@ -9,7 +9,7 @@
     'website': 'https://www.vauxoo.com',
     'license': 'LGPL-3',
     'category': 'Installer',
-    'version': '14.0.1.0.1',
+    'version': '14.0.1.0.2',
     'depends': [
         'l10n_cr',
         'l10n_cr_edi',
@@ -30,6 +30,7 @@
         'pms_housekeeping',
         'pms_rooming_xls',
         'maintenance',
+        'crm',
     ],
     'test': [
     ],
