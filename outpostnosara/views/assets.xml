@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Assets frontend -->
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Assets frontend" priority="1">
+        <!-- SCSS -->
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/outpostnosara/static/src/scss/main.scss" />
+        </xpath>
+        <!-- JS -->
+        <xpath expr="//script[last()]" position="after">
+        </xpath>
+    </template>
+
+</odoo>

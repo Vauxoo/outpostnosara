@@ -38,6 +38,8 @@
         'data/res_company_data.xml',
         'views/hr_employee_views.xml',
         'views/sale_subscription_views.xml',
+        'views/assets.xml',
+        'views/templates/website_sale_templates.xml',
     ],
     'demo': [
     ],

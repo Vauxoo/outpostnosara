@@ -1,0 +1,36 @@
+// =============================================
+// =========== DEFINE MAIN VARIABLES ===========
+// =============================================
+$max-width-form: 640px;
+
+
+// =============================================
+// === DEFINE MEMBERSHIP APPLICATION STYLES ====
+// =============================================
+.ou-membership {
+    max-width: $max-width-form;
+    margin-inline: auto;
+
+    section {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+        padding-block: 1rem;
+    }
+
+    .js_membership_type {
+        .form-row {
+            border: 1px solid #CED4DA;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 0px;
+            padding-block: 0.5rem;
+        }
+    }
+
+}
+
+// =============================================
+// ============ DEFINE MAIN STYLES =============
+// =============================================
+
