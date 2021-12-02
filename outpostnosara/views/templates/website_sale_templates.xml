@@ -8,7 +8,7 @@
 
                 <div id="wrap">
                     <div class="container">
-                        <form action="/shop/address" method="post" class="ou-membership">
+                        <form action="/shop/address" method="post" class="ou ou-membership">
 
                             <section class="js_personal_info">
                                 <h4 class="" >Personal info</h4>

@@ -9,6 +9,8 @@
         </xpath>
         <!-- JS -->
         <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/outpostnosara/static/src/js/daterangepicker.js" />
+            <script type="text/javascript" src="/outpostnosara/static/src/js/reservation_widget.js" />
         </xpath>
     </template>
 

@@ -5,9 +5,10 @@ $max-width-form: 640px;
 
 
 // =============================================
-// === DEFINE MEMBERSHIP APPLICATION STYLES ====
+// ============ DEFINE MAIN STYLES =============
 // =============================================
-.ou-membership {
+
+.ou {
     max-width: $max-width-form;
     margin-inline: auto;
 
@@ -15,7 +16,13 @@ $max-width-form: 640px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.16);
         padding-block: 1rem;
     }
+}
 
+// =============================================
+// === DEFINE MEMBERSHIP APPLICATION STYLES ====
+// =============================================
+
+.ou-membership {
     .js_membership_type {
         .form-row {
             border: 1px solid #CED4DA;
@@ -27,10 +34,14 @@ $max-width-form: 640px;
             padding-block: 0.5rem;
         }
     }
-
 }
 
 // =============================================
-// ============ DEFINE MAIN STYLES =============
+// === DEFINE RESERVATION APPLICATION STYLES ====
 // =============================================
+
+.ou-reservation {
+
+}
+
 

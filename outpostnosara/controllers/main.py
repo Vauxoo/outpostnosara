@@ -6,7 +6,7 @@ from odoo.addons.website_sale.controllers.main import WebsiteSale
 
 
 class WebsiteOutpost(WebsiteSale):
-    @http.route('/outpost/membership', type='http', auth="user", website=True)
+    @http.route('/outpost/membership', type='http', auth="public", website=True)
     def membership(self, **post):
         """Show Membership Application Form."""
         pricelist = self._get_pricelist_context()[1]
@@ -23,3 +23,17 @@ class WebsiteOutpost(WebsiteSale):
         render_values['memberships'] = memberships
         render_values['pricelist'] = pricelist
         return request.render("outpostnosara.membership", render_values)
+
+    @http.route('/outpost/reservation', type='http', auth="user", website=True)
+    def reservation(self, **post):
+        """Show Membership Application Form."""
+        render_values = {
+            'room_types': request.env['pms.room.type'].search([]),
+            'reservation_types': [
+                {'id': 1, 'name': 'By hour'},
+                {'id': 2, 'name': '1/2 Day'},
+                {'id': 3, 'name': 'Daily'},
+            ]
+        }
+        render_values['room_types'] = request.env['pms.room.type'].search([])
+        return request.render("outpostnosara.reservation", render_values)
