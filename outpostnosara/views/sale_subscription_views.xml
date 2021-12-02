@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="sale_subscription_view_form" model="ir.ui.view">
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_form"/>
+        <field name="name">sale_subscription.form.outpostnosara</field>
+        <field name="model">sale.subscription</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_token_id']" position="after">
+                <field name="room_type_id"/>
+                <field name="reservation_id"/>
+                <field name="folio_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_subscription_template_view_form" model="ir.ui.view">
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_template_view_form"/>
+        <field name="name">sale_subscription_template.form.outpostnosara</field>
+        <field name="model">sale.subscription.template</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="room_type_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+

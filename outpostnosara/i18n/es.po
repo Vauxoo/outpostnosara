@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* outpostnosara
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-12-02 21:11+0000\n"
+"PO-Revision-Date: 2021-12-02 21:11+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.view_employee_form
+msgid "<span class=\"o_stat_text\">Housekeeping Task</span>"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.view_employee_form
+msgid "<span class=\"o_stat_text\">Maintenance Task</span>"
+msgstr ""
+
+#. module: outpostnosara
+#: code:addons/outpostnosara/models/sale_subscription.py:0
+#, python-format
+msgid ""
+"An error occurred during the creation of the reservation\n"
+"\n"
+"%s"
+msgstr ""
+"Un error ocurrió durante la creación de la reservación\n"
+"\n"
+"%s"
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_order__display_name
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__display_name
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription_template__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: outpostnosara
+#: model:ir.model,name:outpostnosara.model_hr_employee
+msgid "Employee"
+msgstr "Empleado"
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__folio_id
+msgid "Folio"
+msgstr "Folio"
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__housekeeping_task
+msgid "Housekeeping Tasks"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__id
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_order__id
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__id
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription_template__id
+msgid "ID"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,help:outpostnosara.field_sale_subscription__room_type_id
+msgid "If set will try to create a reservation when the subscription starts."
+msgstr "Si se configura intentará crear una reservación cuando inicie la suscripción."
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_hr_employee____last_update
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_order____last_update
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription____last_update
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription_template____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__maintenance_task
+msgid "Maintenance Tasks"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,help:outpostnosara.field_sale_subscription__folio_id
+msgid "PMS Folio related to this subscription."
+msgstr "Folio PMS relacionado a esta suscripción."
+
+#. module: outpostnosara
+#: model:ir.model.fields,help:outpostnosara.field_sale_subscription__reservation_id
+msgid "PMS Reservation related to this subscription."
+msgstr "reservación PMS relacionada a esta suscripción."
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__reservation_id
+msgid "Reservation"
+msgstr "reservación"
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__room_type_id
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription_template__room_type_id
+msgid "Room Type"
+msgstr "Tipo de Habitación"
+
+#. module: outpostnosara
+#: model:ir.model,name:outpostnosara.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: outpostnosara
+#: model:ir.model,name:outpostnosara.model_sale_subscription
+msgid "Subscription"
+msgstr "Suscripción"
+
+#. module: outpostnosara
+#: model:ir.model,name:outpostnosara.model_sale_subscription_template
+msgid "Subscription Template"
+msgstr "Plantilla de suscripción"

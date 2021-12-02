@@ -37,6 +37,7 @@
     'data': [
         'data/res_company_data.xml',
         'views/hr_employee_views.xml',
+        'views/sale_subscription_views.xml',
     ],
     'demo': [
     ],
