@@ -22,7 +22,6 @@
         <field name="vat">3102807669</field>
         <field name="email">sarah@outpostnosara.com</field>
         <field name="website">https://outpostnosara.com/</field>
-        <field name="currency_id" ref="base.CRC"/>
         <field name="state_id" ref="base.state_G"/>
         <field name="country_id" ref="base.cr"/>
         <field name="logo" type="base64" file="outpostnosara/static/img/logo.png"/>
