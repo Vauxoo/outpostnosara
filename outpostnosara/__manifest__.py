@@ -16,6 +16,7 @@
         'account_accountant',
         'helpdesk',
         'hr_holidays',
+        'hr_attendance',
         'iot',
         'mass_mailing',
         'point_of_sale',
