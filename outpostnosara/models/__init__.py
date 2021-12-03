@@ -8,3 +8,5 @@ from . import sale_order
 from . import pms_reservation
 from . import pms_reservation_line
 from . import website
+from . import pms_reservation
+from . import pm_property
