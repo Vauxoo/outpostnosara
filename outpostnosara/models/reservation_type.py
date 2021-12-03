@@ -9,6 +9,12 @@ class ReservationType(models.Model):
 
     name = fields.Char(help='Reservation Type')
     code = fields.Char(size=4)
+    time_type = fields.Selection(
+        selection=[
+            ('daily', "Daily"),
+            ('hourly', "Hourly"),
+        ],
+        help="Type of time of the reservation, in case of hourly it will compute prices based on reserved hours.")
 
 
 class RoomTypeLines(models.Model):
@@ -17,15 +23,14 @@ class RoomTypeLines(models.Model):
 
     room_type_id = fields.Many2one(
         'pms.room.type',
-        string="Room Type",
         help="Room Type.",
     )
     reservation_type_id = fields.Many2one(
         'pms.reservation.type',
-        string="Reservation Type",
         help="Reservation Type.",
     )
     price = fields.Float(required=True, digits='Product Price', default=0.0)
+    name = fields.Char(related='reservation_type_id.name')
 
 
 class PmsRoomType(models.Model):

@@ -16,6 +16,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "/month"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "1/2 Day"
+msgstr "1/2 Día"
+
+#. module: outpostnosara
 #: model_terms:ir.ui.view,arch_db:outpostnosara.view_employee_form
 msgid "<span class=\"o_stat_text\">Housekeeping Task</span>"
 msgstr ""
@@ -23,6 +33,29 @@ msgstr ""
 #. module: outpostnosara
 #: model_terms:ir.ui.view,arch_db:outpostnosara.view_employee_form
 msgid "<span class=\"o_stat_text\">Maintenance Task</span>"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Address"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Afghanistan"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Afternoon"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid ""
+"All memberships provide access to all communal work and social spaces, "
+"wellness and productivity amenities and curated member events. Memberships "
+"allow for guests accompanied by members."
 msgstr ""
 
 #. module: outpostnosara
@@ -38,7 +71,91 @@ msgstr ""
 "%s"
 
 #. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Armed Forces Americas"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Birthday"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "By hour"
+msgstr "Por Hora"
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Checkin"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Checkout"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Choose"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "City"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Confirm email address"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Contact"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Country"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type__create_uid
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type__create_date
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type__type_lines_ids
+msgid "Custom Values"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields.selection,name:outpostnosara.selection__pms_reservation_type__time_type__daily
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Daily"
+msgstr "Diario"
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Day"
+msgstr "Día"
+
+#. module: outpostnosara
 #: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation__display_name
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_line__display_name
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type__display_name
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type__display_name
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__display_name
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_order__display_name
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__display_name
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription_template__display_name
@@ -46,14 +163,39 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Email address"
+msgstr ""
+
+#. module: outpostnosara
 #: model:ir.model,name:outpostnosara.model_hr_employee
 msgid "Employee"
 msgstr "Empleado"
 
 #. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Female"
+msgstr ""
+
+#. module: outpostnosara
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__folio_id
 msgid "Folio"
-msgstr "Folio"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Gender"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Home address"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields.selection,name:outpostnosara.selection__pms_reservation_type__time_type__hourly
+msgid "Hourly"
+msgstr "Horario"
 
 #. module: outpostnosara
 #: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__housekeeping_task
@@ -62,19 +204,31 @@ msgstr ""
 
 #. module: outpostnosara
 #: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__id
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation__id
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_line__id
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type__id
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type__id
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__id
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_order__id
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__id
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription_template__id
 msgid "ID"
-msgstr ""
+msgstr "Identificación"
 
 #. module: outpostnosara
 #: model:ir.model.fields,help:outpostnosara.field_sale_subscription__room_type_id
 msgid "If set will try to create a reservation when the subscription starts."
-msgstr "Si se configura intentará crear una reservación cuando inicie la suscripción."
+msgstr ""
+"Si se configura intentará crear una reservación cuando inicie la "
+"suscripción."
 
 #. module: outpostnosara
 #: model:ir.model.fields,field_description:outpostnosara.field_hr_employee____last_update
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation____last_update
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_line____last_update
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type____last_update
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type____last_update
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines____last_update
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_order____last_update
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription____last_update
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription_template____last_update
@@ -82,8 +236,42 @@ msgid "Last Modified on"
 msgstr "Última modificación el"
 
 #. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type__write_uid
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type__write_date
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: outpostnosara
 #: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__maintenance_task
 msgid "Maintenance Tasks"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Male"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Membership type"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Morning"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type__name
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__name
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Name"
 msgstr ""
 
 #. module: outpostnosara
@@ -97,20 +285,92 @@ msgid "PMS Reservation related to this subscription."
 msgstr "reservación PMS relacionada a esta suscripción."
 
 #. module: outpostnosara
-#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__reservation_id
-msgid "Reservation"
-msgstr "reservación"
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Personal info"
+msgstr ""
 
 #. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Phone number"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation__type_price
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__price
+msgid "Price"
+msgstr "Precio"
+
+#. module: outpostnosara
+#: model:ir.model,name:outpostnosara.model_pms_reservation
+#: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__reservation_id
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Reservation"
+msgstr "Reservación"
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Reservation Page"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation__type_id
+msgid "Reservation Price Type"
+msgstr "Tipo de Precio de Reservación"
+
+#. module: outpostnosara
+#: model:ir.model,name:outpostnosara.model_pms_reservation_type
+#: model:ir.model,name:outpostnosara.model_pms_room_type_lines
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__reservation_type_id
+#: model:ir.model.fields,help:outpostnosara.field_pms_reservation_type__name
+#: model:ir.model.fields,help:outpostnosara.field_pms_room_type_lines__name
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+#: model_terms:ir.ui.view,arch_db:outpostnosara.room_type_view_form
+msgid "Reservation Type"
+msgstr "Tipo de Reservación"
+
+#. module: outpostnosara
+#: model:ir.model.fields,help:outpostnosara.field_pms_room_type_lines__reservation_type_id
+msgid "Reservation Type."
+msgstr "Tipo de Reservación."
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.room_type_view_form
+msgid "Reservation Types"
+msgstr "Tipos de Reservación"
+
+#. module: outpostnosara
+#: model:ir.model,name:outpostnosara.model_pms_reservation_line
+msgid "Reservations by day"
+msgstr "Reservas por día"
+
+#. module: outpostnosara
+#: model:ir.model,name:outpostnosara.model_pms_room_type
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_room_type_lines__room_type_id
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription__room_type_id
 #: model:ir.model.fields,field_description:outpostnosara.field_sale_subscription_template__room_type_id
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
 msgid "Room Type"
 msgstr "Tipo de Habitación"
+
+#. module: outpostnosara
+#: model:ir.model.fields,help:outpostnosara.field_pms_room_type_lines__room_type_id
+msgid "Room Type."
+msgstr "Tipo de Habitación."
 
 #. module: outpostnosara
 #: model:ir.model,name:outpostnosara.model_sale_order
 msgid "Sales Order"
 msgstr "Pedido de venta"
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "Shop - Select Payment Acquirer"
+msgstr ""
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "State"
+msgstr "Estado"
 
 #. module: outpostnosara
 #: model:ir.model,name:outpostnosara.model_sale_subscription
@@ -121,3 +381,26 @@ msgstr "Suscripción"
 #: model:ir.model,name:outpostnosara.model_sale_subscription_template
 msgid "Subscription Template"
 msgstr "Plantilla de suscripción"
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
+msgid "Time"
+msgstr ""
+
+#. module: outpostnosara
+#: model:ir.model.fields,field_description:outpostnosara.field_pms_reservation_type__time_type
+msgid "Time Type"
+msgstr "Tipo de Tiempo"
+
+#. module: outpostnosara
+#: model:ir.model.fields,help:outpostnosara.field_pms_reservation_type__time_type
+msgid ""
+"Type of time of the reservation, in case of hourly it will compute prices "
+"based on reserved hours."
+msgstr "Tipo de tiempo de la reservación, en caso de horario se computaran los precios "
+"basado en las horas reservadas."
+
+#. module: outpostnosara
+#: model_terms:ir.ui.view,arch_db:outpostnosara.membership
+msgid "ZIP"
+msgstr ""
