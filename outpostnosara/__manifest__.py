@@ -38,9 +38,14 @@
         'data/res_company_data.xml',
         'views/hr_employee_views.xml',
         'views/sale_subscription_views.xml',
+        'data/reservation_type.xml',
         'views/assets.xml',
+        'views/pms_room_type_views.xml',
         'views/templates/website_sale_templates.xml',
         'views/templates/portal_templates.xml',
+
+        # Security
+        'security/ir.model.access.csv',
     ],
     'demo': [
     ],

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+    <record id="reservation_type_by_day" model="pms.reservation.type">
+        <field name="name">Daily</field>
+        <field name="code">day</field>
+    </record>
+
+    <record id="reservation_type_by_hour" model="pms.reservation.type">
+        <field name="name">By hour</field>
+        <field name="code">hour</field>
+    </record>
+
+    <record id="reservation_type_by_half_day" model="pms.reservation.type">
+        <field name="name">1/2 Day</field>
+        <field name="code">half</field>
+    </record>
+
+    <record id="reservation_type_by_year" model="pms.reservation.type">
+        <field name="name">Subscription</field>
+        <field name="code">year</field>
+    </record>
+
+</odoo>
