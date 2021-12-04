@@ -3,13 +3,13 @@
 from odoo import fields, models
 
 
-
 class ReservationType(models.Model):
     _name = 'pms.reservation.type'
     _description = 'Reservation Type'
 
-    name = fields.Char(string='Name', help='Reservation Type')
+    name = fields.Char(help='Reservation Type')
     code = fields.Char(size=4)
+
 
 class RoomTypeLines(models.Model):
     _name = 'pms.room.type.lines'
@@ -25,7 +25,7 @@ class RoomTypeLines(models.Model):
         string="Reservation Type",
         help="Reservation Type.",
     )
-    price = fields.Float('Price', required=True, digits='Product Price', default=0.0)
+    price = fields.Float(required=True, digits='Product Price', default=0.0)
 
 
 class PmsRoomType(models.Model):

@@ -19,6 +19,12 @@ odoo.define("outpostnosara.daterangepicker", function (require) {
                     autoUpdateInput: false,
                     locale: {
                         cancelLabel: 'Clear'
+                    },
+                    ...(this.$el.data('singledatepicker') && {singleDatePicker: true}),
+                    isInvalidDate:(date) => {
+                        var invalid_dates = this.$el.data('dom:invalidDates') || [];
+                        if (invalid_dates.includes(date.format('YYYY-MM-DD')))
+                            return true;
                     }
                 });
             });

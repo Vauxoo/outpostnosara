@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+    <t t-name="outpostnosara.room_select">
+        <option value="">Choose</option>
+        <t t-foreach='room_ids' t-as='room'>
+            <option t-att-value="room.id" t-esc='room.name'/>
+        </t>
+    </t>
+
+    <t t-name="outpostnosara.reservation_select">
+        <option value="">Choose</option>
+        <t t-foreach='reservation_types' t-as='reservation_type'>
+            <option t-att-data-code="reservation_type.code" t-att-value="reservation_type.id" t-esc='reservation_type.name'/>
+        </t>
+    </t>
+</templates>

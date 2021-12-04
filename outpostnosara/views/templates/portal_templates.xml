@@ -15,24 +15,31 @@
                                 <div class="form-group col-md-6">
                                     <label class="col-form-label" for="room_type_id">Room Type</label>
                                     <select id="room_type_id" name="room_type_id" class="form-control">
-                                        <option>Choose</option>
                                         <t t-foreach='room_types' t-as='room_type'>
                                             <option t-att-value="room_type.id" t-esc='room_type.name'/>
                                         </t>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="type">Reservation Type</label>
-                                    <select id="gender" name="type" class="form-control">
+                                    <label class="col-form-label" for="room_id">Room</label>
+                                    <select id="room_id" name="room_id" class="form-control">
+                                        <t t-foreach='room_ids' t-as='room'>
+                                            <option t-att-value="room.id" t-esc='room.name'/>
+                                        </t>
+                                    </select>
+                                </div>
+                                <div class="form-group col-12">
+                                    <label class="col-form-label" for="reservation_type_id">Reservation Type</label>
+                                    <select id="reservation_type_id" name="reservation_type_id" class="form-control">
                                         <option>Choose</option>
                                         <t t-foreach='reservation_types' t-as='reservation_type'>
-                                            <option t-att-value="reservation_type['id']" t-esc="reservation_type['name']"/>
+                                            <option t-att-data-code="reservation_type.code" t-att-value="reservation_type.id" t-esc='reservation_type.name'/>
                                         </t>
                                     </select>
                                 </div>
                             </div>
                         </section>
-                        <section class="js_reservation_3 d-none">
+                        <section class="js_reservation_day d-none">
                             <h4 class="" >Daily</h4>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -45,12 +52,12 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="js_reservation_1 d-none">
+                        <section class="js_reservation_hour d-none">
                             <h4 class="" >By hour</h4>
                             <div class="form-row">
                                 <div class="form-group col-12">
                                     <label class="col-form-label" for="day">Day</label>
-                                    <input type="date" name="day" class="form-control "/>
+                                    <input type="text" name="day" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="col-form-label" for="checkin">Checkin</label>
@@ -62,12 +69,12 @@
                                 </div>
                             </div>
                         </section>
-                        <section class="js_reservation_2 d-none">
+                        <section class="js_reservation_half d-none">
                             <h4 class="" >1/2 Day</h4>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="col-form-label" for="day">Day</label>
-                                    <input type="date" name="day" class="form-control "/>
+                                    <input type="text" name="day" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="col-form-label" for="checkin">Time</label>
