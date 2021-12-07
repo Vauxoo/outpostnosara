@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+    <record id="membership_type_office" model="crm.tag">
+        <field name="name">Private office annual membership</field>
+    </record>
+    <record id="membership_type_suite" model="crm.tag">
+        <field name="name">Private suite annual membership</field>
+    </record>
+    <record id="membership_type_annual" model="crm.tag">
+        <field name="name">Annual membership only</field>
+    </record>
+    <record id="membership_type_desk" model="crm.tag">
+        <field name="name">Desk annual membership</field>
+    </record>
+</odoo>

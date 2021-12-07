@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="calendar" model="ir.attachment">
+        <field name="name">calendar</field>
+        <field name="type">url</field>
+        <field name="url">/outpostnosara/static/img/calendar.svg</field>
+        <field name="public" eval="True"/>
+    </record>
+    <record id="coffee" model="ir.attachment">
+        <field name="name">coffee</field>
+        <field name="type">url</field>
+        <field name="url">/outpostnosara/static/img/coffee.svg</field>
+        <field name="public" eval="True"/>
+    </record>
+    <record id="home" model="ir.attachment">
+        <field name="name">home</field>
+        <field name="type">url</field>
+        <field name="url">/outpostnosara/static/img/home.svg</field>
+        <field name="public" eval="True"/>
+    </record>
+    <record id="laptop" model="ir.attachment">
+        <field name="name">laptop</field>
+        <field name="type">url</field>
+        <field name="url">/outpostnosara/static/img/laptop.svg</field>
+        <field name="public" eval="True"/>
+    </record>
+</odoo>

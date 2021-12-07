@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="membership_contact" name="Membership Application Contact">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <!--  banner  -->
+                <section class="s_cover pt64 pb96 o_colored_level s_parallax_no_overflow_hidden undefined o_cc o_cc3" data-scroll-background-ratio="0" data-snippet="s_cover" data-name="Cover" data-oe-shape-data="{'shape':'web_editor/Origins/15','flip':['y']}" style="position: relative;">
+                    <div class="o_we_shape o_web_editor_Origins_15" style="background-image: url('/web_editor/shape/web_editor/Origins/15.svg?c4=%23FCFCFA&amp;flip=y'); background-color: rgba(255, 255, 255, 0) !important; background-position: 50% 100%;"/>
+                    <div class="s_allow_columns container">
+                        <h1 style="text-align: center;" class="antonio">
+                            <font style="font-size: 62px; font-weight: bold;">APPLY FOR MEMBERSHIP</font>
+                        </h1>
+                        <p class="lead mx-auto" style="text-align: center;max-width: 540px;">
+                            Please tell us a little about yourself by filling out the form below,
+                            and we'll reach out to schedule a casual chat to take the conversation
+                            further and show you around the club.
+                        </p>
+                    </div>
+                </section>
+                <div class="container">
+                    <!--  Mermbership info  -->
+                    <section id="membership-description">
+                        <div class="row pt64">
+                            <div class="col-12 offset-0 col-md-8 offset-md-2">
+                                <div class="text-center mt-5">
+                                    <h3 class="text-uppercase antonio">Membership Offerings</h3>
+                                    <p class="lead mx-auto">Members are granted full access to all shared work amenities, as well as all social and wellness amenities at Outpost. </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-4 mb-5">
+                            <div class="col-12 col-md-6">
+                                <div class="text-center">
+                                    <img class="img img-fluid icon-square" src="/web/image/outpostnosara.coffee" alt="Social and Wellness Amenities"/>
+                                    <h5 class="text-capitalize font-weight-bold m-2">Social + Wellness Amenities</h5>
+                                    <p class="mb-4"> The shared common areas provide balance throughout the day while nurturing the connection between members and the environment. Store your board in the surf club, enjoy delicious eats and drinks in the cafe and indulge in curated cocktails in our speakeasy bar. </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="text-center">
+                                    <img class="img img-fluid icon-square" src="/web/image/outpostnosara.laptop" alt="Shared Work Amenities"/>
+                                    <h5 class="text-capitalize font-weight-bold m-2">Shared Work Amenities</h5>
+                                    <p class="mb-4"> Our open seating work spaces available throughout Outpost including the Library, Rooftop and Cafe cater to businesses and creative thinkers to come together and share ideas. </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="text-center">
+                                    <img class="img img-fluid icon-square" src="/web/image/outpostnosara.calendar" alt="Programming"/>
+                                    <h5 class="text-capitalize font-weight-bold m-2">Programming</h5>
+                                    <p class="mb-4"> A social calendar of Intelligent Leisure events spanning industries and interests will be hosted both within the club walls, while Outpost’s art gallery spotlights a rotation of curators and artists. </p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="text-center">
+                                    <img class="img img-fluid icon-square" src="/web/image/outpostnosara.home" alt="House Account"/>
+                                    <h5 class="text-capitalize font-weight-bold m-2">House Account</h5>
+                                    <p class="mb-4"> A unique member account serves as your house account for all purchaseswithin the club. </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--  form  -->
+                    <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                        <div class="row mt-5">
+                            <div class="col-12 offset-0 col-md-8 offset-md-2">
+                                <div class="text-center border-top">
+                                    <h3 class="text-uppercase antonio mt96 mb-2">Apply for a Membership</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3 mb-5">
+                            <div class="col-12 offset-0 col-md-8 offset-md-2">
+                                <h4 class="my-3" >Personal Info</h4>
+                                <form id="mermership_contact_form" action="/website_form/" method="post"
+                                    enctype="multipart/form-data" data-model_name="crm.lead" data-success-mode="redirect"
+                                    data-success-page="/contactus-thank-you" class="o_mark_required" data-mark="*"
+                                    data-editable-form="false">
+                                    <div class="form-row d-none">
+                                        <div class="form-group col-12">
+                                            <input type="text" name="name" class="form-control " t-att-value="'Memership Application'"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12 s_website_form_field" data-type="char" data-name="Field">
+                                            <label class="col-form-label" for="contact_name">Name</label>
+                                            <input id="contact_name" type="text" class="form-control s_website_form_input" name="contact_name" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12 s_website_form_field" data-type="char" data-name="Field">
+                                            <label class="col-form-label" for="email_from">Email address</label>
+                                            <input id="email_from" type="email" class="form-control s_website_form_input" name="email_from" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12 s_website_form_field" data-type="char" data-name="Field">
+                                            <label class="col-form-label" for="referred">Referred by</label>
+                                            <input id="referred" type="text" class="form-control s_website_form_input" name="referred" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12 s_website_form_field" data-type="char" data-name="Field">
+                                            <label class="col-form-label" for="tag_ids">Membership Type</label>
+                                            <select id="tag_ids" class="form-control s_website_form_input" name="tag_ids" required="" >
+                                                <t t-foreach="membership_tags" t-as="tag">
+                                                    <option t-att-value="tag.id" t-esc="tag.name"/>
+                                                </t>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12 s_website_form_field" data-type="char" data-name="Field">
+                                            <label class="col-form-label" for="phone">Phone Number</label>
+                                            <input id="phone" type="tel" class="form-control s_website_form_input" name="phone" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12 s_website_form_field" data-type="char" data-name="Field">
+                                            <label class="col-form-label" for="description">Tell us a little bit about yourself</label>
+                                            <textarea id="description" class="form-control s_website_form_input" name="description" required=""></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-12 s_website_form_submit p-lg-0 text-center" data-name="Submit Button">
+                                        <div style="width: 200px;" class="s_website_form_label"/>
+                                        <a href="#" role="button" class="btn btn-primary btn-block text-uppercase s_website_form_send mb-4">Send Application</a>
+                                        <span id="s_website_form_result"></span>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

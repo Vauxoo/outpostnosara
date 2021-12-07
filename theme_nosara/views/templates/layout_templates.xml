@@ -15,7 +15,7 @@
 
     <template id="navbar_toggler" inherit_id="website.navbar_toggler" name="Navbar Toggler">
         <xpath expr="//button/span" position="replace">
-            <img class="img img-fluid" src="/web/image/theme_nosara.menu" alt="Mobile Menu"/>
+            <img class="img img-fluid o_offcanvas_logo_container" src="/web/image/theme_nosara.menu" alt="Mobile Menu"/>
         </xpath>
     </template>
 

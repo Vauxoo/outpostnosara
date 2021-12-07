@@ -9,7 +9,7 @@
     'website': 'https://www.vauxoo.com',
     'license': 'LGPL-3',
     'category': 'Installer',
-    'version': '14.0.1.0.7',
+    'version': '14.0.1.0.8',
     'depends': [
         'l10n_cr',
         'l10n_cr_edi',
@@ -41,6 +41,8 @@
         'data/res_company_data.xml',
         'data/reservation_type.xml',
         'data/website_data.xml',
+        'data/crm_tags.xml',
+        'data/website_crm.xml',
 
         # Views
         'views/hr_employee_views.xml',
@@ -50,8 +52,10 @@
 
         # Website
         'views/assets.xml',
+        'views/images_library.xml',
         'views/templates/portal_templates.xml',
         'views/templates/website_sale_templates.xml',
+        'views/templates/website_application_templates.xml',
 
         # Security
         'security/ir.model.access.csv',

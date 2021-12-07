@@ -75,3 +75,24 @@ class WebsiteOutpost(WebsiteSale):
         reservation = request.website.get_reservation()
         reservation.write(values)
         return reservation.read(['id', 'price_room_services_set'])
+
+
+class OutpostNosaraController(http.Controller):
+
+    @http.route('/membership/apply', type='http', auth="public", website=True)
+    def membership_contact(self, **post):
+        ext_ids = [
+            'outpostnosara.membership_type_office',
+            'outpostnosara.membership_type_suite',
+            'outpostnosara.membership_type_annual',
+            'outpostnosara.membership_type_desk',
+        ]
+        crm_tags = request.env['crm.tag'].sudo()
+        for ext_id in ext_ids:
+            tag = crm_tags.env.ref(ext_id, raise_if_not_found=False)
+            if tag:
+                crm_tags |= tag
+        values = {
+            'membership_tags': crm_tags
+        }
+        return request.render("outpostnosara.membership_contact", values)

@@ -3,7 +3,7 @@
 {
     'name': 'Theme Nosara',
     'summary': 'Nosara Official Theme',
-    'version': '14.0.1.0.2',
+    'version': '14.0.1.0.3',
     'author': 'Vauxoo',
     'website': 'https://www.vauxoo.com',
     'license': 'LGPL-3',
