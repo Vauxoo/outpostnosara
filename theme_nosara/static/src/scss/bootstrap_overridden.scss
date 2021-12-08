@@ -1,0 +1,21 @@
+//------------------------------------------------------------------------------
+// Variables
+//------------------------------------------------------------------------------
+// Navbar
+$navbar-light-color: o-website-value('navbar-color');
+
+// Buttons
+$btn-border-width:            2px;
+$btn-font-weight:             bold;
+$btn-active-box-shadow:       none;
+$btn-focus-width:             0px;
+$btn-border-radius:           24px;
+
+// Inputs
+$input-bg: rgba(0, 0, 0, 0.09);
+
+//------------------------------------------------------------------------------
+// Mixins
+//------------------------------------------------------------------------------
+// Change the btn-outline to fit the layout design
+

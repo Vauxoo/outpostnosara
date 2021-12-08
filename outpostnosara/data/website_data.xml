@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+    <!-- Set Logo -->
+    <record id="website.default_website" model="website">
+        <field name="logo" type="base64" file="outpostnosara/static/img/logo.svg" />
+        <field name="theme_id" ref="base.module_theme_nosara" />
+    </record>
+
+    <!-- Set Theme -->
+    <function model="ir.module.module" name="_theme_load">
+        <value eval="ref('base.module_theme_nosara')" />
+        <value model="website" eval="obj(ref('website.default_website'))" />
+    </function>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- DEFAULT HEADER TEMPLATE -->
+    <template id="template_header_default" inherit_id="website.template_header_default" name="Template Header Default">
+        <!-- CENTER THE MENU -->
+        <xpath expr="//t[@t-call='website.navbar_nav']/t[@t-set='_nav_class']" position="attributes">
+            <attribute name='t-value'>'flex-grow-1 justify-content-center'</attribute>
+        </xpath>
+        <!-- REMOVE ml-lg-auto-->
+        <xpath expr="//t[@t-call='portal.user_dropdown']/t[@t-set='_item_class']" position="attributes">
+            <attribute name='t-value'>'nav-item dropdown'</attribute>
+        </xpath>
+    </template>
+</odoo>

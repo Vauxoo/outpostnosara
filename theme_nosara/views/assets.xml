@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Assets frontend -->
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Assets frontend" priority="1">
+        <!-- SCSS -->
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/theme_nosara/static/src/scss/main.scss" />
+        </xpath>
+        <!-- JS -->
+        <xpath expr="//script[last()]" position="after">
+        </xpath>
+    </template>
+
+    <!-- SCSS variables  -->
+    <template id="_assets_primary_variables" inherit_id="website._assets_primary_variables" name="SCSS variables of theme">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/theme_nosara/static/src/scss/fonts.scss" />
+            <link rel="stylesheet" type="text/scss" href="/theme_nosara/static/src/scss/primary_variables.scss" />
+        </xpath>
+    </template>
+
+    <!-- Bootstrap variables  -->
+    <template id="_assets_frontend_helpers" inherit_id="website._assets_frontend_helpers" name="Bootstrap variables of theme">
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/theme_nosara/static/src/scss/bootstrap_overridden.scss" />
+        </xpath>
+    </template>
+
+</odoo>

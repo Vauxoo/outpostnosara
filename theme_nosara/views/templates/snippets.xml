@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Baner snippet -->
+    <template id="s_banner_nosara" name="Banner Nosara">
+        <section class="s_cover pt64 pb96 o_colored_level s_parallax_no_overflow_hidden undefined o_cc o_cc3" data-scroll-background-ratio="0" data-snippet="s_cover" data-name="Cover" data-oe-shape-data="{'shape':'web_editor/Origins/15','flip':['y']}" style="position: relative;">
+            <div class="o_we_shape o_web_editor_Origins_15" style="background-image: url('/web_editor/shape/web_editor/Origins/15.svg?c4=%23FCFCFA&amp;flip=y'); background-color: rgba(255, 255, 255, 0) !important; background-position: 50% 100%;"/>
+            <div class="s_allow_columns container">
+                <h1 style="text-align: center;" class='antonio'>
+                    <font style="font-size: 62px; font-weight: bold;">MEMBERSHIP APPLICATION</font>
+                </h1>
+                <p class="lead mx-auto" style="text-align: center;max-width: 540px;">
+                    Thank you for considering Outpost Nosara to be your next work and
+                    social membership club. To complete your application, please review 
+                    and complete the intake form below.
+                </p>
+            </div>
+       </section>
+    </template>
+   
+    <!-- SNIPPETS -->
+    <template id="snippets" inherit_id="website.snippets">
+        <xpath expr="//t[@id='default_snippets']/div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_nosara.s_banner_nosara" t-thumbnail="/website/static/src/img/snippets_thumbs/s_cover.svg">
+                <keywords>nosara, home, banner</keywords>
+            </t>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,52 @@
+//------------------------------------------------------------------------------
+// Colors
+//------------------------------------------------------------------------------
+
+// color 1 and 2 are used to override primary and secondary
+$o-color-palettes: (
+    (
+        // Primary - Brown
+        "o-color-1": #C0B1AB,
+        // Secondary - Brown litle
+        "o-color-2": #E3DCD6,
+        "o-color-3": #C0B1AB,
+        // Backgroud body
+        "o-color-4": #FCFCFA,
+        // Default Footer Backgroud
+        "o-color-5": #FCFCFA,
+        //but can be customized
+        "footer": 5,
+        "copyright": 5,
+    ),
+);
+
+
+//------------------------------------------------------------------------------//
+// Fonts
+//------------------------------------------------------------------------------//
+$o-website-values-palettes: (
+    (
+        // Font Base
+        "font-size-base": 1rem,
+        "font": "Senlot Sans",
+        // Header
+        "logo-height": 1rem,
+        "fixed-logo-height": 1rem,
+        "mobile-logo-height": 1rem,
+        "navbar-color": #434D57,
+    ),
+);
+
+$o-theme-font-configs: (
+    "Senlot Sans": (
+        "family": ("Senlot Sans", sans-serif),
+    ),
+    "Antonio": (
+        "family": ("Antonio", sans-serif),
+    ),
+);
+
+//------------------------------------------------------------------------------
+// MIXINGS
+//------------------------------------------------------------------------------
+
