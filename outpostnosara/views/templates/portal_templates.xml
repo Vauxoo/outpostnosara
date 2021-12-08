@@ -6,89 +6,138 @@
             <t t-set="no_footer" t-value="1"/>
 
             <div id="wrap">
+                <section class="s_cover pt64 pb96 o_colored_level s_parallax_no_overflow_hidden undefined o_cc o_cc3" data-scroll-background-ratio="0" data-snippet="s_cover" data-name="Cover" data-oe-shape-data="{'shape':'web_editor/Origins/15','flip':['y']}" style="position: relative;">
+                    <div class="o_we_shape o_web_editor_Origins_15" style="background-image: url('/web_editor/shape/web_editor/Origins/15.svg?c4=%23FCFCFA&amp;flip=y'); background-color: rgba(255, 255, 255, 0) !important; background-position: 50% 100%;"/>
+                    <div class="s_allow_columns container">
+                        <h1 style="text-align: center;" class='antonio'>
+                            <font style="font-size: 62px; font-weight: bold;">MEMBERSHIP APPLICATION</font>
+                        </h1>
+                        <p class="lead mx-auto" style="text-align: center;max-width: 540px;">
+                            Thank you for considering Outpost Nosara to be your next work and
+                            social membership club. To complete your application, please review 
+                            and complete the intake form below.
+                        </p>
+                    </div>
+               </section>
                 <div class="container">
-                    <form action="/shop/address" method="post" class="ou ou-reservation s_website_form2">
+                    <div class="ou ou-reservation" >
+                        <form action="/shop/address" method="post">
+                            <section class="js_reservation">
+                                <h4 class="" >Reservation</h4>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-form-label" for="room_type_id">Room Type</label>
+                                        <select id="room_type_id" name="room_type_id" class="form-control">
+                                            <t t-foreach='room_types' t-as='room_type'>
+                                                <option t-att-value="room_type.id" t-esc='room_type.name'/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-form-label" for="room_id">Room</label>
+                                        <select id="room_id" name="room_id" class="form-control">
+                                            <t t-foreach='room_ids' t-as='room'>
+                                                <option t-att-value="room.id" t-esc='room.name'/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-12">
+                                        <label class="col-form-label" for="reservation_type_id">Reservation Type</label>
+                                        <select id="reservation_type_id" name="reservation_type_id" class="form-control">
+                                            <option value="">Choose</option>
+                                            <t t-foreach='reservation_types' t-as='reservation_type'>
+                                                <option t-att-data-code="reservation_type.code" t-att-value="reservation_type.id" t-esc='reservation_type.name'/>
+                                            </t>
+                                        </select>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="js_reservation_day d-none">
+                                <h4 class="" >Daily</h4>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-form-label" for="checkin">Checkin</label>
+                                        <input type="text" name="checkin" class="form-control ou-daterangepicker"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-form-label" for="checkout">Checkout</label>
+                                        <input type="text" name="checkout" class="form-control ou-daterangepicker"/>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="js_reservation_hour d-none">
+                                <h4 class="" >By hour</h4>
+                                <div class="form-row">
+                                    <div class="form-group col-12">
+                                        <label class="col-form-label" for="day">Day</label>
+                                        <input type="text" name="day" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-form-label" for="checkin">Checkin</label>
+                                        <input type="time" name="checkin" class="form-control" min="09:00" max="18:00"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-form-label" for="checkout">Checkout</label>
+                                        <input type="time" name="checkout" class="form-control" min="10:30" max="18:00"/>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="js_reservation_half d-none">
+                                <h4 class="" >1/2 Day</h4>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label class="col-form-label" for="day">Day</label>
+                                        <input type="text" name="day" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label class="col-form-label" for="checkin">Time</label>
+                                        <select id="gender" name="type2" class="form-control">
+                                            <option>Choose</option>
+                                            <option t-att-value="1">Morning</option>
+                                            <option t-att-value="2">Afternoon</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="js_reservation_button d-none border-bottom-0">
+                                <t t-call='outpostnosara.reservation_validator_button'/>
+                            </section>
+                        </form>
 
-                        <section class="js_reservation">
-                            <h4 class="" >Reservation</h4>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="room_type_id">Room Type</label>
-                                    <select id="room_type_id" name="room_type_id" class="form-control">
-                                        <t t-foreach='room_types' t-as='room_type'>
-                                            <option t-att-value="room_type.id" t-esc='room_type.name'/>
-                                        </t>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="room_id">Room</label>
-                                    <select id="room_id" name="room_id" class="form-control">
-                                        <t t-foreach='room_ids' t-as='room'>
-                                            <option t-att-value="room.id" t-esc='room.name'/>
-                                        </t>
-                                    </select>
-                                </div>
-                                <div class="form-group col-12">
-                                    <label class="col-form-label" for="reservation_type_id">Reservation Type</label>
-                                    <select id="reservation_type_id" name="reservation_type_id" class="form-control">
-                                        <option>Choose</option>
-                                        <t t-foreach='reservation_types' t-as='reservation_type'>
-                                            <option t-att-data-code="reservation_type.code" t-att-value="reservation_type.id" t-esc='reservation_type.name'/>
-                                        </t>
-                                    </select>
-                                </div>
+                        <section class="js_reservation_payment d-none border-bottom-0">
+                            <div id="payment_method" class="" t-if="(acquirers or tokens)">
+                                <h4 class="">Payment</h4>
+                                <t t-call="payment.payment_tokens_list">
+                                    <t t-set="mode" t-value="'payment'"/>
+                                    <t t-set="submit_txt">Pay Now</t>
+                                    <t t-set="icon_right" t-value="1"/>
+                                    <t t-set="icon_class" t-value="'fa-chevron-right'"/>
+                                    <t t-set="submit_class" t-value="'btn btn-primary'"/>
+                                    <t t-set="pms" t-value="tokens"/>
+                                    <t t-set="form_action" t-value="'/shop/payment/token'"/>
+                                    <t t-set="prepare_tx_url" t-value="'/shop/payment/transaction/'"/>
+                                    <t t-set="partner_id" t-value="partner"/>
+                                </t>
+                            </div>
+
+                            <div t-if="not acquirers" class="mt-2">
+                                <a role="button" class="btn-link" groups="base.group_system" t-attf-href="/web#action=#{payment_action_id}">
+                                        <i class="fa fa-arrow-right"/> Add payment acquirers
+                                </a>
                             </div>
                         </section>
-                        <section class="js_reservation_day d-none">
-                            <h4 class="" >Daily</h4>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="checkin">Checkin</label>
-                                    <input type="text" name="checkin" class="form-control ou-daterangepicker"/>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="checkout">Checkout</label>
-                                    <input type="text" name="checkout" class="form-control ou-daterangepicker"/>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="js_reservation_hour d-none">
-                            <h4 class="" >By hour</h4>
-                            <div class="form-row">
-                                <div class="form-group col-12">
-                                    <label class="col-form-label" for="day">Day</label>
-                                    <input type="text" name="day" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="checkin">Checkin</label>
-                                    <input type="time" name="checkin" class="form-control" min="09:00" max="18:00"/>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="checkout">Checkout</label>
-                                    <input type="time" name="checkout" class="form-control" min="10:30" max="18:00"/>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="js_reservation_half d-none">
-                            <h4 class="" >1/2 Day</h4>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="day">Day</label>
-                                    <input type="text" name="day" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="col-form-label" for="checkin">Time</label>
-                                    <select id="gender" name="type2" class="form-control">
-                                        <option>Choose</option>
-                                        <option t-att-value="1">Morning</option>
-                                        <option t-att-value="2">Afternoon</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </section>
-                    </form>
+                        
+                    </div>
                 </div>
             </div>
         </t>
+    </template>
+    <template id="reservation_validator_button" name="Reservation validator button">
+        <div class="text-right mt-3">
+            <button id='validate_reservation' type='button' class="btn btn-primary">
+                Validate Reservation  
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
     </template>
 </odoo>

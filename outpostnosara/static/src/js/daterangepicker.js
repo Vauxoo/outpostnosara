@@ -16,6 +16,7 @@ odoo.define("outpostnosara.daterangepicker", function (require) {
         start() {
             return this._super.apply(this, arguments).then(() => {
                 this.$el.daterangepicker({
+                    minDate: new Date(),
                     autoUpdateInput: false,
                     locale: {
                         cancelLabel: 'Clear'
