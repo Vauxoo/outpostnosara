@@ -12,4 +12,94 @@
             <attribute name='t-value'>'nav-item dropdown'</attribute>
         </xpath>
     </template>
+
+    <template id="navbar_toggler" inherit_id="website.navbar_toggler" name="Navbar Toggler">
+        <xpath expr="//button/span" position="replace">
+            <img class="img img-fluid" src="/web/image/theme_nosara.menu" alt="Mobile Menu"/>
+        </xpath>
+    </template>
+
+    <template id="template_header_default_oe_structure_header_default_1"
+              inherit_id="website.template_header_default_oe_structure_header_default_1"
+              name="Contact Us Header Button">
+        <xpath expr="//div[@id='oe_structure_header_default_1']//a" position="replace">
+            <a href="/membership/apply" class="btn btn-outline-dark ml-4">Apply</a>
+        </xpath>
+        <xpath expr="//div[@id='oe_structure_header_default_1']//a" position="attributes">
+            <attribute name="class" separator=" " add="d-none d-lg-block"/>
+            <attribute name="t-if" separator=" " add="user_id._is_public()"/>
+        </xpath>
+    </template>
+
+    <!-- FOOTER -->
+    <template id="footer_custom" inherit_id="website.footer_custom" name='Footer of Theme'>
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div id="footer" class="oe_structure oe_structure_solo">
+                <section class="s_text_block pt40 pb16" data-snippet="s_text_block" data-name="Text">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1 pt-lg-3 pt-md-4 pt-3 pb-md-4 pb-2">
+                                <a href="/">
+                                    <img class="img img-fluid footer-logo" src="/web/image/theme_nosara.mark_logo" t-att-alt="res_company.name"/>
+                                </a>
+                            </div>
+                            <div id="interest-links" class="col-md-8 pt-4 pb-md-4 pb-md-2">
+                                <ul class="list-unstyled">
+                                    <li class="mr-2 my-0"><a href="/">Home</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="#">Work spaces</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="#">Ammenities</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="#">Community</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="#">Impact</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="#">About</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="/contactus">Contact</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="/membership/apply">Apply</a></li>
+                                </ul>
+                            </div>
+                            <div id="connect" class="col-md-3 pt-md-4 pb-md-4 pt-2 pb-5">
+                                <div class="d-flex justify-content-md-end">
+                                    <a t-if="website.social_instagram" t-att-href="website.social_instagram"
+                                        aria-label="Instagram" title="Instagram" class="mr-2">
+                                        <i class="fa fa-instagram rounded-circle"/>
+                                    </a>
+                                    <a t-if="website.social_facebook" t-att-href="website.social_facebook"
+                                        aria-label="Facebook" title="Facebook" class="mr-2">
+                                        <i class="fa fa-facebook rounded-circle"/>
+                                    </a>
+                                    <a t-if="website.social_twitter" t-att-href="website.social_twitter"
+                                        aria-label="Twitter" title="Twitter" class="mr-2">
+                                        <i class="fa fa-twitter rounded-circle"/>
+                                    </a>
+                                    <a t-if="website.social_linkedin" t-att-href="website.social_linkedin"
+                                        aria-label="Linkedin" title="Linkedin" class="mr-2">
+                                        <i class="fa fa-linkedin rounded-circle"/>
+                                    </a>
+                                    <a t-if="website.social_youtube" t-att-href="website.social_youtube"
+                                        aria-label="Youtube" title="Youtube" class="mr-2">
+                                        <i class="fa fa-youtube-play rounded-circle"/>
+                                    </a>
+                                    <a t-if="website.social_github" t-att-href="website.social_github"
+                                        aria-label="Github" title="Github" class="mr-2">
+                                        <i class="fa fa-github rounded-circle"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </xpath>
+        <!-- Copyright -->
+        <xpath expr="//div[hasclass('o_footer_copyright')]/div" position="replace">
+            <div class="container py-3 border-top">
+                <div class="row">
+                    <div class="col-sm text-center text-sm-left text-muted">
+                        <span class="o_footer_copyright_name mr-2">
+                            &amp;copy; Copyright 2021 <br class="d-md-none"/> <span class="d-none d-md-inline">&amp;centerdot;</span> All Rights Reserved
+                            <span t-field="res_company.name"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
 </odoo>

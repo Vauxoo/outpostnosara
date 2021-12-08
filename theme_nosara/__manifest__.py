@@ -3,13 +3,14 @@
 {
     'name': 'Theme Nosara',
     'summary': 'Nosara Official Theme',
-    'version': '14.0.1.0.1',
+    'version': '14.0.1.0.2',
     'author': 'Vauxoo',
     'website': 'https://www.vauxoo.com',
     'license': 'LGPL-3',
     'data': [
         # views
         'views/assets.xml',
+        'views/images_library.xml',
         # Templates
         'views/templates/layout_templates.xml',
         'views/templates/snippets.xml',

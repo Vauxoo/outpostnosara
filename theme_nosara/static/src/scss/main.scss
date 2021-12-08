@@ -37,7 +37,33 @@ header {
 //------------------------------------------------------------------------------
 // FOOTER
 //------------------------------------------------------------------------------
-
+#footer{
+    .footer-logo{
+        max-width: 70%;
+    }
+    .fa.rounded-circle{
+        background-color: $secondary;
+        color: $black;
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+    }
+    ul > li{
+        font-size: $h5-font-size;
+        > a{
+            color: $black;
+        }
+    }
+    #interest-links ul{
+        columns: 2;
+        @include media-breakpoint-up(lg) {
+            > li {
+                display: inline-block;
+            }
+            columns: 1;
+        }
+    }
+}
 
 //------------------------------------------------------------------------------
 // TOOLS

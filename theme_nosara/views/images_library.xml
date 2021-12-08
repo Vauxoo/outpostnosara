@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mark_logo" model="ir.attachment">
+        <field name="name">mark_logo</field>
+        <field name="type">url</field>
+        <field name="url">/theme_nosara/static/img/Mark.svg</field>
+        <field name="public" eval="True"/>
+    </record>
+    <record id="menu" model="ir.attachment">
+        <field name="name">menu</field>
+        <field name="type">url</field>
+        <field name="url">/theme_nosara/static/img/Menu.svg</field>
+        <field name="public" eval="True"/>
+    </record>
+</odoo>
