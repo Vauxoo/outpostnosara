@@ -1,6 +1,6 @@
 # Copyright 2021 Vauxoo
 # License LGPL-3 or later (http://www.gnu.org/licenses/lgpl).
-from odoo import http, _
+from odoo import fields, http, _
 from odoo.http import request
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.exceptions import ValidationError
@@ -27,49 +27,51 @@ class WebsiteOutpost(WebsiteSale):
     @http.route('/outpost/reservation', type='http', auth="user", website=True)
     def reservation(self, **post):
         """Show Reservation Room Form."""
-
         order = request.website.sale_get_order(force_create=True)
         room_types = request.env['pms.room.type'].search([])
         render_values = self._get_shop_payment_values(order, **post)
-
         render_values.update({
             'room_types': room_types,
-            'reservation_types': room_types[:1].type_lines_ids.reservation_type_id,
+            'reservation_types': room_types[:1].type_lines_ids.filtered('reservation_type_id'),
             'room_ids': room_types[:1].room_ids,
         })
 
         return request.render("outpostnosara.reservation", render_values)
 
-    @http.route('/outpost/reserved_date', type='json', auth="public", website=True)
-    def reserved_date(self, room_id=0, **post):
+    @http.route('/outpost/reserved_date/<int:room_id>', type='json', auth="user", website=True)
+    def reserved_date(self, room_id, **post):
         """Get reserved dates of a room."""
-        reserved_dates = request.env['pms.reservation.line'].search([
-            ('room_id', '=', int(room_id)),
-            ('state', 'in', ['confirm', 'onboard', 'arrival_delayed']),
-        ])
-        return reserved_dates.mapped('date')
+        return request.env['pms.reservation.line'].get_reservation_availability(
+            room_id, start_date=fields.Date.today()
+        ).mapped('date')
 
-    @http.route('/outpost/rooms_availables', type='json', auth="public", website=True)
-    def rooms_availables(self, room_type_id=0, **post):
+    @http.route('/outpost/rooms_availables/<model("pms.room.type"):room_type>', type='json', auth="user", website=True)
+    def rooms_availables(self, room_type, **post):
         """Get rooms_availables of a room kind."""
-        room_type = request.env['pms.room.type'].browse([int(room_type_id)])
         return {
-            'reservation_types': room_type.type_lines_ids.reservation_type_id.read(['id', 'name', 'code']),
+            'reservation_types': room_type.type_lines_ids.read(['id', 'name', 'code']),
             'room_ids': room_type.room_ids.read(['id', 'name']),
         }
 
-    @http.route('/outpost/validate_reservation/<model("pms.room"):room_id>', type='json', auth="public", website=True)
-    def validate_reservation(self, room_id, reservation_type_id, start_date, end_date, **post):
+    @http.route('/outpost/validate_reservation/<model("pms.room"):room>', type='json', auth="user", website=True)
+    def validate_reservation(self, room, reservation_type_id, start_date, end_date, **post):
         """Get rooms_availables of a room kind."""
         reservation = request.env['pms.reservation.line']
-        if reservation.get_reservation_availability(room_id.id, reservation_type_id, start_date, end_date=end_date):
+        reservation_type_id = int(reservation_type_id)
+        if reservation.get_reservation_availability(room.id, start_date=start_date, end_date=end_date):
             raise ValidationError(_("Room Occupied"))
 
-        reservation = request.website.get_reservation()
-        reservation.write({
-            'preferred_room_id': room_id.id,
-            'pms_property_id': room_id.pms_property_id,
+        values = {
+            'preferred_room_id': room.id,
+            'pms_property_id': room.pms_property_id,
+            'type_id': reservation_type_id,
             'checkin': start_date,
             'checkout': end_date,
             'adults': 1,
-        })
+            'arrival_hour': room.pms_property_id.default_arrival_hour,
+            'departure_hour': room.pms_property_id.default_departure_hour,
+        }
+        values.update(post)
+        reservation = request.website.get_reservation()
+        reservation.write(values)
+        return reservation.read(['id', 'price_room_services_set'])

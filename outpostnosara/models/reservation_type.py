@@ -28,9 +28,11 @@ class RoomTypeLines(models.Model):
     reservation_type_id = fields.Many2one(
         'pms.reservation.type',
         help="Reservation Type.",
+        required=True,
     )
     price = fields.Float(required=True, digits='Product Price', default=0.0)
     name = fields.Char(related='reservation_type_id.name')
+    code = fields.Char(related='reservation_type_id.code', store=True)
 
 
 class PmsRoomType(models.Model):

@@ -12,7 +12,9 @@ odoo.define("outpostnosara.daterangepicker", function (require) {
         cssLibs: [
             '/web/static/lib/daterangepicker/daterangepicker.css',
         ],
-
+        events: {
+            focus: (ev) => { ev.currentTarget.blur();},
+        },
         start() {
             return this._super.apply(this, arguments).then(() => {
                 this.$el.daterangepicker({
@@ -32,5 +34,4 @@ odoo.define("outpostnosara.daterangepicker", function (require) {
         },
     });
 });
-
 

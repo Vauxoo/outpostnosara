@@ -10,7 +10,7 @@
                     <div class="o_we_shape o_web_editor_Origins_15" style="background-image: url('/web_editor/shape/web_editor/Origins/15.svg?c4=%23FCFCFA&amp;flip=y'); background-color: rgba(255, 255, 255, 0) !important; background-position: 50% 100%;"/>
                     <div class="s_allow_columns container">
                         <h1 style="text-align: center;" class='antonio'>
-                            <font style="font-size: 62px; font-weight: bold;">MEMBERSHIP APPLICATION</font>
+                            <font style="font-size: 62px; font-weight: bold;">RESERVATION APPLICATION</font>
                         </h1>
                         <p class="lead mx-auto" style="text-align: center;max-width: 540px;">
                             Thank you for considering Outpost Nosara to be your next work and
@@ -21,7 +21,7 @@
                </section>
                 <div class="container">
                     <div class="ou ou-reservation" >
-                        <form action="/shop/address" method="post">
+                        <form action="/shop/address" method="post" autocomplete='off'>
                             <section class="js_reservation">
                                 <h4 class="" >Reservation</h4>
                                 <div class="form-row">
@@ -69,16 +69,16 @@
                                 <h4 class="" >By hour</h4>
                                 <div class="form-row">
                                     <div class="form-group col-12">
-                                        <label class="col-form-label" for="day">Day</label>
-                                        <input type="text" name="day" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
+                                        <label class="col-form-label" for="checkin">Day</label>
+                                        <input type="text" name="checkin" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="checkin">Checkin</label>
-                                        <input type="time" name="checkin" class="form-control" min="09:00" max="18:00"/>
+                                        <label class="col-form-label" for="arrival_hour">Arrival Hour</label>
+                                        <input type="time" name="arrival_hour" class="form-control ou-reset" min="09:00" max="18:00" value='06:00'/>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="checkout">Checkout</label>
-                                        <input type="time" name="checkout" class="form-control" min="10:30" max="18:00"/>
+                                        <label class="col-form-label" for="departure_hour">Departure Hour</label>
+                                        <input type="time" name="departure_hour" class="form-control ou-reset" min="10:30" max="18:00" value='18:00'/>
                                     </div>
                                 </div>
                             </section>
@@ -86,21 +86,23 @@
                                 <h4 class="" >1/2 Day</h4>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="day">Day</label>
-                                        <input type="text" name="day" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
+                                        <label class="col-form-label" for="checkin">Day</label>
+                                        <input type="text" name="checkin" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="checkin">Time</label>
-                                        <select id="gender" name="type2" class="form-control">
-                                            <option>Choose</option>
-                                            <option t-att-value="1">Morning</option>
-                                            <option t-att-value="2">Afternoon</option>
+                                        <label class="col-form-label" for="hour">Time</label>
+                                        <select id="hour" name="hour" class="form-control ou-reset">
+                                            <option value="06:00-12:00">Morning</option>
+                                            <option value="12:30-18:00">Afternoon</option>
                                         </select>
                                     </div>
                                 </div>
                             </section>
                             <section class="js_reservation_button d-none border-bottom-0">
                                 <t t-call='outpostnosara.reservation_validator_button'/>
+                            </section>
+                            <section class="js_reservation_price d-none text-right border-bottom-0 text-bold">
+                                <h5>Reservation Total: $ <span class="oe_currency_value"/></h5>
                             </section>
                         </form>
 

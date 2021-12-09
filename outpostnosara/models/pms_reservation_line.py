@@ -7,19 +7,22 @@ from odoo import api, models
 class PmsReservationLine(models.Model):
     _inherit = 'pms.reservation.line'
 
-    def get_reservation_availability(self, room_id, reservation_type_id, start_date, **data):
-        # NOTE: Add when MR#6 is merged ('reservation_type_id', '=', int(reservation_type_id)),
+    def get_reservation_availability(self, room_id, start_date=False, end_date=False, date=False, **data):
+        """Get the daily reservations for day."""
+
+        # The reservation.line is created by day and all reservation_type has to check de daily validation
         domain = [
             ('room_id', '=', int(room_id)),
+            ('reservation_id.type_id.code', '=', 'day'),
             ('state', 'in', ['confirm', 'onboard', 'arrival_delayed']),
         ]
-        if data.get('end_date'):
-            domain += [
-                ('date', '>=', start_date),
-                ('date', '<=', data.get('end_date')),
-            ]
-        else:
-            domain += [('date', '=', start_date)]
+
+        if start_date:
+            domain += [('date', '>=', start_date)]
+        if end_date:
+            domain += [('date', '<=', end_date)]
+        if date:
+            domain += [('date', '=', date)]
 
         return self.search(domain)
 
