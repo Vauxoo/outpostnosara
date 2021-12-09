@@ -45,7 +45,6 @@
         # Views
         'views/hr_employee_views.xml',
         'views/sale_subscription_views.xml',
-        'views/pms_reservation.xml',
         'views/pms_room_type_views.xml',
         'views/pms_reservation_views.xml',
 

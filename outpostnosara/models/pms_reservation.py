@@ -39,9 +39,9 @@ class PmsReservation(models.Model):
             # Here the main change
             if not reservation.checkin:
                 return
-            checkin_hour = int(reservation.arrival_hour[0:2])
-            checkin_minut = int(reservation.arrival_hour[3:5])
-            checkin_time = datetime.time(checkin_hour, checkin_minut)
+            arrival_hour = reservation.arrival_hour or '00:00'
+            reservation._check_arrival_hour()
+            checkin_time = datetime.datetime.strptime(arrival_hour, "%H:%M").time()
             checkin_datetime = datetime.datetime.combine(
                 reservation.checkin, checkin_time
             )
@@ -60,9 +60,9 @@ class PmsReservation(models.Model):
             # Here the main change
             if not reservation.checkout:
                 return
-            checkout_hour = int(reservation.departure_hour[0:2])
-            checkout_minut = int(reservation.departure_hour[3:5])
-            checkout_time = datetime.time(checkout_hour, checkout_minut)
+            departure_hour = reservation.departure_hour or '00:00'
+            reservation._check_departure_hour()
+            checkout_time = datetime.datetime.strptime(departure_hour, "%H:%M").time()
             checkout_datetime = datetime.datetime.combine(
                 reservation.checkout, checkout_time
             )

@@ -5,9 +5,20 @@
         <field name="inherit_id" ref="pms.pms_reservation_view_form"/>
         <field name="name">pms.reservation.form</field>
         <field name="model">pms.reservation</field>
+        <field name="priority">100</field>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='pricelist_id']" position="after">
                 <field name="type_id"/>
+            </xpath>
+            <xpath expr="//field[@name='arrival_hour']" position="before">
+                <field name="checkin_datetime"/>
+                <field name="checkout_datetime"/>
+            </xpath>
+            <xpath expr="//field[@name='arrival_hour']" position="attributes">
+                <attribute name="class" add='oe_edit_only' separator=" "></attribute>
+            </xpath>
+            <xpath expr="//field[@name='departure_hour']" position="attributes">
+                <attribute name="class" add='oe_edit_only' separator=" "></attribute>
             </xpath>
         </field>
     </record>
