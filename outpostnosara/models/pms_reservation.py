@@ -70,3 +70,57 @@ class PmsReservation(models.Model):
                 reservation.pms_property_id.date_property_timezone(checkout_datetime)
             )
             reservation.check_in_out_dates()
+
+    @api.depends("checkin", "checkout", "room_type_id")
+    def _compute_reservation_line_ids(self):
+        """Overwritten this function in order to change how reservation lines
+        are created, now they are created each by day since checkin date to
+        checkout date including the checkout date"""
+        for reservation in self:
+            cmds = []
+            if reservation.checkout and reservation.checkin:
+                # Here the main change. we are adding one more day
+                days_diff = (reservation.checkout - reservation.checkin).days + 1
+                for i in range(0, days_diff):
+                    idate = reservation.checkin + datetime.timedelta(days=i)
+                    old_line = reservation.reservation_line_ids.filtered(lambda r: r.date == idate)
+                    if not old_line:
+                        cmds.append((0, False, {"date": idate}))
+                reservation.reservation_line_ids -= (
+                    # Here other change, we include the checkout date, before the domains was like
+                    # date >= checkout, now like following
+                    reservation.reservation_line_ids.filtered_domain(
+                        [
+                            "|",
+                            ("date", ">", reservation.checkout),
+                            ("date", "<", reservation.checkin),
+                        ]
+                    )
+                )
+                reservation.reservation_line_ids = cmds
+            else:
+                if not reservation.reservation_line_ids:
+                    reservation.reservation_line_ids = False
+            reservation.check_in_out_dates()
+
+    @api.depends("reservation_line_ids", "checkin")
+    def _compute_checkout(self):
+        """Overwritten this method in order to avoid increase checkout date when reservation lines changed"""
+        for record in self:
+            if record.reservation_line_ids:
+                # Here the main change. we are avoiding add one more day
+                checkout_line_date = max(record.reservation_line_ids.mapped("date"))
+                # check if the checkout was created directly as reservation_line_id:
+                if checkout_line_date != record.checkout:
+                    record.checkout = checkout_line_date
+            # default checkout if checkin is set
+            elif record.checkin and not record.checkout:
+                if len(record.folio_id.reservation_ids) > 1:
+                    record.checkin = record.folio_id.reservation_ids[0].checkout
+                else:
+                    # Here the main change. we are avoiding add one more day
+                    record.checkout = record.checkin
+            elif not record.checkout:
+                record.checkout = False
+            # date checking
+            record.check_in_out_dates()
