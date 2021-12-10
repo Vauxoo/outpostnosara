@@ -96,6 +96,11 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             this.$('.js_reservation_payment,.js_reservation_price').removeClass('d-none');
             this.$('.js_reservation_button').addClass('d-none');
         },
+        _get_hour(time){
+            time = time.split(':');
+            var now = new Date();
+            return new Date(now.getFullYear(), now.getMonth(), now.getDate(), ...time);
+        },
         _validateForm() {
             var $inputs = this.$(`.js_reservation_${this._code} input`);
             var $empty_inputs = $inputs.not(':filled');
@@ -107,7 +112,16 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             if ($empty_inputs.length){
                 $empty_inputs.filter(':first').trigger('focus');
                 this.do_notify(_t("Error"), 'Some fields are required');
-            } 
+            }
+            if (this._code === 'hour'){
+                var arrival_hour = this._get_hour(this.$('[name="arrival_hour"]').val());
+                var departure_hour = this._get_hour(this.$('[name="departure_hour"]').val());
+                /*  Convert the milliseconds to hours */
+                var reservation_time = (departure_hour - arrival_hour) / 3600000;
+                if (reservation_time < 1.5){
+                    this.do_notify(_t("Error"), 'The minimum time of reservations are an hour and a half');
+                }
+            }
             return !$empty_inputs.length;
         },
         _resertValidation() {
