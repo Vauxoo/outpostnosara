@@ -13,6 +13,7 @@ class Website(models.Model):
             The pre-reservation is created with:
                 - preconfirm: to set state = draft
                 - overbooking: to set occupies_availability = false
+            And We have to reset room_id the room won't update
 
         :return: last pre-reservation
         :rtype: pms.reservation
@@ -28,6 +29,11 @@ class Website(models.Model):
         if reservation_id:
             reservation = reservation_obj.browse(reservation_id)
             if reservation.exists().filtered(lambda r: r.state == 'draft'):
+                # We have to reset in this specific order or the room won't update
+                reservation.write({
+                    'reservation_line_ids': False,
+                    'preferred_room_id': False,
+                })
                 return reservation
 
         # Search last validity of the reservation
@@ -44,6 +50,12 @@ class Website(models.Model):
                 'preconfirm': self._context.get('preconfirm', False),
                 'overbooking': self._context.get('overbooking', True),
             })
+
+        # We have to reset in this specific order or the room won't update
+        reservation.write({
+            'reservation_line_ids': False,
+            'preferred_room_id': False,
+        })
 
         request.session['reservation_id'] = reservation.id
         return reservation

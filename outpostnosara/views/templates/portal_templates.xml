@@ -29,19 +29,12 @@
                                         <label class="col-form-label" for="room_type_id">Room Type</label>
                                         <select id="room_type_id" name="room_type_id" class="form-control">
                                             <t t-foreach='room_types' t-as='room_type'>
-                                                <option t-att-value="room_type.id" t-esc='room_type.name'/>
+                                                <t t-set='room_id' t-value='len(room_type.room_ids) == 1 and room_type.room_ids[:1].id or False' />
+                                                <option t-att-value="room_type.id" t-att-data-rooms="len(room_type.room_ids)" t-att-data-roomid="room_id" t-esc='room_type.name'/>
                                             </t>
                                         </select>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="room_id">Room</label>
-                                        <select id="room_id" name="room_id" class="form-control">
-                                            <t t-foreach='room_ids' t-as='room'>
-                                                <option t-att-value="room.id" t-esc='room.name'/>
-                                            </t>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-12">
                                         <label class="col-form-label" for="reservation_type_id">Reservation Type</label>
                                         <select id="reservation_type_id" name="reservation_type_id" class="form-control">
                                             <option value="">Choose</option>

@@ -1,9 +1,8 @@
 # Copyright 2021 Vauxoo
 # License LGPL-3 or later (http://www.gnu.org/licenses/lgpl).
-from odoo import fields, http, _
+from odoo import fields, http
 from odoo.http import request
 from odoo.addons.website_sale.controllers.main import WebsiteSale
-from odoo.exceptions import ValidationError
 
 
 class WebsiteOutpost(WebsiteSale):
@@ -32,8 +31,7 @@ class WebsiteOutpost(WebsiteSale):
         render_values = self._get_shop_payment_values(order, **post)
         render_values.update({
             'room_types': room_types,
-            'reservation_types': room_types[:1].type_lines_ids.filtered('reservation_type_id'),
-            'room_ids': room_types[:1].room_ids,
+            'reservation_types': room_types[:1].type_lines_ids,
         })
 
         return request.render("outpostnosara.reservation", render_values)
@@ -45,34 +43,28 @@ class WebsiteOutpost(WebsiteSale):
             room_id, start_date=fields.Date.today()
         ).mapped('date')
 
-    @http.route('/outpost/rooms_availables/<model("pms.room.type"):room_type>', type='json', auth="user", website=True)
+    @http.route('/outpost/types_availables/<model("pms.room.type"):room_type>', type='json', auth="user", website=True)
     def rooms_availables(self, room_type, **post):
-        """Get rooms_availables of a room kind."""
-        return {
-            'reservation_types': room_type.type_lines_ids.read(['id', 'name', 'code']),
-            'room_ids': room_type.room_ids.read(['id', 'name']),
-        }
+        """Get reservation types_availables of a room kind."""
+        return {'data': room_type.type_lines_ids.read(['id', 'name', 'code'])}
 
-    @http.route('/outpost/validate_reservation/<model("pms.room"):room>', type='json', auth="user", website=True)
-    def validate_reservation(self, room, reservation_type_id, start_date, end_date, **post):
+    @http.route(
+        '/outpost/validate_reservation/<model("pms.room.type"):room_type>/<int:reservation_type_id>',
+        type='json', auth="user", website=True)
+    def validate_reservation(self, room_type, reservation_type_id, start_date, end_date, **post):
         """Get rooms_availables of a room kind."""
-        reservation = request.env['pms.reservation.line']
-        reservation_type_id = int(reservation_type_id)
-        if reservation.get_reservation_availability(room.id, start_date=start_date, end_date=end_date):
-            raise ValidationError(_("Room Occupied"))
-
+        reservation = request.website.get_reservation()
+        # preferred_room_id is autoselect by the room_type_id
         values = {
-            'preferred_room_id': room.id,
-            'pms_property_id': room.pms_property_id,
             'type_id': reservation_type_id,
+            'room_type_id': room_type.id,
             'checkin': start_date,
             'checkout': end_date,
             'adults': 1,
-            'arrival_hour': room.pms_property_id.default_arrival_hour,
-            'departure_hour': room.pms_property_id.default_departure_hour,
+            'arrival_hour': reservation.pms_property_id.default_arrival_hour,
+            'departure_hour': reservation.pms_property_id.default_departure_hour,
         }
         values.update(post)
-        reservation = request.website.get_reservation()
         reservation.write(values)
         return reservation.read(['id', 'price_room_services_set'])
 

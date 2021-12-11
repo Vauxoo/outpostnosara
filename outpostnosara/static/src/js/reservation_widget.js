@@ -10,7 +10,6 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
         xmlDependencies: ["/outpostnosara/static/src/xml/reservation.xml"],
         events: {
             "change select[name='reservation_type_id']": "_onChangeReservationType",
-            "change select[name='room_id']": "_onChangeReservationType",
             "change select[name='room_type_id']": "_onChangeRoomType",
             "change .ou-reset": "_resertValidation",
             "click #validate_reservation": "_onValidateReservation",
@@ -19,9 +18,9 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
         init: function () {
             this._super.apply(this, arguments);
             this._invalid_dates = [];
-            this._startDate;
-            this._endDate;
-            this._code;
+            this._startDate = null;
+            this._endDate = null;
+            this._code = null;
         },
         // --------------------------------------------------------------------------
         // Handlers
@@ -57,27 +56,20 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             this.$('.ou-daterangepicker').data('dom:invalidDates', this._invalid_dates);
         },
         _isConfigComplete() {
-            return this.$('[name="room_id"]').val() && this.$('[name="reservation_type_id"]').val();
+            return this.$('[name="reservation_type_id"]').val();
+        },
+        _isOnlyOneRoom() {
+            return this.$('[name="room_type_id"]').children('option:selected').data('roomid');
         },
         async _onChangeRoomType() {
-            var filters = await this._getRoomsAvailables();
-            var $room_filter = this.$("select[name='room_id']");
+            var types = await this._getTypesAvailables();
             var $reservation_filter = this.$("select[name='reservation_type_id']");
-
-            $room_filter.html(
-                qweb.render("outpostnosara.room_select", {
-                    room_ids: filters.room_ids || [],
-                })
-            )
-
             $reservation_filter.html(
                 qweb.render("outpostnosara.reservation_select", {
-                    reservation_types: filters.reservation_types || [],
+                    reservation_types: types.data || [],
                 })
             )
-
             this.$('[class*="js_reservation_"]').addClass('d-none');
-
         },
         _getInvalidDates(picker) {
             var date_range = [];
@@ -132,21 +124,22 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
         // Geters
         // --------------------------------------------------------------------------
         _getReservedDate() {
-            if (!this._isConfigComplete()) return [];
+            if (!this._isConfigComplete() || !this._isOnlyOneRoom()) return [];
             return this._rpc({
-                route: "/outpost/reserved_date/" + this.$('[name="room_id"]').val(),
+                route: "/outpost/reserved_date/" + this._isOnlyOneRoom(),
             })
         },
-        _getRoomsAvailables() {
+        _getTypesAvailables() {
             return this._rpc({
-                route: "/outpost/rooms_availables/" + this.$('[name="room_type_id"]').val(),
+                route: "/outpost/types_availables/" + this.$('[name="room_type_id"]').val(),
             })
         },
         _getValidateReservation() {
+            var reservation_type_id = this.$('[name="reservation_type_id"]').val();
+            var room_type_id = this.$('[name="room_type_id"]').val();
             var params = {
                 start_date: this._startDate.format('YYYY-MM-DD'),
                 end_date: this._endDate.format('YYYY-MM-DD'),
-                reservation_type_id: this.$('[name="reservation_type_id"]').val(),
             }
             switch (this._code) {
                 case 'hour':
@@ -162,7 +155,7 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
                 break;
             }
             return this._rpc({
-                route: "/outpost/validate_reservation/" + this.$('[name="room_id"]').val(),
+                route: `/outpost/validate_reservation/${room_type_id}/${reservation_type_id}`,
                 params,
             })
         },
