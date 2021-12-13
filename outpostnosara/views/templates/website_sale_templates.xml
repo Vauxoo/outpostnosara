@@ -1,117 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="membership" name="Membership Application">
-        <!-- <xpath expr="//t[@t-call='website.layout']" position="replace"> -->
-            <t t-call="website.layout">
-                <t t-set="additional_title">Shop - Select Payment Acquirer</t>
-                <t t-set="no_footer" t-value="1"/>
+        <t t-call="website.layout">
+            <t t-set="additional_title">Shop - Select Payment Acquirer</t>
 
-                <div id="wrap">
-                    <div class="container">
-                        <form action="/shop/address" method="post" class="ou ou-membership">
-
-                            <section class="js_personal_info">
-                                <h4 class="" >Personal info</h4>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="firstname">Name</label>
-                                        <input type="text" name="firstname" class="form-control "/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="lastname">Name</label>
-                                        <input type="text" name="lastname" class="form-control "/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="birthday">Birthday</label>
-                                        <input type="date" name="birthday" class="form-control "/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="gender">Gender</label>
-                                        <select id="gender" name="gender" class="form-control">
-                                            <option>Choose</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section class="js_home_address">
-                                <h4 class="" >Home address</h4>
-                                <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label" for="street">Address</label>
-                                        <input type="text" name="street" class="form-control "/>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="city">City</label>
-                                        <input type="text" name="city" class="form-control "/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="birthday">State</label>
-                                        <select name="state_id" data-init="1" class="form-control ">
-                                            <option value="68">
-                                                Armed Forces Americas
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="zip">ZIP</label>
-                                        <input type="text" name="zip" class="form-control "/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="birthday">Country</label>
-                                        <select id="country_id" name="country_id" class="form-control">
-                                            <option value="3">
-                                                Afghanistan
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section class="js_contact">
-                                <h4 class="" >Contact</h4>
-                                <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label" for="email">Email address</label>
-                                        <input type="email" name="email" class="form-control "/>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label" for="emailc">Confirm email address</label>
-                                        <input type="emailc" name="emailc" class="form-control "/>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label" for="phone">Phone number</label>
-                                        <input type="tel" name="phone" class="form-control "/>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section class="js_membership_type">
-                                <h4 class="" >Membership type</h4>
-                                <t t-foreach='memberships' t-as='membership'>
-                                    <div class="form-row mx-0 my-2">
-                                        <div class="form-group col-md-8" t-esc='membership.name'/>
-                                        <div class="form-group col-md-4 text-md-right" >
-                                            <span t-esc="membership.price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>/month
-                                        </div>
-                                    </div>
-                                </t>
-                                <div>
-                                    All memberships provide access to all communal work and social spaces, wellness and productivity amenities and curated member events. Memberships allow for guests accompanied by members.
-                                </div>
-                            </section>
-                        </form>
+            <div id="wrap">
+                <section class="s_cover pt64 pb96 o_colored_level s_parallax_no_overflow_hidden undefined o_cc o_cc3" data-scroll-background-ratio="0" data-snippet="s_cover" data-name="Cover" data-oe-shape-data="{'shape':'web_editor/Origins/15','flip':['y']}" style="position: relative;">
+                    <div class="o_we_shape o_web_editor_Origins_15" style="background-image: url('/web_editor/shape/web_editor/Origins/15.svg?c4=%23FCFCFA&amp;flip=y'); background-color: rgba(255, 255, 255, 0) !important; background-position: 50% 100%;"/>
+                    <div class="s_allow_columns container">
+                        <h1 style="text-align: center;" class="antonio">
+                            <font style="font-size: 62px; font-weight: bold;">MEMBERSHIP APPLICATION</font>
+                        </h1>
+                        <p class="lead mx-auto" style="text-align: center;max-width: 540px;">
+                            Thank you for considering Outpost Nosara to be your next work and social
+                            membership club. To complete your application, please review and complete
+                            the intake form below.
+                        </p>
                     </div>
+                </section>
+                <div class="container">
+                    <t t-call="outpostnosara.membership_content"/>
                 </div>
-            </t>
-        <!-- </xpath> -->
+            </div>
+        </t>
+    </template>
+    <template id="membership_content" name="Membership Application Page Content">
+        <div class="col-12 text-center">
+            <p class="alert alert-danger" t-if="error" role="alert">
+                <t t-esc="error"/>
+            </p>
+        </div>
+        <div class="ou ou-membership">
+            <div class="outpost-membership-form">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="hidden" class="membership-field" name="partner_id"/>
+                <section class="js_personal_info">
+                    <h4 class="mt-3">Personal Info</h4>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="col-form-label" for="name">Full Name</label>
+                            <input type="text" name="name" class="form-control membership-field required_input"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label" for="birthdate_date">Birthday</label>
+                            <input type="date" name="birthdate_date" class="form-control text-uppercase membership-field required_input"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label" for="gender">Gender</label>
+                            <select id="gender" name="gender" class="form-control membership-field required_input">
+                                <option value="">Gender...</option>
+                                <t t-foreach="genders" t-as="g">
+                                    <option t-att-value="g[0]" t-att-selected="g[0] == (gender and gender[0] or -1)">
+                                        <t t-esc="g[1]" />
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="js_home_address">
+                    <h4 class="mt-3">Home Address</h4>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="col-form-label" for="street">Address</label>
+                            <input type="text" name="street" class="form-control membership-field required_input"/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label" for="country_id">Country</label>
+                            <select id="country_id" name="country_id" class="form-control membership-field required_input">
+                                <option value="">Country...</option>
+                                <t t-foreach="countries" t-as="c">
+                                    <option t-att-value="c.id" t-att-selected="c.id == (country and country.id or -1)">
+                                        <t t-esc="c.name" />
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6" id="select_state"/>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label" for="city">City</label>
+                            <input type="text" name="city" class="form-control membership-field required_input"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label" for="zip">ZIP</label>
+                            <input type="text" name="zip" class="form-control membership-field required_input"/>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="js_contact">
+                    <h4 class="mt-3">Contact</h4>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="col-form-label" for="email">Email address</label>
+                            <input type="email" name="email" class="form-control membership-field required_input"/>
+                        </div>
+                        <div class="form-group col-12">
+                            <label class="col-form-label" for="email">Confirm Email address</label>
+                            <input type="email" name="confirm_email" class="form-control membership-field required_input"/>
+                        </div>
+                        <div class="form-group col-12">
+                            <label class="col-form-label" for="phone">Phone number</label>
+                            <input type="tel" name="phone" class="form-control membership-field required_input"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label" for="category_id">Document</label>
+                            <select id="category_id" name="category_id" class="form-control membership-field required_input">
+                                <option value="">Document ...</option>
+                                <t t-foreach="document_categories" t-as="d">
+                                    <option t-att-value="d.id" t-att-selected="d.id == (document and document.id or -1)">
+                                        <t t-esc="d.name" />
+                                    </option>
+                                </t>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-form-label" for="id_number">ID</label>
+                            <input type="text" name="id_number" class="form-control membership-field required_input"/>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="js_membership_type">
+                    <h4 class="my-3" >Membership Type</h4>
+                    <input type="hidden" name="product_id" value="" class="form-control membership-field"/>
+                    <t t-foreach='memberships' t-as='membership'>
+                        <div class="form-row mx-0 my-2 membership_type" t-att-data-product-id="membership.id">
+                            <div class="form-group col-md-8" t-esc='membership.name'/>
+                            <div class="form-group col-md-4 text-md-right" >
+                                <span t-esc="membership.price" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>/month
+                            </div>
+                        </div>
+                    </t>
+                    <div class="mt-3">
+                        <label>
+                            All memberships provide access to all communal work and social spaces, wellness and productivity amenities and curated member events. Memberships allow for guests accompanied by members.
+                        </label>
+                    </div>
+                </section>
+
+                <section class="js_payment">
+                    <div id="payment_method" class="" t-if="(acquirers or tokens)">
+                        <h4 class="mt-3">Payment</h4>
+                        <t t-call="payment.payment_tokens_list">
+                            <t t-set="mode" t-value="'payment'"/>
+                            <t t-set="submit_txt">Pay Now</t>
+                            <t t-set="pms" t-value="tokens"/>
+                            <t t-set="submit_class" t-value="'btn btn-primary d-none'"/>
+                            <t t-set="acquirers" t-value="acquirers"/>
+                            <t t-set="form_action" t-value="'/shop/payment/token'"/>
+                            <t t-set="prepare_tx_url" t-value="'/shop/payment/transaction/'"/>
+                            <t t-set="partner_id" t-value="partner"/>
+                        </t>
+                    </div>
+                </section>
+
+                <section class="js_terms_and_conditions">
+                    <h4 class="my-3" >Terms and Conditions</h4>
+                    <div class="form-row form-check my-2 pl-2">
+                        <label class="checkbox-container">
+                            <div>
+                                I agree I will be charged the first month membership fee.
+                            </div>
+                            <input type="checkbox" id="agree_charges_subscription_term" name="agree_charges_subscription_term" checked="checked"/>
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">
+                            <div>
+                                I understand that a membership at Outpost is a 1-year commitment.
+                            </div>
+                            <input type="checkbox" id="one_year_subscription_term" name="one_year_subscription_term" checked="checked"/>
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="checkbox-container">
+                            <div class="long-description">
+                                I acknowledge the receipt of and agree to be bound by
+                                the Membership Plan, Club Rules and Application Agreement.
+                            </div>
+                            <input type="checkbox" id="acknowledge_agreement_subscription_term" name="acknowledge_agreement_subscription_term" checked="checked"/>
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="form-group col-12 s_website_form_submit p-lg-0 text-center" data-name="Submit Button">
+                        <button type="submit" class="d-none"/>
+                        <a href="#" role="button" class="btn btn-primary btn-block text-uppercase s_website_form_send mb-4">
+                            Submit
+                        </a>
+                    </div>
+                </section>
+
+                <section id="membership-fees" class="mb96">
+                    <h4 class="my-3" >Membership Fees</h4>
+                    <p>
+                        Upon the acceptance of your application, you will be charged the
+                        first month of your membership fee. This fee secures your spot as
+                        an Outpost member, and commits you to your first year of membership.
+                    </p>
+                    <p>
+                        Monthly fees. You will be charged your membership and/or your office
+                        rent monthly on the 1st of each month. All memberships are annual
+                        commitments.
+                    </p>
+                    <p>
+                        For our frequently asked questions, please take a look at Outpost's
+                        FAQs page. For specific questions, please write to
+                        <a href="mailto:membership@outpostnosara.com">membership@outpostnosara.com</a>,
+                        and our Membership Team will be in touch as soon as possible.
+                    </p>
+                </section>
+            </div>
+        </div>
+    </template>
+    <template id="confirmation" name="Sale Order - Confirmation" inherit_id="website_sale.confirmation">
+        <!-- Replace the signup message on the confirmation page -->
+        <xpath expr="//div[hasclass('oe_cart')]//a[@t-att-href='order.partner_id.signup_prepare() and order.partner_id.with_context(relative_url=True).signup_url']/.." position="attributes">
+            <attribute name='t-if'>False</attribute>
+        </xpath>
     </template>
 </odoo>

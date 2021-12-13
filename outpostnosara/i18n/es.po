@@ -259,7 +259,7 @@ msgstr ""
 
 #. module: outpostnosara
 #: model_terms:ir.ui.view,arch_db:outpostnosara.membership
-msgid "Membership type"
+msgid "Membership Type"
 msgstr ""
 
 #. module: outpostnosara

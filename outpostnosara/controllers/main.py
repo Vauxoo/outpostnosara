@@ -1,5 +1,6 @@
 # Copyright 2021 Vauxoo
 # License LGPL-3 or later (http://www.gnu.org/licenses/lgpl).
+
 from odoo import _, fields, http
 from odoo.http import request
 from odoo.osv import expression
@@ -11,6 +12,26 @@ from odoo.exceptions import ValidationError
 
 
 class WebsiteOutpost(WebsiteSale):
+
+    def _get_application_login_fields(self):
+        return ('email', 'name', 'birthdate_date', 'gender', 'street', 'country_id',
+                'state_id', 'city', 'zip', 'phone')
+
+    def _get_application_term_fields(self):
+        return ('agree_charges_subscription_term', 'one_year_subscription_term',
+                'acknowledge_agreement_subscription_term')
+
+    def prepare_partner_values(self, post):
+        login_fields = self._get_application_login_fields()
+        term_fields = self._get_application_term_fields()
+        values = {key: post.get(key) for key in login_fields}
+        terms_values = {key: True for key in term_fields}
+        values.update(terms_values)
+        if post.get('category_id'):
+            values['id_numbers'] = [
+                (0, False, {'category_id': int(post.get('category_id')), 'name': post.get('id_number')})]
+        return values
+
     @http.route('/outpost/membership', type='http', auth="public", website=True)
     def membership(self, **post):
         """Show Membership Application Form."""
@@ -18,15 +39,56 @@ class WebsiteOutpost(WebsiteSale):
         order = request.website.sale_get_order(force_create=True)
         render_values = self._get_shop_payment_values(order, **post)
         memberships = request.env['product.template'].with_context(pricelist=pricelist.id).search(
-            [
-                ('recurring_invoice', '=', True),
-                ('is_published', '=', True),
-            ],
-            order='website_sequence',
-        )
-        render_values['memberships'] = memberships
-        render_values['pricelist'] = pricelist
+            [('recurring_invoice', '=', True), ('is_published', '=', True)], order='website_sequence')
+        countries = request.env['res.country'].search([])
+        genders = request.env['res.partner']._fields['gender'].selection
+        document_categories = request.website.get_document_category()
+        render_values.update({
+            'memberships': memberships,
+            'pricelist': pricelist,
+            'countries': countries,
+            'genders': genders,
+            'document_categories': document_categories,
+        })
         return request.render("outpostnosara.membership", render_values)
+
+    @http.route('/outpost/membership/order', type='json', auth='public', methods=['POST'], website=True)
+    def create_membership_order(self, **post):
+        order = request.website.sale_get_order()
+        mode = ('new', 'billing')
+        partner = post.get('partner_id')
+        if partner:
+            partner = request.env['res.partner'].sudo().browse(int(partner))
+            post['partner_id'] = int(partner)
+            mode = ('edit', 'billing')
+        membership = post.get('product_id', False)
+        membership_product = request.env['product.product'].search([('product_tmpl_id', '=', int(membership))])
+        post['country_id'] = int(post.get('country_id'))
+        if post.get('state_id'):
+            post['state_id'] = int(post.get('state_id'))
+        if mode[0] == 'edit':
+            partner.update_documents(post)
+        values = self.prepare_partner_values(post)
+        try:
+            partner_id = self._checkout_form_save(mode, values, post)
+            order_line = [(0, False, {'product_id': membership_product.id})]
+            order_line_membership = order.order_line.filtered(lambda l: l.product_id.recurring_invoice)
+            if order_line_membership:
+                order.write({'order_line': [(5, 0)]})
+            order.write({
+                'partner_id': partner_id,
+                'partner_invoice_id': partner_id,
+                'order_line': order_line,
+            })
+            order.with_context(not_self_saleperson=True).onchange_partner_id()
+        except (Exception) as error:
+            message = _('An error ocurred:\n  %s') % (error.args[0])
+            raise ValidationError(message)
+        request.session['sale_last_order_id'] = order.id
+        request.session['sale_order_id'] = order.id
+        if not partner:
+            partner = request.env['res.partner'].sudo().browse(partner_id)
+        return partner.read(['id'])
 
     @http.route('/outpost/reservation', type='http', auth="user", website=True)
     def reservation(self, **post):
@@ -270,6 +332,11 @@ class OutpostNosaraController(http.Controller):
         if invoice.state == 'draft':
             invoice.action_post()
         return True
+
+    @http.route(['/website/state_infos/<model("res.country"):country_id>'],
+                type='json', auth="public", methods=['POST'], website=True)
+    def state_infos(self, country_id, **kw):
+        return {'states': country_id.state_ids.read(['id', 'name'])}
 
 
 class CredomaticOutpost(Credomatic):

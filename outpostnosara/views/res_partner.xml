@@ -26,6 +26,28 @@
                         </group>
                     </group>
                 </page>
+                <page string="Terms &amp; Conditions" name="terms_conditions">
+                    <group string="Subscription Partner Terms &amp; Conditions" name="terms_conditions">
+                        <group class="w-100">
+                            <div class="o_row">
+                                <field name="agree_charges_subscription_term"/>
+                                <label for="agree_charges_subscription_term"/>
+                            </div>
+                        </group>
+                        <group class="w-100 mt-0">
+                            <div class="o_row">
+                                <field name="one_year_subscription_term"/>
+                                <label for="one_year_subscription_term"/>
+                            </div>
+                        </group>
+                        <group class="w-100 mt-0">
+                            <div class="o_row">
+                                <field name="acknowledge_agreement_subscription_term"/>
+                                <label for="acknowledge_agreement_subscription_term"/>
+                            </div>
+                        </group>
+                    </group>
+                </page>
             </xpath>
         </field>
     </record>

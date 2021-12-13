@@ -74,3 +74,18 @@ class Website(models.Model):
 
         request.session[reservation_key] = reservation.id
         return reservation
+
+    def get_document_external_ids(self):
+        return [
+            'pms.document_type_identification_document',
+            'pms.document_type_passport',
+        ]
+
+    def get_document_category(self):
+        ext_ids = self.get_document_external_ids()
+        document_categories = self.env['res.partner.id_category'].sudo()
+        for ext_id in ext_ids:
+            document = document_categories.env.ref(ext_id, raise_if_not_found=False)
+            if document:
+                document_categories |= document
+        return document_categories

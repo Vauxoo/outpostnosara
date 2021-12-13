@@ -11,6 +11,7 @@
         <xpath expr="//script[last()]" position="after">
             <script type="text/javascript" src="/outpostnosara/static/src/js/daterangepicker.js" />
             <script type="text/javascript" src="/outpostnosara/static/src/js/reservation_widget.js" />
+            <script type="text/javascript" src="/outpostnosara/static/src/js/application_widget.js" />
             <script type="text/javascript" src="/outpostnosara/static/src/lib/jquery.validate.js" />
         </xpath>
     </template>

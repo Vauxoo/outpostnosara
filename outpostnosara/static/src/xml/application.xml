@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates>
+    <t t-name="outpostnosara.states_select">
+        <label class="col-form-label" for="state_id">State</label>
+        <select id="state_id" name="state_id" class="form-control membership-field required_input">
+            <option value="">State...</option>
+            <t t-foreach='states' t-as='state'>
+                <option t-att-value="state.id" t-esc='state.name'/>
+            </t>
+        </select>
+    </t>
+</templates>
