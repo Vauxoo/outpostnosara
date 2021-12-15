@@ -59,6 +59,7 @@
 
         # Security
         'security/ir.model.access.csv',
+        'security/ir_rule.xml',
     ],
     'demo': [
     ],

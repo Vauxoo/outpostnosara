@@ -1,3 +1,10 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 access_pms_reservation_type,access_pms_reservation_type,model_pms_reservation_type,base.group_user,1,1,1,1
 access_pms_room_type_lines,access_pms_room_type_lines,model_pms_room_type_lines,base.group_user,1,1,1,1
+portal_access_pms_room,portal_access_pms_room,pms.model_pms_room,base.group_portal,1,0,0,0
+portal_access_pms_room_type,portal_access_pms_room_type,pms.model_pms_room_type,base.group_portal,1,0,0,0
+portal_access_pms_room_type_lines,portal_access_pms_room_type_lines,model_pms_room_type_lines,base.group_portal,1,0,0,0
+portal_access_pms_reservation_line,portal_access_pms_reservation_line,pms.model_pms_reservation_line,base.group_portal,1,0,0,0
+portal_access_pms_folio_sale_line,portal_access_pms_folio_sale_line,pms.model_folio_sale_line,base.group_portal,1,0,0,0
+portal_access_property,portal_access_property,pms.model_pms_property,base.group_portal,1,0,0,0
+portal_access_ir_sequence_group_user,portal_access_ir_sequence_group_user,base.model_ir_sequence,base.group_portal,1,0,0,0
