@@ -15,4 +15,12 @@
         </xpath>
     </template>
 
+    <!-- Point of Sale Assets -->
+    <template id="point_of_sale_assets" inherit_id="point_of_sale.assets" name="Point of Sale Assets">
+        <!-- CSS -->
+        <xpath expr="//link[last()]" position="after">
+            <link rel="stylesheet" type="text/scss" href="/outpostnosara/static/src/css/pos_receipts.css" />
+        </xpath>
+    </template>
+
 </odoo>
