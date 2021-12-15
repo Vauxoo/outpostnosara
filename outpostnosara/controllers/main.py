@@ -31,9 +31,10 @@ class WebsiteOutpost(WebsiteSale):
         render_values = self._get_shop_payment_values(order, **post)
         # PMS Room Type Property(pms_room_type_property_rule)
         room_types = request.env['pms.room.type'].search([
-            '|',
+            '&', '|',
+            ('pms_property_ids', 'in', request.env.user.get_active_property_ids()),
             ('pms_property_ids', '=', False),
-            ('pms_property_ids', 'in', request.env.user.get_active_property_ids())
+            ('website_published', '=', True)
         ])
         render_values.update({
             'room_types': room_types,

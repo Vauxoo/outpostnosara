@@ -9,7 +9,7 @@
     'website': 'https://www.vauxoo.com',
     'license': 'LGPL-3',
     'category': 'Installer',
-    'version': '14.0.1.0.8',
+    'version': '14.0.1.0.9',
     'depends': [
         'l10n_cr',
         'l10n_cr_edi',

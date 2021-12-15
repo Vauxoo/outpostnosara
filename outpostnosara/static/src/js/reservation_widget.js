@@ -21,6 +21,7 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             this._startDate = null;
             this._endDate = null;
             this._code = null;
+            this._format = 'MM/DD/YYYY';
         },
         // --------------------------------------------------------------------------
         // Handlers
@@ -41,12 +42,12 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             this._resertValidation();
 
             if ($input.data('singledatepicker')) {
-                 $input.val(picker.startDate.format('DD/MM/YYYY'));
+                 $input.val(picker.startDate.format(this._format));
                 return;
             }
 
-            this.$('.ou-daterangepicker[name="checkin"]').val(picker.startDate.format('DD/MM/YYYY'));
-            this.$('.ou-daterangepicker[name="checkout"]').val(picker.endDate.format('DD/MM/YYYY'));
+            this.$('.ou-daterangepicker[name="checkin"]').val(picker.startDate.format(this._format));
+            this.$('.ou-daterangepicker[name="checkout"]').val(picker.endDate.format(this._format));
 
             this.$('.js_reservation_button').removeClass('d-none');
             this.$('.js_reservation_payment,.js_reservation_price').addClass('d-none');

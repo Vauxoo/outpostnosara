@@ -39,3 +39,6 @@ class PmsRoomType(models.Model):
     _inherit = 'pms.room.type'
 
     type_lines_ids = fields.One2many('pms.room.type.lines', 'room_type_id', string="Custom Values", copy=True)
+    # We can't use active because active remove it in backend too
+    website_published = fields.Boolean(
+        default=True, help="Set active to false to hide in reservation page without removing it.")

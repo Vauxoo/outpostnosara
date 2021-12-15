@@ -82,7 +82,7 @@ msgstr ""
 
 #. module: outpostnosara
 #: model_terms:ir.ui.view,arch_db:outpostnosara.reservation
-msgid "By hour"
+msgid "Hourly"
 msgstr "Por Hora"
 
 #. module: outpostnosara

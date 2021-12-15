@@ -16,6 +16,9 @@
                     </field>
                 </page>
             </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="website_published"/>
+            </xpath>
         </field>
     </record>
 </odoo>
