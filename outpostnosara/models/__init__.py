@@ -10,3 +10,4 @@ from . import pms_reservation
 from . import res_users
 from . import website
 from . import res_partner
+from . import pms_lock

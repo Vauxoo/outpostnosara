@@ -8,3 +8,5 @@ portal_access_pms_reservation_line,portal_access_pms_reservation_line,pms.model_
 portal_access_pms_folio_sale_line,portal_access_pms_folio_sale_line,pms.model_folio_sale_line,base.group_portal,1,0,0,0
 portal_access_property,portal_access_property,pms.model_pms_property,base.group_portal,1,0,0,0
 portal_access_ir_sequence_group_user,portal_access_ir_sequence_group_user,base.model_ir_sequence,base.group_portal,1,0,0,0
+access_pms_lock,access_pms_lock,model_pms_lock,pms.group_pms_user,1,1,1,1
+access_pms_lock_slot,access_pms_lock_slot,model_pms_lock_slot,pms.group_pms_user,1,1,1,1

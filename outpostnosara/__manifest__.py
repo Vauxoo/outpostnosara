@@ -51,6 +51,7 @@
         'views/sale_subscription_views.xml',
         'views/pms_room_type_views.xml',
         'views/pms_reservation_views.xml',
+        'views/pms_lock_views.xml',
 
         # Website
         'views/assets.xml',
