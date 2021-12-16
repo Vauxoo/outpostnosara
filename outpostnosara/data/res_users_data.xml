@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<odoo noupdate="1">
+
+    <!-- Default template user for new users signing in -->
+    <record id="base.template_portal_user_id" model="res.users">
+        <!-- Update portal_user to avoid error when new portal user is created -->
+        <field name="pms_property_ids" eval="[(6, 0, [ref('pms.main_pms_property')])]"/>
+        <field name="pms_property_id" eval="ref('pms.main_pms_property')"/>
+    </record>
+
+</odoo>

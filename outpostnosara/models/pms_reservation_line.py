@@ -10,11 +10,10 @@ class PmsReservationLine(models.Model):
     def get_reservation_availability(self, room_id, start_date=False, end_date=False, date=False, **data):
         """Get the daily reservations for day."""
 
-        # The reservation.line is created by day and all reservation_type has to check de daily validation
+        # _sql_constraints_rule_availability in /pms/models/pms_reservation_line.py#L116
         domain = [
             ('room_id', '=', int(room_id)),
-            ('reservation_id.type_id.code', '=', 'day'),
-            ('state', 'in', ['confirm', 'onboard', 'arrival_delayed']),
+            ('occupies_availability', '=', True),
         ]
 
         if start_date:
@@ -23,6 +22,8 @@ class PmsReservationLine(models.Model):
             domain += [('date', '<=', end_date)]
         if date:
             domain += [('date', '=', date)]
+        if self._context.get('code'):
+            domain += [('reservation_id.type_id.code', '=', self._context.get('code'))]
 
         return self.search(domain)
 

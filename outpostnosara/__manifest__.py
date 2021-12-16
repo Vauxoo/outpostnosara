@@ -39,6 +39,7 @@
     'data': [
         # Data
         'data/res_company_data.xml',
+        'data/res_users_data.xml',
         'data/reservation_type.xml',
         'data/website_data.xml',
         'data/crm_tags.xml',

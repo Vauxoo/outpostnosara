@@ -1,8 +1,9 @@
 # Copyright 2021 Vauxoo
 # License LGPL-3 or later (http://www.gnu.org/licenses/lgpl).
-from odoo import fields, http
+from odoo import _, fields, http
 from odoo.http import request
 from odoo.addons.website_sale.controllers.main import WebsiteSale
+from odoo.exceptions import ValidationError
 
 
 class WebsiteOutpost(WebsiteSale):
@@ -27,8 +28,13 @@ class WebsiteOutpost(WebsiteSale):
     def reservation(self, **post):
         """Show Reservation Room Form."""
         order = request.website.sale_get_order(force_create=True)
-        room_types = request.env['pms.room.type'].search([])
         render_values = self._get_shop_payment_values(order, **post)
+        # PMS Room Type Property(pms_room_type_property_rule)
+        room_types = request.env['pms.room.type'].search([
+            '|',
+            ('pms_property_ids', '=', False),
+            ('pms_property_ids', 'in', request.env.user.get_active_property_ids())
+        ])
         render_values.update({
             'room_types': room_types,
             'reservation_types': room_types[:1].type_lines_ids,
@@ -39,7 +45,7 @@ class WebsiteOutpost(WebsiteSale):
     @http.route('/outpost/reserved_date/<int:room_id>', type='json', auth="user", website=True)
     def reserved_date(self, room_id, **post):
         """Get reserved dates of a room."""
-        return request.env['pms.reservation.line'].get_reservation_availability(
+        return request.env['pms.reservation.line'].with_context(code='day').get_reservation_availability(
             room_id, start_date=fields.Date.today()
         ).mapped('date')
 
@@ -54,7 +60,7 @@ class WebsiteOutpost(WebsiteSale):
     def validate_reservation(self, room_type, reservation_type_id, start_date, end_date, **post):
         """Get rooms_availables of a room kind."""
         reservation = request.website.get_reservation()
-        # preferred_room_id is autoselect by the room_type_id
+        reservation_lines = reservation.reservation_line_ids
         values = {
             'type_id': reservation_type_id,
             'room_type_id': room_type.id,
@@ -64,8 +70,13 @@ class WebsiteOutpost(WebsiteSale):
             'arrival_hour': reservation.pms_property_id.default_arrival_hour,
             'departure_hour': reservation.pms_property_id.default_departure_hour,
         }
-        values.update(post)
-        reservation.write(values)
+        reservation.write({**values, **post})
+        # preferred_room_id is autoselect by the room_type_id
+        reservation.flush()
+        if reservation_lines.get_reservation_availability(
+            reservation.preferred_room_id.id, start_date=start_date, end_date=end_date
+        ):
+            raise ValidationError(_("Room Occupied"))
         return reservation.read(['id', 'price_room_services_set'])
 
 

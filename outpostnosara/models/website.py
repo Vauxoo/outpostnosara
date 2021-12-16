@@ -1,5 +1,6 @@
-from odoo import models
+from odoo import _, models
 from odoo.http import request
+from odoo.exceptions import ValidationError
 
 
 class Website(models.Model):
@@ -19,10 +20,14 @@ class Website(models.Model):
         :rtype: pms.reservation
         """
         self.ensure_one()
+        user = self.env.user
+        if not user.pms_property_id or not user.pms_property_ids:
+            raise ValidationError(_("Please, set a property for the user"))
+
         reservation_obj = self.env['pms.reservation'].with_company(request.website.company_id.id).sudo()
-        partner = self.env.user.partner_id
-        # There is only one property and it will be update in validate_reservation
-        pms_property = self.env['pms.property'].sudo().search([], limit=1)
+        partner = user.partner_id
+        # Default Property
+        pms_property = user.pms_property_id
         reservation_id = request.session.get('reservation_id')
 
         # Test validity of the reservation_id
@@ -44,7 +49,7 @@ class Website(models.Model):
 
         # Create a validity of the reservation
         if not reservation:
-            reservation = self.env['pms.reservation'].create({
+            reservation = reservation_obj.create({
                 'partner_id': partner.id,
                 'pms_property_id': pms_property.id,
                 'preconfirm': self._context.get('preconfirm', False),
