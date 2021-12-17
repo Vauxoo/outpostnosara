@@ -10,6 +10,7 @@
                 <field name="room_type_id"/>
                 <field name="reservation_id"/>
                 <field name="folio_id"/>
+                <field name="pin"/>
             </xpath>
         </field>
     </record>

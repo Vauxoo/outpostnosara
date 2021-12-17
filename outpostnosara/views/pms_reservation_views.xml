@@ -20,6 +20,10 @@
             <xpath expr="//field[@name='departure_hour']" position="attributes">
                 <attribute name="class" add='oe_edit_only' separator=" "></attribute>
             </xpath>
+            <xpath expr="//field[@name='document_number']" position="after">
+                <field name="pin"/>
+                <field name="pin_state"/>
+            </xpath>
         </field>
     </record>
 

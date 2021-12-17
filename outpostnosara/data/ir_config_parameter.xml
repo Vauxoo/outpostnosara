@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="param_delay_checkin_reserve_lock" model="ir.config_parameter">
+        <field name="key">outpostnosara.delay_checkin_reserve_lock</field>
+        <field name="value">1</field>
+    </record>
+    <record id="param_delay_checkout_reserve_lock" model="ir.config_parameter">
+        <field name="key">outpostnosara.delay_checkout_reserve_lock</field>
+        <field name="value">1</field>
+    </record>
+</odoo>

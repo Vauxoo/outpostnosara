@@ -2,6 +2,7 @@ import datetime
 
 from odoo import api, models, fields, _
 from odoo.exceptions import UserError
+from odoo.tools.safe_eval import const_eval
 
 
 class PmsReservation(models.Model):
@@ -17,6 +18,14 @@ class PmsReservation(models.Model):
     checkout_datetime = fields.Datetime(
         store=True,
     )
+    pin = fields.Char(string='PIN', index=True, readonly=True)
+    pin_state = fields.Selection(
+        selection=[
+            ('active', "Active"),
+            ('inactive', "Inactive"),
+        ],
+        string='PIN State', default='inactive',
+        help="Type of time of the reservation, in case of hourly it will compute prices based on reserved hours.")
 
     def check_in_out_dates(self):
         """Overwritten this method since outpost needs to register reservations not only for days but hours.
@@ -124,3 +133,39 @@ class PmsReservation(models.Model):
                 record.checkout = False
             # date checking
             record.check_in_out_dates()
+
+    @api.model
+    def auto_departure_delayed(self):
+        res = super().auto_departure_delayed()
+        delay = const_eval(self.env['ir.config_parameter'].sudo().get_param(
+            'outpostnosara.delay_checkin_reserve_lock', 1))
+        now = fields.Datetime.now() + datetime.timedelta(minutes=delay)
+
+        reservations = self.env["pms.reservation"].search([
+            ("state", "in", ("onboard",)),
+            ("checkout_datetime", "<=", now),
+        ])
+        for reservation in reservations:
+            if reservation.pin_state == 'inactive':
+                continue
+            reservation.preferred_room_id._clear_lock(reservation.pin)
+            reservation.pin_state = 'inactive'
+        return res
+
+    @api.model
+    def auto_arrival_delayed(self):
+        res = super().auto_arrival_delayed()
+        delay = const_eval(self.env['ir.config_parameter'].sudo().get_param(
+            'outpostnosara.delay_checkout_reserve_lock', 1))
+        now = fields.Datetime.now() + datetime.timedelta(minutes=delay)
+
+        reservations = self.env["pms.reservation"].search([
+            ("state", "in", ("draft", "confirm")),
+            ("checkin_datetime", "<=", now),
+        ])
+        for reservation in reservations:
+            if reservation.pin_state == 'active':
+                continue
+            reservation.preferred_room_id._set_lock(reservation.pin)
+            reservation.pin_state = 'active'
+        return res

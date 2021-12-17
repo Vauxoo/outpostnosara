@@ -1,6 +1,9 @@
 # Copyright 2021 Vauxoo
 # License LGPL-3 or later (http://www.gnu.org/licenses/lgpl).
 import json
+import os
+
+
 from requests import post
 
 from odoo import fields, models, _
@@ -56,6 +59,8 @@ class PmsLockSlot(models.Model):
         }
 
     def _set_user_code(self, usercode=None):
+        if os.environ.get('ODOO_STAGE', False):
+            return True
         parameters = self._get_connection_parameters()
         usercode = usercode or self.usercode
         payload = {
@@ -77,6 +82,8 @@ class PmsLockSlot(models.Model):
         return response
 
     def _clear_user_code(self):
+        if os.environ.get('ODOO_STAGE', False):
+            return True
         parameters = self._get_connection_parameters()
         payload = {
             'entity_id': self.lock_id.name,
@@ -94,9 +101,9 @@ class PmsLockSlot(models.Model):
         self.write({'usercode': False})
         return response
 
-    def action_set_user_code(self, usercode):
+    def action_set_user_code(self):
         self.ensure_one()
-        return self._set_user_code(usercode)
+        return self._set_user_code(self.usercode)
 
     def action_clear_user_code(self):
         self.ensure_one()

@@ -1,3 +1,7 @@
+import string
+import random
+
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tests.common import Form
@@ -19,6 +23,12 @@ class SaleSubscription(models.Model):
     )
     folio_id = fields.Many2one(
         'pms.folio', related='reservation_id.folio_id', store=True, help="PMS Folio related to this subscription.")
+
+    pin = fields.Char(string='PIN', index=True, readonly=True)
+
+    _sql_constraints = [
+        ('pin_uniq', 'unique(pin)', 'The pin code must be unique!')
+    ]
 
     @api.model
     def create(self, vals):
@@ -42,6 +52,7 @@ class SaleSubscription(models.Model):
         reservation = self.env['pms.reservation']
         try:
             self.onchange_date_start()
+            self.set_pin()
             with Form(reservation) as reservation_form:
                 reservation_form.partner_id = self.partner_id
                 reservation_form.checkin = self.date_start
@@ -53,6 +64,16 @@ class SaleSubscription(models.Model):
             self.write({
                 'reservation_id': reservation.id,
             })
+            reservation.write({'pin': self.pin})
         except BaseException as error:
             raise UserError(_('An error occurred during the creation of the reservation\n\n%s') % error)
         return reservation
+
+    def set_pin(self):
+        self.ensure_one()
+        pin = ''
+        duplicated = True
+        while duplicated:
+            pin = ''.join((random.choice(string.digits) for x in range(8)))
+            duplicated = self.search([('pin', '=', pin)], limit=1)
+        self.pin = pin
