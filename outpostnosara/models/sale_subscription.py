@@ -18,22 +18,15 @@ class SaleSubscription(models.Model):
 
     room_type_id = fields.Many2one(
         'pms.room.type', help="If set will try to create a reservation when the subscription starts.")
-    reservation_id = fields.Many2one(
-        'pms.reservation', help="PMS Reservation related to this subscription."
-    )
-    folio_id = fields.Many2one(
-        'pms.folio', related='reservation_id.folio_id', store=True, help="PMS Folio related to this subscription.")
+    folio_ids = fields.One2many(
+        'pms.folio', 'subscription_id', help="PMS Folio related to this subscription.")
 
-    pin = fields.Char(string='PIN', index=True, readonly=True)
-
-    _sql_constraints = [
-        ('pin_uniq', 'unique(pin)', 'The pin code must be unique!')
-    ]
+    pin = fields.Char(string='PIN', size=8, index=True, help="PIN code for the door locks.")
 
     @api.model
     def create(self, vals):
         subscription = super().create(vals)
-        if subscription.room_type_id and not subscription.folio_id and subscription.stage_category == "progress":
+        if subscription.room_type_id and not subscription.folio_ids and subscription.stage_category == "progress":
             subscription.create_reservation()
         return subscription
 
@@ -41,14 +34,12 @@ class SaleSubscription(models.Model):
         old_not_in_progress = self.filtered(lambda sub: sub.stage_category != "progress")
         result = super().write(vals)
         for subscription in old_not_in_progress.filtered(
-                lambda sub: sub.stage_category == "progress" and sub.room_type_id and not sub.folio_id):
+                lambda sub: sub.stage_category == "progress" and sub.room_type_id and not sub.folio_ids):
             subscription.create_reservation()
         return result
 
     def create_reservation(self):
         self.ensure_one()
-        if self.reservation_id:
-            return self.reservation_id
         reservation = self.env['pms.reservation']
         try:
             self.onchange_date_start()
@@ -61,10 +52,6 @@ class SaleSubscription(models.Model):
                 reservation_form.room_type_id = self.room_type_id
             reservation = reservation_form.save()
             reservation.reservation_line_ids.write({'price': 0})
-            self.write({
-                'reservation_id': reservation.id,
-            })
-            reservation.write({'pin': self.pin})
         except BaseException as error:
             raise UserError(_('An error occurred during the creation of the reservation\n\n%s') % error)
         return reservation

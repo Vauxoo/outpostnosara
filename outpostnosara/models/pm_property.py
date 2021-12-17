@@ -1,10 +1,13 @@
 import pytz
 
-from odoo import models
+from odoo import fields, models
 
 
 class PmsProperty(models.Model):
     _inherit = 'pms.property'
+
+    default_arrival_hour = fields.Char(default="12:00")
+    default_departure_hour = fields.Char(default="14:00")
 
     def date_property_timezone(self, dtimezone):
         """Overwritten this because the following error when user does not have timezone set

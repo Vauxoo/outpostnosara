@@ -12,3 +12,4 @@ from . import website
 from . import res_partner
 from . import pms_lock
 from . import pms_room
+from . import pms_folio

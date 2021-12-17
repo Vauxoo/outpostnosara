@@ -12,27 +12,27 @@ from odoo.exceptions import UserError
 
 class PmsLock(models.Model):
     _name = 'pms.lock'
-    _description = 'PMS Lock door connected to a homeassitant'
+    _description = 'PMS Lock door connected to Home Assistant'
 
     name = fields.Char(
         required=True,
-        help="""Identifier of the lock in the home assistant, you need to get this from that configuration"""
+        help="""Identifier of the lock in Home Assistant, you can set this from the device's configuration in HA."""
     )
-    slot_ids = fields.One2many('pms.lock.slot', 'lock_id', help="Memory slots where the keys are saved")
+    slot_ids = fields.One2many('pms.lock.slot', 'lock_id', help="Memory slots where the keys are saved in the lock.")
 
     def action_set_user_code(self, slot_name, usercode):
         self.ensure_one()
-        slot = self.slot_ids.mapped(lambda s: s.name == slot_name)
+        slot = self.slot_ids.filtered(lambda s: s.name == slot_name)
         if not slot:
             slot = slot.create({
                 'lock_id': self.id,
-                'slot': slot_name,
+                'name': slot_name,
             })
         return slot._set_user_code(usercode=usercode)
 
     def action_clear_user_code(self, slot_name):
         self.ensure_one()
-        slot = self.slot_ids.mapped(lambda s: s.name == slot_name)
+        slot = self.slot_ids.filtered(lambda s: s.name == slot_name)
         if not slot:
             return False
         return slot._clear_user_code()
@@ -40,26 +40,26 @@ class PmsLock(models.Model):
 
 class PmsLockSlot(models.Model):
     _name = 'pms.lock.slot'
-    _description = 'PMS Lock Slot or memory position where the keys of the lock key  will be saved'
+    _description = 'PMS Lock slot or memory position where the user codes will be saved.'
 
     lock_id = fields.Many2one('pms.lock', required=True)
-    name = fields.Integer(required=True, help="Slot position or memory position")
+    name = fields.Integer(required=True, help="Slot number, it is an integer between 1 and 30.")
     usercode = fields.Char(size=8, help="Pin Code between 4 and 8")
 
     def _get_connection_parameters(self):
         hostname = self.sudo().env['ir.config_parameter'].get_param('pms.locks_hostname')
         auth_token = self.sudo().env['ir.config_parameter'].get_param('pms.locks_auth_token')
         if not hostname:
-            raise UserError(_("Set the key pms.locks_hostname on the parameters, None found"))
+            raise UserError(_("Please set the key pms.locks_hostname in the configuration parameters."))
         if not auth_token:
-            raise UserError(_("Set the key pms.locks_auth_token on the parameters, None found"))
+            raise UserError(_("Please set the key pms.locks_auth_token in the configuration parameters."))
         return {
             'hostname': hostname,
             'auth_token': auth_token
         }
 
     def _set_user_code(self, usercode=None):
-        if os.environ.get('ODOO_STAGE', False):
+        if os.environ.get('ODOO_STAGE', False) != 'production':
             return True
         parameters = self._get_connection_parameters()
         usercode = usercode or self.usercode
@@ -82,7 +82,7 @@ class PmsLockSlot(models.Model):
         return response
 
     def _clear_user_code(self):
-        if os.environ.get('ODOO_STAGE', False):
+        if os.environ.get('ODOO_STAGE', False) != 'production':
             return True
         parameters = self._get_connection_parameters()
         payload = {
@@ -110,5 +110,5 @@ class PmsLockSlot(models.Model):
         return self._clear_user_code()
 
     _sql_constraints = [
-        ('lock_code_uniq', 'unique(lock_id, name)', 'The name of the slot must be unique by lock!')
+        ('lock_code_uniq', 'unique(lock_id, name)', 'The name of the slot in a lock must be unique.')
     ]

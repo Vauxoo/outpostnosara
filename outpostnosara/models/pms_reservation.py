@@ -18,14 +18,13 @@ class PmsReservation(models.Model):
     checkout_datetime = fields.Datetime(
         store=True,
     )
-    pin = fields.Char(string='PIN', index=True, readonly=True)
     pin_state = fields.Selection(
         selection=[
             ('active', "Active"),
             ('inactive', "Inactive"),
         ],
         string='PIN State', default='inactive',
-        help="Type of time of the reservation, in case of hourly it will compute prices based on reserved hours.")
+        help="Indicates if the PIN code is active in the door locks for this reservation.")
 
     def check_in_out_dates(self):
         """Overwritten this method since outpost needs to register reservations not only for days but hours.
@@ -144,11 +143,10 @@ class PmsReservation(models.Model):
         reservations = self.env["pms.reservation"].search([
             ("state", "in", ("onboard",)),
             ("checkout_datetime", "<=", now),
+            ("pin_state", "=", "active"),
         ])
         for reservation in reservations:
-            if reservation.pin_state == 'inactive':
-                continue
-            reservation.preferred_room_id._clear_lock(reservation.pin)
+            reservation.preferred_room_id._clear_lock(reservation.folio_id.subscription_id.pin)
             reservation.pin_state = 'inactive'
         return res
 
@@ -162,10 +160,9 @@ class PmsReservation(models.Model):
         reservations = self.env["pms.reservation"].search([
             ("state", "in", ("draft", "confirm")),
             ("checkin_datetime", "<=", now),
+            ("pin_state", "=", "inactive"),
         ])
         for reservation in reservations:
-            if reservation.pin_state == 'active':
-                continue
-            reservation.preferred_room_id._set_lock(reservation.pin)
+            reservation.preferred_room_id._set_lock(reservation.folio_id.subscription_id.pin)
             reservation.pin_state = 'active'
         return res

@@ -9,7 +9,7 @@
     'website': 'https://www.vauxoo.com',
     'license': 'LGPL-3',
     'category': 'Installer',
-    'version': '14.0.1.1.0',
+    'version': '14.0.1.1.1',
     'depends': [
         'l10n_cr',
         'l10n_cr_edi',
@@ -53,6 +53,7 @@
         'views/pms_room_type_views.xml',
         'views/pms_reservation_views.xml',
         'views/pms_lock_views.xml',
+        'views/pms_folio_views.xml',
 
         # Website
         'views/assets.xml',

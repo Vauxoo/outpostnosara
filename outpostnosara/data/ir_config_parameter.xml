@@ -2,10 +2,10 @@
 <odoo noupdate="1">
     <record id="param_delay_checkin_reserve_lock" model="ir.config_parameter">
         <field name="key">outpostnosara.delay_checkin_reserve_lock</field>
-        <field name="value">1</field>
+        <field name="value">10</field>
     </record>
     <record id="param_delay_checkout_reserve_lock" model="ir.config_parameter">
         <field name="key">outpostnosara.delay_checkout_reserve_lock</field>
-        <field name="value">1</field>
+        <field name="value">5</field>
     </record>
 </odoo>
