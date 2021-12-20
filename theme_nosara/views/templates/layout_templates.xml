@@ -7,9 +7,13 @@
         <xpath expr="//t[@t-call='website.navbar_nav']/t[@t-set='_nav_class']" position="attributes">
             <attribute name='t-value'>'flex-grow-1 justify-content-center'</attribute>
         </xpath>
-        <!-- REMOVE ml-lg-auto-->
+        <!-- REMOVE ml-lg-auto IN USER MENU-->
         <xpath expr="//t[@t-call='portal.user_dropdown']/t[@t-set='_item_class']" position="attributes">
             <attribute name='t-value'>'nav-item dropdown'</attribute>
+        </xpath>
+        <!-- REMOVE ml-lg-auto IN LOGIN MENU-->
+        <xpath expr="//t[@t-call='portal.placeholder_user_sign_in']/t[@t-set='_item_class']" position="attributes">
+            <attribute name='t-value'>'nav-item'</attribute>
         </xpath>
     </template>
 
