@@ -9,3 +9,4 @@ from . import pm_property
 from . import pms_reservation
 from . import res_users
 from . import website
+from . import res_partner

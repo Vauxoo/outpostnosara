@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 class Website(models.Model):
     _inherit = 'website'
 
-    def get_reservation(self):
+    def get_reservation(self, invoice_create=None):
         """ Return the last pre-reservation of the partner by:
                 - session reservation_id
                 - last pms.reservation.state = draft
@@ -35,10 +35,11 @@ class Website(models.Model):
             reservation = reservation_obj.browse(reservation_id)
             if reservation.exists().filtered(lambda r: r.state == 'draft'):
                 # We have to reset in this specific order or the room won't update
-                reservation.write({
-                    'reservation_line_ids': False,
-                    'preferred_room_id': False,
-                })
+                if not invoice_create:
+                    reservation.write({
+                        'reservation_line_ids': False,
+                        'preferred_room_id': False,
+                    })
                 return reservation
 
         # Search last validity of the reservation

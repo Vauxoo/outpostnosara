@@ -3,6 +3,7 @@
 from odoo import _, fields, http
 from odoo.http import request
 from odoo.addons.website_sale.controllers.main import WebsiteSale
+from odoo.addons.account_payment.controllers.payment import PaymentPortal
 from odoo.exceptions import ValidationError
 
 
@@ -27,8 +28,9 @@ class WebsiteOutpost(WebsiteSale):
     @http.route('/outpost/reservation', type='http', auth="user", website=True)
     def reservation(self, **post):
         """Show Reservation Room Form."""
-        order = request.website.sale_get_order(force_create=True)
-        render_values = self._get_shop_payment_values(order, **post)
+        partner = request.env.user.partner_id
+        render_values = request.env['payment.acquirer']._get_available_payment_input(
+            partner=partner, company=partner.company_id)
         # PMS Room Type Property(pms_room_type_property_rule)
         room_types = request.env['pms.room.type'].search([
             '&', '|',
@@ -78,7 +80,36 @@ class WebsiteOutpost(WebsiteSale):
             reservation.preferred_room_id.id, start_date=start_date, end_date=end_date
         ):
             raise ValidationError(_("Room Occupied"))
+        self.update_invoice(reservation)
         return reservation.read(['id', 'price_room_services_set'])
+
+    def update_invoice(self, reservation):
+        """  Use this method to create an invoice or update the invoice lines
+        for reservations in order to process the payment.
+
+        The last_website_invoice_id values get the last invoice in the draft
+        state related to the partner to avoid the creation of multiple draft
+        invoices each time the user logs in to his account.
+        """
+        folio = reservation.folio_id
+        lines_to_invoice = folio.sale_line_ids.filtered(lambda l: l.reservation_id.id == reservation.id)
+        dict_lines = {}
+        for line in lines_to_invoice:
+            line.qty_to_invoice = 0 if line.display_type else 1
+            dict_lines[line.id] = 0 if line.display_type else 1
+        partner = request.env.user.partner_id
+        invoice = partner.last_website_invoice_id
+        if not invoice or invoice.state == 'post':
+            invoice = folio._create_invoices(lines_to_invoice=dict_lines)
+        else:
+            lines = [(5, 0)]
+            for line in lines_to_invoice:
+                invoice_line_values = line._prepare_invoice_line(qty=line.qty_to_invoice)
+                new_line = (0, False, invoice_line_values)
+                lines.append(new_line)
+            invoice.write({'invoice_line_ids': lines})
+        request.session['last_invoice_id'] = invoice.id
+        invoice.write({'website_id': request.website.id})
 
 
 class OutpostNosaraController(http.Controller):
@@ -100,3 +131,42 @@ class OutpostNosaraController(http.Controller):
             'membership_tags': crm_tags
         }
         return request.render("outpostnosara.membership_contact", values)
+
+    @http.route('/outpost/pay/invoice', type='http', auth="user", website=True)
+    def redirect_pay_invoice(self, **post):
+        if request.session.get('last_invoice_id'):
+            invoice_id = request.session.get('last_invoice_id')
+            portal_payment = PaymentPortal()
+            acquirer_id = post.get('acquirer_id')
+            acquirer = request.env['payment.acquirer'].browse(int(acquirer_id))
+            if acquirer.payment_flow == 's2s':
+                return portal_payment.invoice_pay_token(invoice_id, **post)
+            return portal_payment.invoice_pay_form(acquirer_id, invoice_id, **post)
+        return request.redirect('/outpost/reservation')
+
+    @http.route('/outpost/reservation/confirmation', type='http', auth="user", website=True)
+    def reservation_confirmation(self, **post):
+        if not request.session.get('last_invoice_id'):
+            return request.redirect('/outpost/reservation')
+        invoice_id = request.session.get('last_invoice_id')
+        invoice = request.env['account.move'].sudo().browse(invoice_id)
+        values = {}
+        error = False
+        transaction = invoice.get_portal_last_transaction()
+        reservation_obj = request.env['pms.reservation'].with_company(request.website.company_id.id).sudo()
+        reservation = reservation_obj.browse(request.session.get('reservation_id'))
+        if transaction.state == 'done':
+            reservation.write({
+                'preconfirm': True,
+                'overbooking': False,
+            })
+            reservation.confirm()
+        if transaction.state == 'error':
+            error = transaction.state_message
+        values.update({
+            'reservation': reservation,
+            'invoice': invoice,
+            'transaction': transaction,
+            'error': error,
+        })
+        return request.render("outpostnosara.reservation_confirmation", values)

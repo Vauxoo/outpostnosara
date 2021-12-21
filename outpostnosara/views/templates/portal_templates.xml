@@ -134,9 +134,11 @@
                                     <t t-set="icon_class" t-value="'fa-chevron-right'"/>
                                     <t t-set="submit_class" t-value="'btn btn-primary'"/>
                                     <t t-set="pms" t-value="tokens"/>
-                                    <t t-set="form_action" t-value="'/shop/payment/token'"/>
-                                    <t t-set="prepare_tx_url" t-value="'/shop/payment/transaction/'"/>
+                                    <t t-set="form_action" t-value="'/outpost/pay/invoice'"/>
+                                    <t t-set="prepare_tx_url" t-value="'/outpost/pay/invoice'"/>
                                     <t t-set="partner_id" t-value="partner"/>
+                                    <t t-set="success_url" t-value="'/outpost/reservation/confirmation'"/>
+                                    <t t-set="error_url" t-value="'/outpost/reservation/confirmation'"/>
                                 </t>
                             </div>
 
@@ -146,7 +148,6 @@
                                 </a>
                             </div>
                         </section>
-                        
                     </div>
                 </div>
             </div>
@@ -155,9 +156,76 @@
     <template id="reservation_validator_button" name="Reservation validator button">
         <div class="text-right mt-3">
             <button id='validate_reservation' type='button' class="btn btn-primary">
-                Validate Reservation  
+                Validate Reservation
                 <i class="fa fa-chevron-right"></i>
             </button>
         </div>
+    </template>
+    <template id="reservation_confirmation" name="Reservation Confirmation Page">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <!--  banner  -->
+                <section class="s_cover pt64 pb96 o_colored_level s_parallax_no_overflow_hidden undefined o_cc o_cc3" data-scroll-background-ratio="0" data-snippet="s_cover" data-name="Cover" data-oe-shape-data="{'shape':'web_editor/Origins/15','flip':['y']}" style="position: relative;">
+                    <div class="o_we_shape o_web_editor_Origins_15" style="background-image: url('/web_editor/shape/web_editor/Origins/15.svg?c4=%23FCFCFA&amp;flip=y'); background-color: rgba(255, 255, 255, 0) !important; background-position: 50% 100%;"/>
+                    <div class="s_allow_columns container">
+                         <h1 style="text-align: center;" class='antonio'>
+                            <font style="font-size: 62px; font-weight: bold;">RESERVATION</font>
+                        </h1>
+                        <p class="lead mx-auto" style="text-align: center;max-width: 540px;">
+                            Thank you for considering Outpost Nosara to be your next work and
+                            social membership club. To complete your application, please review
+                            and complete the intake form below.
+                        </p>
+                    </div>
+                </section>
+                <div class="container">
+                    <div class="row mt16 o_portal_invoice_sidebar">
+                        <!-- Sidebar -->
+                        <t t-call="portal.portal_record_sidebar">
+                            <t t-set="classes" t-value="'col-lg-auto d-print-none'"/>
+                            <t t-set="title">
+                                <h2 class="mb-0">
+                                    <b t-if="invoice.amount_residual > 0" t-field="invoice.amount_residual"/>
+                                    <b t-else="1" t-field="invoice.amount_total"/>
+                                </h2>
+                            </t>
+
+                            <t t-set="entries">
+                                <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                                    <li class="list-group-item flex-grow-1">
+                                        <div class="o_download_pdf btn-toolbar flex-sm-nowrap">
+                                            <div class="btn-group  flex-grow-1 mr-1 mb-1">
+                                                <a class="btn btn-secondary btn-block o_download_btn" t-att-href="invoice.get_portal_url(report_type='pdf', download=True)" title="Download"><i class="fa fa-download"/> Download</a>
+                                            </div>
+                                            <div class="btn-group flex-grow-1 mb-1">
+                                                <a class="btn btn-secondary btn-block o_print_btn o_portal_invoice_print" t-att-href="invoice.get_portal_url(report_type='pdf')" id="print_invoice_report" title="Print" target="_blank"><i class="fa fa-print"/> Print</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </t>
+                        </t>
+
+                        <!-- Page Content -->
+                        <div id="invoice_content" class="col-12 col-lg">
+                            <div class="row mr16">
+                                <div t-if="transaction.state == 'done'" class="col-lg-12 mr16 ml16 alert alert-dismissable alert-success" role="alert">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    <h3>Thank you for your Reservation!</h3>
+                                </div>
+                                <div t-if="error" t-attf-class="'col-lg-12 mr16 ml16 alert alert-dismissable' #{'alert-danger' if error else 'alert-warning'}" role="alert">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    <h3>Error: <t t-esc="error"/></h3>
+                                </div>
+                            </div>
+
+                            <div class="o_portal_html_view shadow p-3">
+                                <iframe id="invoice_html" class="mt8 mb8" width="100%" height="100%" frameborder="0" scrolling="no" t-att-src="invoice.get_portal_url(report_type='html')"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
     </template>
 </odoo>
