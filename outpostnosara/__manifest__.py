@@ -46,6 +46,7 @@
         'data/crm_tags.xml',
         'data/website_crm.xml',
         'data/ir_config_parameter.xml',
+        'data/email_templates.xml',
 
         # Views
         'views/hr_employee_views.xml',

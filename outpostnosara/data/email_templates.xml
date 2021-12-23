@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pms.confirmed_reservation_email" model="mail.template">
+        <field name="subject">Outpost Nosara has confirmed your reservation</field>
+        <field name="body_html" type="html">
+                <table
+                    border="0"
+                    cellpadding="0"
+                    cellspacing="0"
+                    style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"
+                >
+                <tr><td align="center">
+                    <table
+                                border="0"
+                                cellpadding="0"
+                                cellspacing="0"
+                                width="590"
+                                style="background-color: #FCFCFA; color: #454748; border-collapse:separate; margin-bottom:16px;"
+                            >
+                        <head>
+                            <link
+                                        rel="stylesheet"
+                                        href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+                                        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+                                        crossorigin="anonymous"
+                                    />
+                        </head>
+                        <tbody>
+                            <!-- HEADER -->
+                            <tr>
+                                <td style="padding-right:20px; background-color: #E3DCD6;">
+                                    <table width="100%" cellpadding="7">
+                                        <tr>
+                                            <td align="center">
+                                                <img src="/outpostnosara/static/img/logo.png" style="pngborder-style:none;max-width:45%; margin:16px;"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- PROPERTY DESCRIPTION -->
+                            <tr>
+                                <td align="center" style="min-width: 590px; padding: 16px">
+                                    <table
+                                                width="590"
+                                                border="0"
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                style="min-width: 590px; background-color: #FCFCFA; padding: 0px 0px 0px 0px; border-collapse:separate;"
+                                            >
+                                        <tr>
+                                            <td align="right">
+                                                <div class="col-sm-6" style="margin-top: 16px;">
+                                                    <p>
+                                                        % if object.pms_property_id.partner_id.street
+                                                        <span>${object.pms_property_id.partner_id.street}</span>
+                                                        % endif
+                                                        % if object.pms_property_id.partner_id.street2
+                                                            <span>${object.pms_property_id.partner_id.street2}</span>
+                                                        % endif
+                                                    </p>
+                                                    <p>
+                                                        <span>${object.pms_property_id.partner_id.city}, </span>
+                                                        <span>${object.pms_property_id.partner_id.country_id.name} </span>
+                                                        <span>${object.pms_property_id.partner_id.zip} </span>
+                                                    </p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td valign="top" style="font-size: 14px;">
+                                                <hr
+                                                                width="100%"
+                                                                style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
+                                                            />
+                                                <div style="margin-top: 32px;">
+                                                    <p>Hello ${object.partner_id.name.split(' ')[0] or ''},</p>
+                                                    <br/>
+                                                    <p>
+                                                        Your reservation has been confirmed. Please see the details below.
+                                                    </p>
+                                                    <p>
+                                                        If you have any questions prior to your reservation date, please email us
+                                                        at <a href="mailto:reservations@outpostnosara.com">reservations@outpostnosara.com</a>.
+                                                    </p>
+                                                    <br/>
+                                                    <p>Thank you,</p>
+                                                    <br/>
+                                                    <p>Outpost Management</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- DETAILS -->
+                            <tr>
+                                <td align="center" style="min-width: 590px; padding: 16px">
+                                    <hr width="100%"
+                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
+                                    />
+                                    <div align="left" style="margin: 16px 0px 16px 0px;">
+                                        <strong>Reservation Details</strong>
+                                    </div>
+                                    <table
+                                                width="590"
+                                                border="0"
+                                                cellpadding="0"
+                                                cellspacing="0"
+                                                style="min-width: 590px; background-color: #FCFCFA; padding: 0px 8px 0px 8px; border-collapse:separate;"
+                                            >
+                                        <tr>
+                                            <td valign="top" style="font-size: 14px;">
+                                                <table style="width:60%;">
+                                                    <tr>
+                                                        <td>
+                                                            <div class="far fa-calendar-alt fa-2x" style="margin: 0px 16px 0px 0px;"/>
+                                                        </td>
+                                                        <td style="margin: 16px 0px 16px 0px; font-size: 14px;">
+                                                            <div>
+                                                                <strong>From:</strong> ${format_date(object.checkin, 'EEEE, MMMM d, Y')}
+                                                                <strong> At</strong> ${object.arrival_hour}
+                                                            </div>
+                                                            <div>
+                                                                <strong>To:</strong> ${format_date(object.checkout, 'EEEE, MMMM d, Y')}
+                                                                <strong> At</strong> ${object.departure_hour}
+                                                            </div>
+                                                            <div style="font-size:12px;color:#9e9e9e">
+                                                                <i><strong>TZ</strong> ${object.pms_property_id.tz}</i>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="margin: 16px 0px 16px 0px;">
+                                                            <br/>
+                                                            <div class="fas fa-laptop fa-2x" style="margin: 0px 16px 0px 0px;"/>
+                                                        </td>
+                                                        <td style="vertical-align:top;">
+                                                            <br/>
+                                                            <div><strong>Room:</strong> ${object.room_type_id.name}</div>
+                                                        </td>
+                                                    </tr>
+                                                    % if object.folio_id.subscription_id.pin
+                                                    <tr>
+                                                        <td style="margin: 16px 0px 16px 0px;">
+                                                            <br/>
+                                                            <div class="fas fa-key fa-2x" style="margin: 0px 16px 0px 0px;"/>
+                                                        </td>
+                                                        <td style="vertical-align:top;">
+                                                            <br />
+                                                            <div><strong>Access Code for the Locks:  </strong>${object.folio_id.subscription_id.pin}</div>
+                                                        </td>
+                                                    </tr>
+                                                    % endif
+                                                    <tr>
+                                                        <td style="margin: 16px 0px 16px 0px;">
+                                                            <br/>
+                                                            <div class="fas fa-coins fa-2x" style="margin: 0px 16px 0px 0px;"/>
+                                                        </td>
+                                                        <td style="margin: 16px 0px 16px 0px; font-size: 14px;">
+                                                            <br/>
+                                                            <div><strong>Price: </strong> ${object.currency_id.symbol} ${object.price_room_services_set}</div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        % if object.pms_property_id.mail_information
+                                        <tr>
+                                            <td valign="top" style="font-size: 14px;">
+                                                <div>
+                                                    <hr width="100%"
+                                                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
+                                                    />
+                                                    <div align="left" style="margin: 16px 0px 16px 0px;">
+                                                        <strong>Additional Information</strong>
+                                                    </div>
+                                                        ${object.pms_property_id.mail_information|safe}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        % endif
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- FOOTER -->
+                            <tr>
+                                <td align="center" style="min-width: 590px;">
+                                    % if object.pms_property_id.privacy_policy
+                                    <table
+                                            border="0"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                            width="590"
+                                            style="padding: 16px; background-color: #FCFCFA; color: #454748; border-collapse:separate;"
+                                        >
+                                        <tr><td style="font-size: 10px;">
+                                            ${object.pms_property_id.privacy_policy|safe}
+                                        </td></tr>
+                                    </table>
+                                    % endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center" style="min-width: 590px;">
+                                    % if object.company_id
+                                    <table
+                                            width="590"
+                                            border="0"
+                                            cellpadding="0"
+                                            cellspacing="0"
+                                            style="min-width: 590px; background-color: #FCFCFA; color: #454748; padding: 8px; border-collapse:separate;"
+                                        >
+                                        <tr>
+                                            <td style="text-align: center; font-size: 10px;">
+                                                Sent by <a
+                                                            target="_blank"
+                                                            href="${object.company_id.website}"
+                                                            style="color: #875A7B;"
+                                                        >OUTPOST NOSARA</a>
+                                                <br/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    % endif
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td></tr>
+                </table>
+        </field>
+    </record>
+</odoo>
