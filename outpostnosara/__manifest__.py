@@ -33,7 +33,7 @@
         'maintenance',
         'crm',
         'theme_nosara',
-        'payment_stripe',
+        'payment_credomatic',
     ],
     'test': [
     ],

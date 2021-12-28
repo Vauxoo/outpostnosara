@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="payment_acquirer_credomatic" model="payment.acquirer">
+        <field name="name">Debit / Credit card</field>
+        <field name="image_128" type="base64" file="payment_credomatic/static/src/img/icon.png"/>
+        <field name="provider">credomatic</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="payment_flow">s2s</field>
+        <field name="registration_view_template_id" ref="payment_credomatic.credomatic_s2s_form"/>
+        <field name="view_template_id" ref="payment_credomatic.credomatic_s2s_form"/>
+        <field name="state">test</field>
+        <field name="save_token">none</field>
+        <field name="pre_msg"><![CDATA[
+            <p>After filling out the form, your payment will be authorized and charged.</p>]]>
+        </field>
+        <field name="payment_icon_ids" eval="[(6, 0, [ref('payment.payment_icon_cc_visa'), ref('payment.payment_icon_cc_american_express'), ref('payment.payment_icon_cc_mastercard')])]" />
+        <field name="credomatic_gateway_url">https://credomatic.compassmerchantsolutions.com/api/transact.php</field>
+    </record>
+</odoo>

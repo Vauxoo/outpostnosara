@@ -1,0 +1,161 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* payment_credomatic
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-02 23:08+0000\n"
+"PO-Revision-Date: 2018-10-02 23:08+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: payment_credomatic
+#: code:addons/payment_credomatic/controllers/main.py:57
+#, python-format
+msgid "%s Please refresh the page."
+msgstr "%s Por favor, refresca la página."
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.credomatic_s2s_form
+msgid "123"
+msgstr "123"
+
+#. module: payment_credomatic
+#: model:payment.acquirer,cancel_msg:payment_credomatic.payment_acquirer_credomatic
+msgid "<span><i>Cancel,</i> Your payment has been cancelled.</span>"
+msgstr "<span><i>Cancelado,</i> Su pago ha sido cancelado.</span>"
+
+#. module: payment_credomatic
+#: model:payment.acquirer,done_msg:payment_credomatic.payment_acquirer_credomatic
+msgid "<span><i>Done,</i> Your online payment has been successfully processed. Thank you for your order.</span>"
+msgstr "<span><i>Listo,</i> Su pago en línea ha sido procesado exitosamente. Gracias por su orden.</span>"
+
+#. module: payment_credomatic
+#: model:payment.acquirer,error_msg:payment_credomatic.payment_acquirer_credomatic
+msgid "<span><i>Error,</i> Please be aware that an error occurred during the transaction. The order has been confirmed but will not be paid. Do not hesitate to contact us if you have any questions on the status of your order.</span>"
+msgstr "<span><i>Error,</i> Por favor tenga en cuenta que se ha producido un error durante la transacción. La orden se ha confirmado pero no se pagará. No dude en ponerse en contacto con nosotros si tiene alguna pregunta sobre el estado de su pedido.</span>"
+
+#. module: payment_credomatic
+#: model:payment.acquirer,pending_msg:payment_credomatic.payment_acquirer_credomatic
+msgid "<span><i>Pending,</i> Your online payment has been successfully processed. But your order is not validated yet.</span>"
+msgstr "<span><i>Pendiente,</i> Su pago en línea ha sido preocesado exitosamente. Pero su orden no está validada aún.</span>"
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.error_on_shop
+msgid "<span>An error has occurred while charging your sale order.</span>"
+msgstr "<span>Ha ocurrido un error al procesar el pago de tu orden.</span>"
+
+#. module: payment_credomatic
+#: model:payment.acquirer,pre_msg:payment_credomatic.payment_acquirer_credomatic
+msgid "After filling out the form, your payment will be authorized and charged."
+msgstr "Después de llenar el formulario, tu pago será autorizado y cargado."
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.credomatic_s2s_form
+msgid "CVV"
+msgstr "CVV"
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.credomatic_s2s_form
+msgid "Card Number"
+msgstr "Número de tarjeta"
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.credomatic_s2s_form
+msgid "Cardholder"
+msgstr "Titular de la tarjeta"
+
+#. module: payment_credomatic
+#: model:payment.acquirer,name:payment_credomatic.payment_acquirer_credomatic
+msgid "Debit / Credit card"
+msgstr "Tarjeta de Crédito / Débito"
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.credomatic_s2s_form
+msgid "Ej. 1234 5678 1234 5678"
+msgstr "Ej. 1234 5678 1234 5678"
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.credomatic_s2s_form
+msgid "Expiration date"
+msgstr "Fecha de expiración"
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.credomatic_s2s_form
+msgid "MM"
+msgstr "MM"
+
+#. module: payment_credomatic
+#: model:ir.model.fields,field_description:payment_credomatic.field_payment_acquirer_credomatic_public_id
+msgid "Merchant key public id"
+msgstr "Llave pública del comerciante"
+
+#. module: payment_credomatic
+#: model:ir.model.fields,field_description:payment_credomatic.field_payment_acquirer_credomatic_login
+msgid "Merchant login"
+msgstr "Login del comerciante"
+
+#. module: payment_credomatic
+#: model:ir.model.fields,field_description:payment_credomatic.field_payment_acquirer_credomatic_private_api_key
+msgid "Merchant private key"
+msgstr "Llave privada del comerciante"
+
+#. module: payment_credomatic
+#: model:ir.model.fields,field_description:payment_credomatic.field_payment_acquirer_credomatic_gateway_url
+msgid "Merchant transaction url"
+msgstr "URL de transacciones del comerciante"
+
+#. module: payment_credomatic
+#: model:ir.model,name:payment_credomatic.model_payment_acquirer
+msgid "Payment Acquirer"
+msgstr "Medio de pago"
+
+#. module: payment_credomatic
+#: model:ir.model,name:payment_credomatic.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Transacción de pago"
+
+#. module: payment_credomatic
+#: model:ir.ui.view,arch_db:payment_credomatic.credomatic_s2s_form
+msgid "YYYY"
+msgstr "YYYY"
+
+#. module: payment_credomatic
+#: code:addons/payment_credomatic/controllers/main.py:36
+#, python-format
+msgid "You don't have any active order."
+msgstr "No tienes ninguna orden activa."
+
+#. module: payment_credomatic
+#. openerp-web
+#: code:addons/payment_credomatic/static/src/xml/providers.xml:5
+#, python-format
+msgid "For security, after changing the aquirer environment, its credentials are removed."
+msgstr "Por seguridad, despues de cambiar el ambiente del método de pago, sus credenciales serán removidas."
+
+#. module: payment_credomatic
+#. openerp-web
+#: code:addons/payment_credomatic/static/src/xml/providers.xml:6
+#, python-format
+msgid "Make sure the credentials you are input in the aquirer form are from the"
+msgstr "Asegurate que las credenciales que ingreses sean del modo de "
+
+#. module: payment_credomatic
+#. openerp-web
+#: code:addons/payment_credomatic/static/src/xml/providers.xml:10
+#, python-format
+msgid "Reload the page to see the changes in the form."
+msgstr "Recarga ĺa página para ver los cambios."
+
+#. module: payment_credomatic
+#. openerp-web
+#: code:addons/payment_credomatic/static/src/xml/providers.xml:7
+#, python-format
+msgid "state."
+msgstr "."

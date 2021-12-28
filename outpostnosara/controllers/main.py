@@ -4,6 +4,7 @@ from odoo import _, fields, http
 from odoo.http import request
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.addons.account_payment.controllers.payment import PaymentPortal
+from odoo.addons.payment_credomatic.controllers.main import safe_int, FacBacController as Credomatic
 from odoo.exceptions import ValidationError
 
 
@@ -170,3 +171,16 @@ class OutpostNosaraController(http.Controller):
             'error': error,
         })
         return request.render("outpostnosara.reservation_confirmation", values)
+
+
+class CredomaticOutpost(Credomatic):
+
+    def credomatic_get_related_document(self, data):
+        if data.get('order_id'):
+            return request.env['sale.order'].browse(safe_int(data.get('order_id')))
+        if data.get('invoice_id'):
+            return request.env['account.move'].browse(safe_int(data.get('invoice_id')))
+        if request.session.get('last_invoice_id'):
+            invoice_id = request.session.get('last_invoice_id')
+            return request.env['account.move'].browse(safe_int(invoice_id))
+        return request.website.sale_get_order()

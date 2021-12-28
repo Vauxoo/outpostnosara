@@ -1,0 +1,2359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Single-Page Checkout</title>
+</head>
+<body>
+    <div class="d-block d-lg-none" style="max-width: 375px !important; margin: auto; overflow: hidden;">
+        <header class="col-12" style="
+        font-family: sans-serif !important;
+        color: white !important;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        max-width: 375px;
+        margin: auto;
+        ">
+        <img src="./background.jpg" srcset="payment_credomatic/static/description/background.jpg" style="
+            position: absolute;
+            height: 100%;
+            margin: auto;
+            display: block;
+            left: 0;
+            width: 100%;
+        "/>
+            <div class="">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row mt-3">
+                            <div class="col-5 pl-3 pr-0">
+                                <img src="./credomatic-app.svg" style="width: 100%" />
+                            </div>
+                            <div class="col-7 d-flex align-items-center" style="padding: 0;">
+                                <h1 style="
+                                font-weight: bolder;
+                                font-size: 16px;
+                                white-space: nowrap;
+                                line-height: 21px;
+                                letter-spacing: .5px;
+                                " class="text-white mb-4 mt-3 ml-2">Payment<br/>Credomatic</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mt-4 pl-0">
+                        <h2 style="
+                        white-space: nowrap;
+                        letter-spacing: .5px;
+                        line-height: 15.5px;
+                        margin-top: auto;
+                        margin-bottom: auto;
+                        font-size: 12px;
+                        display: block;" class="text-white font-weight-bold">
+        “Do not limit your clients,<br/>
+        &nbsp;&nbsp;offer a payment platform<br/>
+        &nbsp;&nbsp;that provides peace of<br/>
+        &nbsp;&nbsp;mind, CREDOMATIC”
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p style="
+                        font-size: 11px;
+                        letter-spacing: .6px;
+                        white-space: nowrap;
+                        margin-top: 5px;
+                        ">
+                            The BAC Credomatic Group is one of the main financial<br />holdings in Central America. Through its subsidiary banks,<br />it offers financial services in an extensive network of<br />branches in El Salvador, Guatemala, Honduras, Nicaragua,<br />Costa Rica and Panama.
+                        </p>
+                    </div>
+                    <div class="col-12" style="overflow:hidden;">
+                        <img style="width: 112px;
+                        height: auto;
+                        float: right;
+                        margin-right: 17px;
+                        margin-bottom: 6px;" src="./vauxoo-w.svg"  />
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div style="
+        background: white;
+        text-align: center;
+        padding: 15px 0;
+        ">
+            <span style="
+            display: inline-block;
+            margin: 9px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #282932;
+            ">User:credomatic/Password:credomatic</span>
+        </div>
+        <div class="row">
+            <div class="col-12 col-xs-12">
+                <div>
+                    <h2 style="
+                    background-color: #413790;
+                    margin: 0;
+                    text-align: center;
+                    color: white;
+                    font-size: 18px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    padding: 0.45rem;">
+                        DEMO VIDEO
+                    </h2>
+                    <video poster="credomatic.png" controls="controls" style="width: 100%; height: auto; display: block;">
+                        <source src="credomatic.mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+        <nav class="col-12 px-0" style="
+            text-align: center;
+            font-size: 16px;
+            background: white;
+            margin-bottom: 40px;
+        ">
+            <div style="
+                display: inline-flex;
+                padding: 0;
+                margin: 45px auto 0;
+                position: relative;
+                bottom: -2px;
+                list-style: none;
+                border-bottom: 1px solid rgba(97,97,97, 0.5);
+                padding-bottom: 7px;
+                width: 100%;
+            ">
+                <span style="
+                    border-bottom: 4px solid #d12149;
+                    margin: 0 15px;
+                    padding: 0 .7rem;
+                ">
+                    <span style="
+                        letter-spacing: .6px;
+                        color: #34393e !important;
+                    "><strong>Features & Technical info</strong></span>
+                </span>
+                <span style="
+                    margin: 0 15px;
+                ">
+                    <a href="#support" style="
+                        letter-spacing: .6px;
+                        font-weight: 300;
+                        color: #4d555b !important;
+                    ">Support</a>
+                </span>
+            </div>
+        </nav>
+        <div style="
+            box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+            width: 88%;
+            margin: auto;
+        ">
+            <h2 style="
+            background-color: #413790;
+            margin: 0;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 0.45rem;">
+                HIGHTLIGHT
+            </h2>
+            <div class="container" style="padding-right: 20px;padding-left: 15px;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-5">
+                                <img src="./icon-feature-1.svg" style="
+                                    position: relative;
+                                    width: 83px;
+                                    top: 50px;
+                                    left: 10px;
+                                ">
+                            </div>
+                            <div class="col-7 mt48 mb-3" style="padding: 0;">
+                                <div style="
+                                    margin-bottom: .5rem;
+                                    font-size: 14px;
+                                    color: #2d3236;
+                                ">
+                                    <strong>Data security.</strong>
+                                </div>
+                                <div>
+                                    <p style="
+                                        line-height: 1.4em;
+                                        font-size: 12px;
+                                        white-space: nowrap;
+                                        margin: 0;
+                                    ">
+                                        We do not store your<br />card number on our<br />servers
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-5">
+                                <img src="./icon-feature-2.svg" style="
+                                    position: relative;
+                                    width: 83px;
+                                    top: 50px;
+                                    left: 10px;
+                                ">
+                            </div>
+                            <div class="col-7 mt48 mb-3" style="padding: 0;">
+                                <div style="
+                                    margin-bottom: .5rem;
+                                    font-size: 14px;
+                                    color: #2d3236;
+                                ">
+                                    <strong>Coverage in various Latin<br/>American countries.</strong>
+                                </div>
+                                <div>
+                                    <p style="
+                                        line-height: 1.4em;
+                                        font-size: 12px;
+                                        white-space: nowrap;
+                                        margin: 0;
+                                    ">
+                                        Shopping from Costa Rica,<br/>Salvador, Nicaragua, Honduras,<br/>Guatemala, Panama, Bahamas<br/>and Grand Cayman, buy with<br/>CREDOMATIC.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-5">
+                                <img src="./icon-feature-3.svg" style="
+                                    position: relative;
+                                    width: 83px;
+                                    top: 50px;
+                                    left: 10px;
+                                ">
+                            </div>
+                            <div class="col-7 mt48 mb-3" style="padding: 0;">
+                                <div style="
+                                    margin-bottom: .5rem;
+                                    font-size: 14px;
+                                    color: #2d3236;
+                                ">
+                                    <strong>Paying efficiency.</strong>
+                                </div>
+                                <div>
+                                    <p style="
+                                        line-height: 1.4em;
+                                        font-size: 12px;
+                                        white-space: nowrap;
+                                        margin: 0;
+                                    ">
+                                        Fill in the basic purchase<br/>information and your<br/>transaction will be approved in<br/>one click.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt-5" style="
+            box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+            width: 88%;
+            margin: auto;
+        ">
+            <h2 style="
+            background-color: #413790;
+            margin: 0;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 0.45rem;">
+                FEATURES
+            </h2>
+            <div class="container" style="padding-right: 15px; padding-left: 15px;">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="">
+                            <div style="
+                                list-style: none;
+                                padding: 0;
+                                margin: 25px 0;
+                                list-style: none;
+                                padding: 0;
+                                margin: 25px 0;
+                                font-size: 15px;
+                                color: #34393e;">
+                                <span class="mb-4">-Payment of sales orders from the website store.</span>
+                                <span class="mb-4">-Payment of budgets to website users, in their order portal.</span>
+                                <span class="mb-4">-Payment of budgets to customers without account, through one-way payment links.</span>
+                                <span class="mb-4">-Supports multiple accounts.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mt32" style="
+            box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            width: 88%;
+            margin: auto;">
+            <h2 style="
+                margin: 0;
+                text-align: center;
+                color: #d72b5e;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 1px;
+                padding: 0.45rem;">
+                AVAILABLE FOR
+            </h2>
+            <div style="
+                list-style: none;
+                padding: 0;
+                font-size: 15px;
+                margin: 10px 0 44px 35px;">
+                <span style="margin-bottom: 15px;">-Odoo version 11.</span>
+                <span style="margin-bottom: 15px;">-Odoo version 12.</span>
+                <span style="margin-bottom: 15px">-Odoo version 13.</span>
+            </div>
+            <img src="./icon-version.svg" style="position: absolute; right: 15px; bottom: 15px; width: 36px;">
+        </div>
+        <div class="mt32" style="
+            box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            width: 88%;
+            margin: auto;">
+            <h2 style="
+                margin: 0;
+                text-align: center;
+                color: #d72b5e;
+                font-size: 18px;
+                text-transform: uppercase;
+                font-weight: bold;
+                letter-spacing: 1px;
+                padding: 0.45rem;">
+                PLATAFORMS
+            </h2>
+            <div style="
+                list-style: none;
+                padding: 0;
+                font-size: 15px;
+                margin: 10px 0 44px 35px;">
+                <span style="margin-bottom: 15px;">-Odoo</span>
+                <span style="margin-bottom: 15px">-Version Android</span>
+                <span style="margin-bottom: 15px">-Version iOS</span>
+            </div>
+            <img src="./icon-screens.svg" style="position: absolute; right: 15px; bottom: 15px; width: 36px;">
+        </div>
+        <h2 style="
+        background-color: #413790;
+        text-align: center;
+        color: white;
+        font-size: 22px;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 1px;
+        padding: 12px 0;
+        display: block;
+        margin-top: 25px;"
+        class="row">
+            HOW CAN I USE IT?
+        </h2>
+        <div class="row mt-4">
+            <div class="col-12 text-center mb24">
+                <a href="#installation"
+                style="
+                    color: #d9326a !important;
+                    text-decoration: none !important;
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    font-weight: 400;
+                    font-size: 16px;
+                    padding: 5px 6px;
+                    margin: 0 7px;
+                    border-radius: 2px;
+                ">Installation
+                </a>
+            </div>
+            <div class="col-12 text-center mb24">
+                <a href="#Configuration"
+                style="
+                    color: #d9326a !important;
+                    text-decoration: none !important;
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    font-weight: 400;
+                    font-size: 16px;
+                    padding: 5px 6px;
+                    margin: 0 7px;
+                    border-radius: 2px;
+                ">Configuration
+                </a>
+            </div>
+            <div class="col-12 text-center mb24">
+                <a href="#Usermanualforwebsite"
+                style="
+                    color: #d9326a !important;
+                    text-decoration: none !important;
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    font-weight: 400;
+                    font-size: 16px;
+                    padding: 5px 6px;
+                    margin: 0 7px;
+                    border-radius: 2px;
+                ">User manual for website
+                </a>
+            </div>
+            <div class="col-12 text-center mb24">
+                <a href="#Usermanualforthebackendsales"
+                style="
+                    color: #d9326a !important;
+                    text-decoration: none !important;
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    font-weight: 400;
+                    font-size: 16px;
+                    padding: 5px 6px;
+                    margin: 0 7px;
+                    border-radius: 2px;
+                ">User manual for the backend sales
+                </a>
+            </div>
+        </div>
+        <section>
+            <div>
+                <div id="installation" style="
+                    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    margin-top: 32px;
+                    position: relative;
+                ">
+                    <h1 style="
+                    color: #d12149;
+                    margin: 0;
+                    padding: 11px 0 8px 0;
+                    font-weight: bold;
+                    font-size: 27px;
+                    letter-spacing: .5px;
+                    ">
+                        Installation
+                    </h1>
+                    <img src="./icon-download.svg" style="
+                        position: absolute;
+                        left: 24px;
+                        top: 50%;
+                        transform:translateY(-50%) !important;
+                        width: 29px;
+                    " />
+                </div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                        Apps > Search Credomatic<br/>
+                        app > Install
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        1
+                    </div>
+                </div>
+                <img src="./block-1.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div id="configuration" style="
+                    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    margin-top: 32px;
+                    position: relative;
+                ">
+                    <h1 style="
+                    color: #d12149;
+                    margin: 0;
+                    padding: 11px 0 8px 0;
+                    font-weight: bold;
+                    font-size: 27px;
+                    letter-spacing: .5px;
+                    ">
+                        Configuration
+                    </h1>
+                    <img src="./icon-configuration.svg" style="
+                        position: absolute;
+                        left: 24px;
+                        top: 50%;
+                        transform:translateY(-50%) !important;
+                        width: 29px;
+                    " />
+                </div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Navigate into Website > Configurations > Payment Acquirers..
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        2
+                    </div>
+                </div>
+                <img src="./block-2.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Find Debit / Credit card (That is Credomatic).
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        3
+                    </div>
+                </div>
+                <img src="./block-3.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Once it's opened, publish it. It's necessary for it to appear in the website.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        4
+                    </div>
+                </div>
+                <img src="./block-4.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Set your Credomatic's credentials.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        5
+                    </div>
+                </div>
+                <img src="./block-5.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Save the record.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        6
+                    </div>
+                </div>
+                <img src="./block-6.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div id="Usermanualforwebsite" style="
+                    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    margin-top: 32px;
+                    position: relative;
+                ">
+                    <h1 style="
+                    color: #d12149;
+                    margin: 0;
+                    padding: 11px 0 8px 0;
+                    font-weight: bold;
+                    font-size: 27px;
+                    letter-spacing: .5px;
+                    ">
+                    <div style="width: 290px;
+                    margin: auto;
+                    margin-right: 21px;">User manual for website</div>
+                    </h1>
+                    <img src="./icon-web.svg" style="
+                        position: absolute;
+                        left: 24px;
+                        top: 50%;
+                        transform:translateY(-50%) !important;
+                        width: 29px;
+                    " />
+                </div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                        Navigate into the Website's shop.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        7
+                    </div>
+                </div>
+                <img src="./block-7.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Choose a product and add it to your shopping cart.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        8
+                    </div>
+                </div>
+                <img src="./block-8.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Once it's opened, publish it. It's necessary for it to appear in the website.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        9
+                    </div>
+                </div>
+                <img src="./block-9.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Once in the payment section, choose "Credit / Debit card" and fill the information to pay.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        10
+                    </div>
+                </div>
+                <img src="./block-10.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div id="Usermanualforthebackendsales" style="
+                    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+                    text-align: center;
+                    margin-top: 32px;
+                    position: relative;
+                ">
+                    <h1 style="
+                    color: #d12149;
+                    margin: 0;
+                    padding: 11px 0 8px 0;
+                    font-weight: bold;
+                    font-size: 27px;
+                    letter-spacing: .5px;
+                    ">
+                    <div style="width: 290px;
+                    margin: auto;
+                    margin-right: 21px;">User manual for backend</div>
+                    </h1>
+                    <img src="./icon-sales.svg" style="
+                        position: absolute;
+                        left: 24px;
+                        top: 50%;
+                        transform:translateY(-50%) !important;
+                        width: 29px;
+                    " />
+                </div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                        Navigate to sales.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        11
+                    </div>
+                </div>
+                <img src="./block-11.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Create a quotation.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        12
+                    </div>
+                </div>
+                <img src="./block-12.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Click the button "Send by email".
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        13
+                    </div>
+                </div>
+                <img src="./block-13.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Click the button "Preview", so you can open that quotation.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        14
+                    </div>
+                </div>
+                <img src="./block-14.png" class="mt-4" style="width: 100%;"/>
+            </div>
+            <div>
+                <div class="mt-5 mx-3" style="
+                    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                ">
+                    <p style="
+                        color: #626b71;
+                        font-size: 16px;
+                        margin: 26px;
+                    ">
+                    Choose "Credit / Debit card" and fill the information and pay the quotation.
+                    </p>
+                    <div style="
+                        background-color: #413790;
+                        width: 28px;
+                        height: 28px;
+                        font-weight: bold;
+                        font-size: 20px;
+                        position: absolute;
+                        top: -14px;
+                        left: 30px;
+                        color: white;
+                        text-align: center;
+                        line-height: 28px;
+                    ">
+                        15
+                    </div>
+                </div>
+                <img src="./block-15.png" class="mt-4" style="width: 100%;"/>
+            </div>
+        </section>
+        <div id="support" class="container mt-5 px-2">
+            <div style="box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2); margin-bottom: 1rem;">
+                    <h2 style="
+                    background-color: #413790;
+                    margin: 0;
+                    text-align: center;
+                    color: white;
+                    font-size: 18px;
+                    text-transform: uppercase;
+                    font-weight: bold;
+                    letter-spacing: 1px;
+                    padding: 0.45rem;">
+                        DETAILS
+                    </h2>
+                    <div class="container">
+                        <div class="row" style="padding: 30px 15px;">
+                            <div class="col-3 offset-1 pl-2 pr-0">
+                                <img src="./icon-support.svg" style="width: 100%;" />
+                            </div>
+                            <div class="col-8" style="
+                                display: flex;
+                                align-items: center;                                                        
+                            ">
+                                <div class="container">
+                                    <p>
+                                        Visit us at <span style="color: #d42553;">vauxoo.com</span><br/>
+                                        <small>Request feature at 
+                                        <span style="color: #d42553;">www.vauxoo.com/contactus</span></small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row mt24 px-4">
+            <img src="./vauxoo-g.svg" style="width: 100%;">
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-12">
+                <nav class="row" style="
+                    text-align: center;
+                    font-size: 1.65rem;
+                    background: white;
+                    margin-bottom: 40px;
+                    border-bottom: 1px solid #979797;
+                ">
+                    <div style="
+                        display: inline-flex;
+                        padding: 0;
+                        margin: 45px auto 0;
+                        position: relative;
+                        bottom: -2px;
+                        list-style: none;
+                        width: 100%;
+                        justify-content: center;
+                    ">
+                        <span style="
+                            border-bottom: 4px solid #d12149;
+                            margin: 0 15px;
+                            padding: 0 .7rem;
+                        ">
+                            <span style="
+                                letter-spacing: .6px;
+                                color: #34393e !important;
+                            "><strong>Testimonial</strong></span>
+                        </span>
+                    </div>
+                </nav>
+                <div style="
+                    background-color: #eaedf0;
+                    font-style: italic;
+                    color: #282c2f;
+                    padding: 60px 10px 10px 10px;
+                    margin-bottom: 24px;
+                ">
+                Just what I was looking for. I STRONGLY recommend Credomatic to EVERYONE interested in running a successful online business! I just can't get enough of Credomatic. I want to get a T-Shirt with Credomatic on it so I can show it off to everyone."
+                <br/>- Georgette C.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-none d-lg-block" style="max-width:  1140px !important;">
+        <section style="background: rgba(185, 198, 205, 0.3);" class="row">
+            <nav class="col-12 col-xs-12" style="
+                text-align: center;
+                font-size: 1.65rem;
+                background: white;
+                margin-bottom: 40px;
+            ">
+                <div style="
+                    display: inline-flex;
+                    padding: 0;
+                    margin: 34px auto 0;
+                    position: relative;
+                    bottom: -2px;
+                    list-style: none;
+                ">
+                    <span style="
+                        border-bottom: 4px solid #d12149;
+                        margin: 0 15px;
+                        padding: 0 .7rem;
+                    ">
+                        <span style="
+                            letter-spacing: .6px;
+                            color: #34393e !important;
+                        "><strong>Description</strong></span>
+                    </span>
+                    <span style="
+                        margin: 0 15px;
+                    ">
+                        <span style="
+                            letter-spacing: .6px;
+                            font-weight: 300;
+                            color: #4d555b !important;
+                        ">License</span>
+                    </span>
+                </div>
+            </nav>
+            <header class="col-12 col-xs-12" style="
+                font-family: sans-serif !important;
+                color: white !important;
+                background-repeat: no-repeat;
+                background-size: 100%;
+            ">
+                <img src="./background.jpg" srcset="payment_credomatic/static/description/background.jpg" style="
+                    position: absolute;
+                    height: 100%;
+                    margin: auto;
+                    display: block;
+                    width: 100%;
+                "/>
+                <div class="">
+                    <div class="row">
+                        <div class="col-10 col-offset-xs-1 col-xs-10 offset-1">
+                            <div class="row">
+                                <div class="col-xs-5 col-5">
+                                    <div class=" mt24">
+                                        <div class="row">
+                                            <div class="col-4 col-xs-4">
+                                                <img src="./credomatic-app.svg" style="width: 100%" />
+                                            </div>
+                                            <div class="col-8 col-xs-8" style="padding: 0;">
+                                                <h1 style="
+                                                font-weight: bolder;
+                                                font-size: 32px;
+                                                white-space: nowrap;
+                                                line-height: 35px;
+                                                margin-top: 6px;
+                                                letter-spacing: .5px;
+                                                " class="text-white">Payment<br/>Credomatic</h1>
+                                            </div>
+                                        </div>
+                                        <div class="row mt16">
+                                            <div class="col-12 col-xs-12">
+                                                <p style="
+                                                    font-size: 10px;
+                                                    letter-spacing: .3px;
+                                                    white-space: nowrap
+                                                ">
+                                                    The BAC Credomatic Group is one of the main financial<br />holdings in Central America. Through its subsidiary banks,<br />it offers financial services in an extensive network of<br />branches in El Salvador, Guatemala, Honduras, Nicaragua,<br />Costa Rica and Panama.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4 col-4" style="display: flex;">
+                                    <h2 style="
+                                    white-space: nowrap;
+                                    letter-spacing: 1px;
+                                    line-height: 26px;
+                                    margin-top: auto;
+                                    margin-bottom: auto;
+                                    font-size: 20px;
+                                    display: block;
+                                    word-spacing: -1.5px;
+                                    position: relative;
+                                    left: -40px;
+                                    ;" class="text-white font-weight-bold">
+            “ Do not limit your clients,<br/>
+            &nbsp;&nbsp;offer a payment platform <br/>
+            &nbsp;&nbsp;that provides peace of mind,<br/>
+            &nbsp;&nbsp;CREDOMATIC”
+                                    </h2>
+                                </div>
+                                <div class="col-xs-3 col-3 text-white text-center" style="display: flex;
+                                flex-direction: column;
+                                justify-content: center;">
+                                    <img style="width:145px; height: auto; display: block; margin: 0 auto 14px;" src="./vauxoo-w.svg"  />
+                                    
+                                    <div>
+                                        <span style="
+                                        display: inline-block;
+                                        margin: 9px;
+                                        font-family: monospace;
+                                        font-size: 11px;
+                                        ">User:credomatic <br/> Password:credomatic</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="col-xs-12 col-12">
+                <div class="row">
+                    <div style="background: white" class="col-10 offset-1 col-xs-10 col-offset-xs-1">
+                        <div class="row">
+                            <nav class="col-12 col-xs-12" id="technicalinfo" style="
+                                text-align: center;
+                                font-size: 1.65rem;
+                                background: white;
+                                margin-bottom: 40px;
+                                border-bottom: 1px solid #979797;
+                            ">
+                                <div style="
+                                    display: inline-flex;
+                                    padding: 0;
+                                    margin: 45px auto 0;
+                                    position: relative;
+                                    bottom: -2px;
+                                    list-style: none;
+                                ">
+                                    <span style="
+                                        border-bottom: 4px solid #d12149;
+                                        margin: 0 15px;
+                                        padding: 0 .7rem;
+                                    ">
+                                        <span style="
+                                            letter-spacing: .6px;
+                                            color: #34393e !important;
+                                        "><strong>Features & Technical info</strong></span>
+                                    </span>
+                                    <span style="
+                                        margin: 0 15px;
+                                    ">
+                                        <a href="#support" style="
+                                            letter-spacing: .6px;
+                                            font-weight: 300;
+                                            color: #4d555b !important;
+                                        ">Support</a>
+                                    </span>
+                                </div>
+                            </nav>
+                        </div>
+                        <div class="row">
+                            <div class="col-10 offset-1">
+                                <div class="contianer mt32">
+
+                                    <div class="row mt24">
+                                        <div class="col-12 col-xs-12">
+                                            <div style="box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2)">
+                                                <h2 style="
+                                                background-color: #413790;
+                                                margin: 0;
+                                                text-align: center;
+                                                color: white;
+                                                font-size: 18px;
+                                                text-transform: uppercase;
+                                                font-weight: bold;
+                                                letter-spacing: 1px;
+                                                padding: 0.45rem;">
+                                                    DEMO VIDEO
+                                                </h2>
+                                                <div class="container" style="padding-right: 15px; padding-left: 15px;">
+                                                    <div class="row">
+                                                       <video poster="credomatic.png" controls="controls" style="width: 100%; height: auto; display: block;">
+                                                           <source src="credomatic.mp4">
+                                                       </video>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt24">
+                                        <div class="col-12 col-xs-12">
+                                            <div style="box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2)">
+                                                    <h2 style="
+                                                    background-color: #413790;
+                                                    margin: 0;
+                                                    text-align: center;
+                                                    color: white;
+                                                    font-size: 18px;
+                                                    text-transform: uppercase;
+                                                    font-weight: bold;
+                                                    letter-spacing: 1px;
+                                                    padding: 0.45rem;">
+                                                        HIGHTLIGHT
+                                                    </h2>
+                                                    <div class="container" style="padding-right: 15px; padding-left: 15px;">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="">
+                                                                    <div class="row">
+                                                                        <div class="col-5">
+                                                                            <img src="./icon-feature-1.svg" style="
+                                                                                position: relative;
+                                                                                width: 100%;
+                                                                                top: 50px;
+                                                                            ">
+                                                                        </div>
+                                                                        <div class="col-7 mt48 mb48" style="padding: 0;">
+                                                                            <div style="
+                                                                                margin-bottom: .5rem;
+                                                                                font-size: 12px;
+                                                                            ">
+                                                                                <strong>
+                                                                                    Data security.
+                                                                                </strong>
+                                                                            </div>
+                                                                            <div>
+                                                                                <p style="
+                                                                                    line-height: 1.4em;
+                                                                                    font-size: 10.5px;
+                                                                                    white-space: nowrap;
+                                                                                    margin: 0;
+                                                                                ">
+                                                                                    We do not store your<br />card number on our<br />servers
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4" style="padding-left: 0; transform: translateX(-15px);">
+                                                                <div class="">
+                                                                    <div class="row">
+                                                                        <div class="col-5">
+                                                                            <img src="./icon-feature-2.svg" style="
+                                                                                position: relative;
+                                                                                width: 100%;
+                                                                                top: 50px;
+                                                                            ">
+                                                                        </div>
+                                                                        <div class="col-7 mt48 mb48" style="padding: 0;">
+                                                                            <div style="
+                                                                                margin-bottom: .5rem;
+                                                                                font-size: 12px;
+                                                                            ">
+                                                                                <strong>
+                                                                                    Coverage in various Latin<br/>American countries.
+                                                                                </strong>
+                                                                            </div>
+                                                                            <div>
+                                                                                <p style="
+                                                                                    line-height: 1.4em;
+                                                                                    font-size: 10.5px;
+                                                                                    white-space: nowrap;
+                                                                                    margin: 0;
+                                                                                ">
+                                                                                    Shopping from Costa Rica,<br/>Salvador, Nicaragua, Honduras,<br/>Guatemala, Panama, Bahamas<br/>and Grand Cayman, buy with<br/>CREDOMATIC.
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4" style="padding-left: 0">
+                                                                <div class="">
+                                                                    <div class="row">
+                                                                        <div class="col-5">
+                                                                            <img src="./icon-feature-3.svg" style="
+                                                                                position: relative;
+                                                                                width: 100%;
+                                                                                top: 50px;
+                                                                            ">
+                                                                        </div>
+                                                                        <div class="col-7 mt48 mb48" style="padding: 0;">
+                                                                            <div style="
+                                                                                margin-bottom: .5rem;
+                                                                                font-size: 12px;
+                                                                            ">
+                                                                                <strong>
+                                                                                    Paying efficiency.
+                                                                                </strong>
+                                                                            </div>
+                                                                            <div>
+                                                                                <p style="
+                                                                                    line-height: 1.4em;
+                                                                                    font-size: 10.5px;
+                                                                                    white-space: nowrap;
+                                                                                    margin: 0;
+                                                                                ">
+                                                                                    Fill in the basic purchase<br/>information and your<br/>transaction will be approved in<br/>one click.
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt24">
+                                        <div class="col-12 col-xs-12">
+                                            <div style="box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2)">
+                                                <h2 style="
+                                                background-color: #413790;
+                                                margin: 0;
+                                                text-align: center;
+                                                color: white;
+                                                font-size: 18px;
+                                                text-transform: uppercase;
+                                                font-weight: bold;
+                                                letter-spacing: 1px;
+                                                padding: 0.45rem;">
+                                                    FEATURES
+                                                </h2>
+                                                <div class="container" style="padding-right: 15px; padding-left: 15px;">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="">
+                                                                <div style="
+                                                                    list-style: none;
+                                                                    padding: 0;
+                                                                    margin: 25px 0;">
+                                                                    <span style="margin-bottom: 25px;">-Payment of sales orders from the website store.</span>
+                                                                    <span>-Payment of budgets to website users, in their order portal.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="">
+                                                                <div style="
+                                                                    list-style: none;
+                                                                    padding: 0;
+                                                                    margin: 25px 0;">
+                                                                    <span style="margin-bottom: 25px;">-Payment of budgets to customers without account, through one-way payment links.</span>
+                                                                    <span>-Supports multiple accounts.</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5 offset-1">
+                                            <div class="mt32" style="box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2); position: relative; overflow: hidden;">
+                                                <h2 style="
+                                                    margin: 0;
+                                                    text-align: center;
+                                                    color: #d72b5e;
+                                                    font-size: 18px;
+                                                    text-transform: uppercase;
+                                                    font-weight: bold;
+                                                    letter-spacing: 1px;
+                                                    padding: 0.45rem;">
+                                                    AVAILABLE FOR
+                                                </h2>
+                                                <div style="
+                                                    list-style: none;
+                                                    padding: 0;
+                                                    margin: 10px 0 44px 35px;">
+                                                    <span style="margin-bottom: 15px;">-Odoo version 11.</span>
+                                                    <span style="margin-bottom: 15px;">-Odoo version 12.</span>
+                                                    <span style="margin-bottom: 15px">-Odoo version 13.</span>
+                                                </div>
+                                                <img src="./icon-version.svg" style="position: absolute; right: 15px; bottom: 15px; width: 29px;">
+                                            </div>
+                                        </div>
+                                        <div class="col-5">
+                                            <div class="mt32" style="box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2); position: relative; overflow: hidden;">
+                                                <h2 style="
+                                                    margin: 0;
+                                                    text-align: center;
+                                                    color: #d72b5e;
+                                                    font-size: 18px;
+                                                    text-transform: uppercase;
+                                                    font-weight: bold;
+                                                    letter-spacing: 1px;
+                                                    padding: 0.45rem;">
+                                                    PLATAFORMS
+                                                </h2>
+                                                <div style="
+                                                    list-style: none;
+                                                    padding: 0;
+                                                    margin: 10px 0 44px 35px;">
+                                                    <span style="margin-bottom: 15px;">-Odoo</span>
+                                                    <span style="margin-bottom: 15px">-Version Android</span>
+                                                    <span style="margin-bottom: 15px">-Version iOS</span>
+                                                </div>
+                                                <img src="./icon-screens.svg" style="position: absolute; right: 15px; bottom: 15px; width: 29px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h2 style="
+                        background-color: #413790;
+                        text-align: center;
+                        color: white;
+                        font-size: 28px;
+                        text-transform: uppercase;
+                        font-weight: bold;
+                        letter-spacing: 1px;
+                        padding: 12px 0;
+                        display: block;
+                        margin-top: 25px;"
+                        class="row">
+                            HOW CAN I USE IT?
+                        </h2>
+                        <div style="display: flex; justify-content: center; margin-top: 18px;">
+                            <a href="#installation"
+                            style="
+                                color: #d9326a !important;
+                                text-decoration: none !important;
+                                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                font-weight: bold;
+                                padding: 5px 6px;
+                                margin: 0 7px;
+                                border-radius: 2px;
+                            ">Installation
+                            </a>
+                            <a href="#Configuration"
+                            style="
+                                color: #d9326a !important;
+                                text-decoration: none !important;
+                                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                font-weight: bold;
+                                padding: 5px 6px;
+                                margin: 0 7px;
+                                border-radius: 2px;
+                            ">Configuration
+                            </a>
+                            <a href="#Usermanualforwebsite"
+                            style="
+                                color: #d9326a !important;
+                                text-decoration: none !important;
+                                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                font-weight: bold;
+                                padding: 5px 6px;
+                                margin: 0 7px;
+                                border-radius: 2px;
+                            ">User manual for website
+                            </a>
+                            <a href="#Usermanualforthebackendsales"
+                            style="
+                                color: #d9326a !important;
+                                text-decoration: none !important;
+                                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                font-weight: bold;
+                                padding: 5px 6px;
+                                margin: 0 7px;
+                                border-radius: 2px;
+                            ">User manual for the backend sales
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-10 offset-1 col-xs-1 offset-col-xs-1">
+                                <div class="container">
+                                    <div id="installation" style="
+                                        box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+                                        text-align: center;
+                                        margin-top: 32px;
+                                        position: relative;
+                                    ">
+                                        <h1 style="
+                                        color: #d12149;
+                                        margin: 0;
+                                        padding: 11px 0 8px 0;
+                                        font-weight: bold;
+                                        font-size: 27px;
+                                        letter-spacing: .5px;
+                                        ">
+                                            Installation
+                                        </h1>
+                                        <img src="./icon-download.svg" style="
+                                            position: absolute;
+                                            left: 24px;
+                                            top: 50%;
+                                            transform:translateY(-50%);
+                                            width: 29px;
+                                        " />
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 92px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                            Apps > Search Credomatic<br/>
+                                            app > Install
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            1
+                                        </div>
+                                        <img src="./block-1.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -38%;
+                                        "/>
+                                    </div>
+                                    <div id="Configuration" style="
+                                        box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+                                        text-align: center;
+                                        margin-top: 32px;
+                                        position: relative;
+                                    ">
+                                        <h1 style="
+                                        color: #d12149;
+                                        margin: 0;
+                                        padding: 11px 0 8px 0;
+                                        font-weight: bold;
+                                        font-size: 27px;
+                                        letter-spacing: .5px;
+                                        ">
+                                            Configuration
+                                        </h1>
+                                        <img src="./icon-configuration.svg" style="
+                                            position: absolute;
+                                            left: 24px;
+                                            top: 50%;
+                                            transform:translateY(-50%);
+                                            width: 29px;
+                                        " />
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 92px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Navigate into Website ><br/>Configurations ><br/>Payment Acquirers.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            2
+                                        </div>
+                                        <img src="./block-2.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 92px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                            Find Debit / Credit card<br/>(That is Credomatic).
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            3
+                                        </div>
+                                        <img src="./block-3.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 92px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Once it's opened, publish<br/>it. It's necessary for it to<br/>appear in the website.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            4
+                                        </div>
+                                        <img src="./block-4.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Set your Credomatic's<br/>credentials.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            5
+                                        </div>
+                                        <img src="./block-5.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 92px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Save the record.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            6
+                                        </div>
+                                        <img src="./block-6.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -60%;
+                                        "/>
+                                    </div>
+                                    <div id="Usermanualforwebsite" style="
+                                        box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+                                        text-align: center;
+                                        margin-top: 32px;
+                                        position: relative;
+                                    ">
+                                        <h1 style="
+                                        color: #d12149;
+                                        margin: 0;
+                                        padding: 11px 0 8px 0;
+                                        font-weight: bold;
+                                        font-size: 27px;
+                                        letter-spacing: .5px;
+                                        ">
+                                        User manual for website
+                                        </h1>
+                                        <img src="./icon-web.svg" style="
+                                            position: absolute;
+                                            left: 24px;
+                                            top: 50%;
+                                            transform:translateY(-50%);
+                                            width: 29px;
+                                        " />
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Navigate into the<br/>Website's shop.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            7
+                                        </div>
+                                        <img src="./block-7.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Choose a product and add<br/>it to your shopping cart.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            8
+                                        </div>
+                                        <img src="./block-8.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Proceed to the checkout<br/>and add your billing<br/>information.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            9
+                                        </div>
+                                        <img src="./block-9.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Once in the payment section,<br/>choose"Credit / Debit card"<br/>and fill the information<br/>to pay.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            10
+                                        </div>
+                                        <img src="./block-10.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -11%;
+                                        "/>
+                                    </div>
+                                    <div id="Usermanualforthebackendsales" style="
+                                        box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2);
+                                        text-align: center;
+                                        margin-top: 32px;
+                                        position: relative;
+                                    ">
+                                        <h1 style="
+                                        color: #d12149;
+                                        margin: 0;
+                                        padding: 11px 0 8px 0;
+                                        font-weight: bold;
+                                        font-size: 27px;
+                                        letter-spacing: .5px;
+                                        ">
+                                            User manual for the backend sales
+                                        </h1>
+                                        <img src="./icon-sales.svg" style="
+                                            position: absolute;
+                                            left: 24px;
+                                            top: 50%;
+                                            transform:translateY(-50%);
+                                            width: 29px;
+                                        " />
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Navigate to Sales
+                                        <br/><br/>
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            11
+                                        </div>
+                                        <img src="./block-11.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Create a quotation.
+                                        <br/><br/>
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            12
+                                        </div>
+                                        <img src="./block-12.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Click the button "Send<br/>by email".
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            13
+                                        </div>
+                                        <img src="./block-13.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -35%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 110px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Click the button<br/>"Preview", so you can<br/>open that quotation.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            14
+                                        </div>
+                                        <img src="./block-14.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -25%;
+                                        "/>
+                                    </div>
+                                    <div style="
+                                        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+                                        display: flex;
+                                        align-items: center;
+                                        position: relative;
+                                        margin: 70px 0 290px;
+                                    ">
+                                        <p style="
+                                            color: #626b71;
+                                            font-size: 16px;
+                                            margin: 26px;
+                                        ">
+                                        Choose "Credit / Debit<br/>card" and fill the<br/>information and pay<br/>the quotation.
+                                        </p>
+                                        <div style="
+                                            background-color: #413790;
+                                            width: 28px;
+                                            height: 28px;
+                                            font-weight: bold;
+                                            font-size: 20px;
+                                            position: absolute;
+                                            top: -14px;
+                                            left: 30px;
+                                            color: white;
+                                            text-align: center;
+                                            line-height: 28px;
+                                        ">
+                                            15
+                                        </div>
+                                        <img src="./block-15.png" style="
+                                            width: 450px;
+                                            position: absolute;
+                                            right: -2px;
+                                            top: -16%;
+                                        "/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt48">
+                            <div class="col-xs-12 col-12">
+                                <nav class="row" style="
+                                    text-align: center;
+                                    font-size: 1.65rem;
+                                    background: white;
+                                    margin-bottom: 40px;
+                                    border-bottom: 1px solid #979797;
+                                ">
+                                    <div style="
+                                        display: inline-flex;
+                                        padding: 0;
+                                        margin: 45px auto 0;
+                                        position: relative;
+                                        bottom: -2px;
+                                        list-style: none;
+                                    ">
+                                    <span style="
+                                        margin: 0 15px;
+                                    ">
+                                        <a href="#technicalinfo" style="
+                                            letter-spacing: .6px;
+                                            font-weight: 300;
+                                            color: #4d555b !important;
+                                        ">Features & Technical info
+                                    </a>
+                                    </span>
+                                        <span style="
+                                            border-bottom: 4px solid #d12149;
+                                            margin: 0 15px;
+                                            padding: 0 .7rem;
+                                        ">
+                                            <span style="
+                                                letter-spacing: .6px;
+                                                color: #34393e !important;
+                                            "><strong>Support</strong></span>
+                                        </span>
+                                    </div>
+                                </nav>
+                                <div id="support" class="container">
+                                    <div class="row">
+                                        <div class="col-6 col-xs-6 offset-3 col-offset-xs-3">
+                                            <div style="box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.2), -2px -2px 6px 0 rgba(0, 0, 0, 0.2); margin-bottom: 1rem;">
+                                                    <h2 style="
+                                                    background-color: #413790;
+                                                    margin: 0;
+                                                    text-align: center;
+                                                    color: white;
+                                                    font-size: 18px;
+                                                    text-transform: uppercase;
+                                                    font-weight: bold;
+                                                    letter-spacing: 1px;
+                                                    padding: 0.45rem;">
+                                                        HIGHTLIGHT
+                                                    </h2>
+                                                    <div class="container">
+                                                        <div class="row" style="padding: 30px 15px;">
+                                                            <div class="col-3 col-xs-3 offset-1 col-offset-xs-1">
+                                                                <img src="./icon-support.svg" style="width: 100%;" />
+                                                            </div>
+                                                            <div class="col-8 col-xs-8" style="
+                                                                display: flex;
+                                                                align-items: center;                                                        
+                                                            ">
+                                                                <div class="container">
+                                                                    <p>
+                                                                        Visit us at <span style="color: #d42553;">vauxoo.com</span><br/>
+                                                                        <small>Request feature at 
+                                                                        <span style="color: #d42553;">www.vauxoo.com/contactus</span></small>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt72 mb72">
+                            <div class="col-4 col-xs-4 offset-4 col-offset-xs-4" style="padding: 0;">
+                                <img src="./vauxoo-g.svg" style="width: 100%;">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-12">
+                                <nav class="row" style="
+                                    text-align: center;
+                                    font-size: 1.65rem;
+                                    background: white;
+                                    margin-bottom: 40px;
+                                    border-bottom: 1px solid #979797;
+                                ">
+                                    <div style="
+                                        display: inline-flex;
+                                        padding: 0;
+                                        margin: 45px auto 0;
+                                        position: relative;
+                                        bottom: -2px;
+                                        list-style: none;
+                                    ">
+                                        <span style="
+                                            border-bottom: 4px solid #d12149;
+                                            margin: 0 15px;
+                                            padding: 0 .7rem;
+                                        ">
+                                            <span style="
+                                                letter-spacing: .6px;
+                                                color: #34393e !important;
+                                            "><strong>Testimonial</strong></span>
+                                        </span>
+                                    </div>
+                                </nav>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-10 offset-1 col-xs-1 col-offset-1">
+                                            <div class="container">
+                                                <div style="
+                                                    background-color: #eaedf0;
+                                                    font-style: italic;
+                                                    color: #282c2f;
+                                                    padding: 44px 85px;
+                                                    margin-bottom: 24px;
+                                                ">
+                                                Just what I was looking for. I STRONGLY recommend Credomatic to EVERYONE interested in running a successful online business! I just can't get enough of Credomatic. I want to get a T-Shirt with Credomatic on it so I can show it off to everyone."
+                                                <br/>- Georgette C.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

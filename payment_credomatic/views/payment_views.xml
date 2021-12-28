@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_acquirer_form_credomatic" model="ir.ui.view">
+        <field name="name">payment.acquirer.form.inherit</field>
+        <field name="model">payment.acquirer</field>
+        <field name="inherit_id" ref="payment.acquirer_form"/>
+        <field name="arch" type="xml">
+            <xpath expr='//group[@name="acquirer"]' position='after'>
+                <group attrs="{'invisible': [('provider', '!=', 'credomatic')]}">
+                    <field name="credomatic_public_id"/>
+                    <field name="credomatic_private_api_key"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

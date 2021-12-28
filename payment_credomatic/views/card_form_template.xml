@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="credomatic_s2s_form">
+        <div id="card-form" method="POST" t-att-action="tx_url" target="_self" class="s_website_form form-horizontal container-fluid">
+            <div class="row">
+                <div class="col-12 credomatic-card-form">
+                    <input t-if="invoice" type="hidden" name="invoice_id" t-att-value="invoice.id" />
+                    <t t-set="order" t-value="order or website_sale_order or sale_order" />
+                    <input t-if="order" type="hidden" name="order_id" t-att-value="order.id" />
+                    <input type="hidden" name="data_set" data-create-route="/payment_credomatic/tunnel_credomatic" />
+                    <input type="hidden" name="acquirer_id" t-att-value="id" />
+                    <input type="hidden" name="csrf_token" id="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="row">
+                        <div class="col-12">
+                            <div id="card-number-div" class="form-group form-field o_website_form_required">
+                                <label class="" for="number">Cardholder</label>
+                                <input name="cardholder" type="text" class="form-control credomatic-input o_website_form_input" data-is-required="true" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <div id="card-number-div" class="form-group form-field o_website_form_required">
+                                <label class="" for="number">Card Number</label>
+                                <input name="ccnumber" id="cc_number" type="text" class="form-control credomatic-input o_website_form_input" maxlength="23" placeholder="Ej. 1234 5678 1234 5678" data-is-required="true" data-value-type="number" />
+                                <div class="card_placeholder"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6" id="expiration-div">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group form-field o_website_form_required">
+                                        <label for="expiration">Expiration date</label>
+                                        <label class="credomatic-expiration labeled-div mt0">
+                                            <input name="exp_month" id="exp_month" type="text" class="credomatic-input false-input text-center mr4" maxlength="2" placeholder="MM" data-is-required="true"  data-value-type="number"/>
+                                            <span class="black-text">/</span>
+                                            <input name="exp_year" id="exp_year" type="text" class="credomatic-input false-input text-center" maxlength="4" placeholder="YYYY" data-is-required="true" data-value-type="number"/>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group form-field o_website_form_required mt0">
+                                        <label class="" for="cvv">CVV</label>
+                                        <input name="cvv" id="cvv" type="text" class="form-control credomatic-input o_website_form_input text-center" maxlength="3" placeholder="123" data-is-required="true" data-value-type="number"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

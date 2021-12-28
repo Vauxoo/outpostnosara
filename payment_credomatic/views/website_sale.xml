@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="error_on_shop" inherit_id="website_sale.products" name="Error on shop">
+        <xpath expr="//t//div[@id='wrap']//div[hasclass('oe_website_sale')]//div[@id='products_grid_before']" position="inside">
+            <div id="sale_message_error" t-if="sale_error" class="mt16">
+                <div class="alert alert-danger">
+                    <span>An error has occurred while charging your sale order.</span>
+                    <div class="text-right mt8">
+                        <small><strong t-esc="sale_message" />.</small>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template xml:space="preserve">
+    <t t-name="payment_credomatic.alert_environment">
+        <div class="alert alert-warning">
+            <p class="mt8 mb8 ml8 text-warning">
+                For security, after changing the aquirer environment, its credentials are removed. <br />
+                Make sure the credentials you are input in the aquirer form are from the <strong><t t-esc="widget.state"/></strong> state.
+            </p>
+            <div class="mt16 ml16">
+                <strong>Reload the page to see the changes in the form.</strong>
+            </div>
+        </div>
+    </t>
+</template>
