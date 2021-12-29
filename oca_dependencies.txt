@@ -1,4 +1,4 @@
 enterprise git@github.com:Vauxoo/enterprise.git
 sh-tools git@git.vauxoo.com:vauxoo/sh-tools.git
-pms git@github.com:OCA/pms.git
+pms git@github.com:Vauxoo/pms.git
 reporting-engine git@github.com:OCA/reporting-engine.git
