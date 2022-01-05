@@ -2,6 +2,7 @@
 # License LGPL-3 or later (http://www.gnu.org/licenses/lgpl).
 from odoo import _, fields, http
 from odoo.http import request
+from odoo.osv import expression
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.addons.account_payment.controllers.payment import PaymentPortal
 from odoo.addons.payment_credomatic.controllers.main import safe_int, FacBacController as Credomatic
@@ -33,12 +34,18 @@ class WebsiteOutpost(WebsiteSale):
         render_values = request.env['payment.acquirer']._get_available_payment_input(
             partner=partner, company=partner.company_id)
         # PMS Room Type Property(pms_room_type_property_rule)
-        room_types = request.env['pms.room.type'].search([
+        domain = [
             '&', '|',
             ('pms_property_ids', 'in', request.env.user.get_active_property_ids()),
             ('pms_property_ids', '=', False),
             ('website_published', '=', True)
-        ])
+        ]
+
+        if not partner.is_harmony:
+            harmony_room = request.env.ref('outpost.harmony_office_room_type')
+            domain = expression.AND([domain, [('id', '!=', harmony_room.id)]])
+
+        room_types = request.env['pms.room.type'].search(domain)
         render_values.update({
             'room_types': room_types,
             'reservation_types': room_types[:1].type_lines_ids,

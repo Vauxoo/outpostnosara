@@ -8,6 +8,7 @@ class ResPartner(models.Model):
     last_website_invoice_id = fields.Many2one('account.move',
                                               compute='_compute_last_website_invoice_id',
                                               string='Last Online Invoice')
+    is_harmony = fields.Boolean()
 
     def _compute_last_website_invoice_id(self):
         account_move = self.env['account.move']
@@ -21,3 +22,7 @@ class ResPartner(models.Model):
                 partner.last_website_invoice_id = invoices[:1]
             else:
                 partner.last_website_invoice_id = account_move
+
+    def toggle_is_harmony(self):
+        for record in self:
+            record.is_harmony = not record.is_harmony

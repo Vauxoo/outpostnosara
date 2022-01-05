@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_res_partner_form" model="ir.ui.view">
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="name">res.partner.form.outpostnosara</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="is_harmony"  invisible="1"/>
+                <button name="toggle_is_harmony"
+                    type="object"
+                     icon="fa-certificate"
+                    attrs="{'invisible': [('is_harmony', '=', True)]}"
+                    string="Set as Harmony"/>
+                <button name="toggle_is_harmony"
+                    type="object"
+                    icon="fa-certificate"
+                    attrs="{'invisible': [('is_harmony', '=', False)]}"
+                    string="Is Harmony"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
