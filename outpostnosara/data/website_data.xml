@@ -13,4 +13,12 @@
         <value model="website" eval="obj(ref('website.default_website'))" />
     </function>
 
+    <record id="menu_reservation" model="website.menu">
+        <field name="name">Reservation</field>
+        <field name="url">/outpost/reservation</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">20</field>
+        <field name="group_ids" eval="[(4, ref('base.group_portal')), (4, ref('base.group_user'))]"/>
+    </record>
+
 </odoo>

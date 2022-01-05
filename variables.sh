@@ -8,7 +8,7 @@ export TRAVIS_PYTHON_VERSION="3.8"
 export TRAVIS_REPO_SLUG="Vauxoo/"
 export COUNTRY="MX"
 export CUSTOMER="outpostnosara"
-export COVERAGE_MIN=44
+export COVERAGE_MIN=40
 export COVERAGE_PRECISION=2
 export OPTIONS="--load=multi_pms_properties"
 export INSTALL_OPTIONS="--load=multi_pms_properties"

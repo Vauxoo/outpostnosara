@@ -50,8 +50,8 @@
                             <div id="interest-links" class="col-md-8 pt-4 pb-md-4 pb-md-2">
                                 <ul class="list-unstyled">
                                     <li class="mr-2 my-0"><a href="/">Home</a></li>
-                                    <li class="mr-2 my-md-0 my-3"><a href="#">Work spaces</a></li>
-                                    <li class="mr-2 my-md-0 my-3"><a href="#">Ammenities</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="#">Work Spaces</a></li>
+                                    <li class="mr-2 my-md-0 my-3"><a href="#">Amenities</a></li>
                                     <li class="mr-2 my-md-0 my-3"><a href="#">Community</a></li>
                                     <li class="mr-2 my-md-0 my-3"><a href="#">Impact</a></li>
                                     <li class="mr-2 my-md-0 my-3"><a href="#">About</a></li>
@@ -99,7 +99,7 @@
                     <div class="col-sm text-center text-sm-left text-muted">
                         <span class="o_footer_copyright_name mr-2">
                             &amp;copy; Copyright 2021 <br class="d-md-none"/> <span class="d-none d-md-inline">&amp;centerdot;</span> All Rights Reserved
-                            <span t-field="res_company.name"/>
+                            <span>Outpost Nosara.</span>
                         </span>
                     </div>
                 </div>

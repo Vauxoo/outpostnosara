@@ -128,8 +128,10 @@ class OutpostNosaraController(http.Controller):
             tag = crm_tags.env.ref(ext_id, raise_if_not_found=False)
             if tag:
                 crm_tags |= tag
+        subject_name = _("Membership Application")
         values = {
-            'membership_tags': crm_tags
+            'membership_tags': crm_tags,
+            'membership_subject': subject_name,
         }
         return request.render("outpostnosara.membership_contact", values)
 
