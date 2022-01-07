@@ -35,6 +35,7 @@
         'theme_nosara',
         'payment_credomatic',
         'website_helpdesk',
+        'website_point_of_sale',
     ],
     'test': [
     ],
