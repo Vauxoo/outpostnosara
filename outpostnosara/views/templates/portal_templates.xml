@@ -1,5 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <template id="reservation_form" name="Reservation Form">
+       <div class="container">
+            <div class="ou ou-reservation" >
+                <form action="/shop/address" method="post" autocomplete='off'>
+                    <section class="js_reservation">
+                        <h4 class="" >Reservation</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="room_type_id">Room Type</label>
+                                <select id="room_type_id" name="room_type_id" class="form-control">
+                                    <t t-foreach='room_types' t-as='room_type'>
+                                        <t t-set='room_id' t-value='len(room_type.room_ids) == 1 and room_type.room_ids[:1].id or False' />
+                                        <option t-att-value="room_type.id" t-att-data-rooms="len(room_type.room_ids)" t-att-data-roomid="room_id" t-esc='room_type.name'/>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="reservation_type_id">Reservation Type</label>
+                                <select id="reservation_type_id" name="reservation_type_id" class="form-control">
+                                    <option value="">Choose</option>
+                                    <t t-foreach='reservation_types' t-as='reservation_type'>
+                                        <option t-att-data-code="reservation_type.code" t-att-value="reservation_type.id" t-esc='reservation_type.name'/>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="js_reservation_day d-none">
+                        <h4 class="" >Daily</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="checkin">Checkin</label>
+                                <input type="text" name="checkin" class="form-control ou-daterangepicker"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="checkout">Checkout</label>
+                                <input type="text" name="checkout" class="form-control ou-daterangepicker"/>
+                            </div>
+                        </div>
+                        <span>Questions about how to fill this field? <a href="https://youtu.be/VmjNqpTlTyA">Click here</a></span>
+                    </section>
+                    <section class="js_reservation_hour d-none">
+                        <h4 class="" >Hourly</h4>
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <label class="col-form-label" for="checkin">Day</label>
+                                <input type="text" name="checkin" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="arrival_hour">Arrival Hour</label>
+                                <select id="arrival_hour" name="arrival_hour" class="form-control ou-reset">
+                                    <option value="06:00">06:00 A.M</option>
+                                    <option value="07:00">07:00 A.M</option>
+                                    <option value="08:00">08:00 A.M</option>
+                                    <option value="09:00">09:00 A.M</option>
+                                    <option value="10:00">10:00 A.M</option>
+                                    <option value="11:00">11:00 A.M</option>
+                                    <option value="12:00">12:00 P.M</option>
+                                    <option value="13:00">01:00 P.M</option>
+                                    <option value="14:00">02:00 P.M</option>
+                                    <option value="15:00">03:00 P.M</option>
+                                    <option value="16:00">04:00 P.M</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="departure_hour">Departure Hour</label>
+                                <select id="departure_hour" name="departure_hour" class="form-control ou-reset">
+                                    <option value="08:00">08:00 A.M</option>
+                                    <option value="09:00">09:00 A.M</option>
+                                    <option value="10:00">10:00 A.M</option>
+                                    <option value="11:00">11:00 A.M</option>
+                                    <option value="12:00">12:00 A.M</option>
+                                    <option value="13:00">01:00 P.M</option>
+                                    <option value="14:00">02:00 P.M</option>
+                                    <option value="15:00">03:00 P.M</option>
+                                    <option value="16:00">04:00 P.M</option>
+                                    <option value="17:00">05:00 P.M</option>
+                                    <option value="18:00">06:00 P.M</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="js_reservation_half d-none">
+                        <h4 class="" >1/2 Day</h4>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="checkin">Day</label>
+                                <input type="text" name="checkin" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="col-form-label" for="hour">Time</label>
+                                <select id="hour" name="hour" class="form-control ou-reset">
+                                    <option value="06:00-12:00">Morning (06:00 A.M - 12:00 P.M)</option>
+                                    <option value="12:30-18:00">Afternoon (12:30 P.M - 06:00 P.M)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="js_reservation_button d-none border-bottom-0">
+                        <t t-call='outpostnosara.reservation_validator_button'/>
+                    </section>
+                    <section class="js_reservation_price d-none text-right border-bottom-0 text-bold">
+                        <h5>Reservation Total: $ <span class="oe_currency_value"/></h5>
+                    </section>
+                </form>
+
+                <section t-if="not user.partner_id.is_harmony" class="js_reservation_payment d-none border-bottom-0">
+                    <div id="payment_method" class="" t-if="(acquirers or pms)">
+                        <h4 class="">Payment</h4>
+                        <t t-call="payment.payment_tokens_list">
+                            <t t-set="mode" t-value="'payment'"/>
+                            <t t-set="submit_txt">Pay Now</t>
+                            <t t-set="icon_right" t-value="1"/>
+                            <t t-set="icon_class" t-value="'fa-chevron-right'"/>
+                            <t t-set="submit_class" t-value="'btn btn-primary'"/>
+                            <t t-set="pms" t-value="pms"/>
+                            <t t-set="form_action" t-value="'/outpost/pay/invoice'"/>
+                            <t t-set="prepare_tx_url" t-value="'/outpost/pay/invoice'"/>
+                            <t t-set="partner_id" t-value="partner"/>
+                            <t t-set="success_url" t-value="'/outpost/reservation/confirmation'"/>
+                            <t t-set="error_url" t-value="'/outpost/reservation/confirmation'"/>
+                        </t>
+                    </div>
+
+                    <div t-if="not acquirers" class="mt-2">
+                        <a role="button" class="btn-link" groups="base.group_system" t-attf-href="/web#action=#{payment_action_id}">
+                                <i class="fa fa-arrow-right"/> Add payment acquirers
+                        </a>
+                    </div>
+                </section>
+                <t t-else="" t-call="outpostnosara.harmony_reservation_form"/>
+            </div>
+        </div>
+    </template>
+    <template id="harmony_reservation_form" name="Harmony Reservation Form">
+        <div class="d-none js_harmony_reservation">
+            <section class="harmony_reservation">
+                <h4 class="" >Extra Info</h4>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="room_type_id">Guest Name</label>
+                        <input type="text" name="guest_name" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label" for="room_type_id">Guest Email</label>
+                        <input type="email" name="guest_email" class="form-control"/>
+                    </div>
+                </div>
+            </section>
+            <section class="border-bottom-0">
+                <t t-call="outpostnosara.confirm_harmony_reservation_button"/>
+            </section>
+        </div>
+    </template>
     <template id="reservation" name="Reservation Page">
         <t t-call="website.layout">
             <t t-set="additional_title">Reservation Page</t>
@@ -19,139 +174,16 @@
                         </p>
                     </div>
                </section>
-                <div class="container">
-                    <div class="ou ou-reservation" >
-                        <form action="/shop/address" method="post" autocomplete='off'>
-                            <section class="js_reservation">
-                                <h4 class="" >Reservation</h4>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="room_type_id">Room Type</label>
-                                        <select id="room_type_id" name="room_type_id" class="form-control">
-                                            <t t-foreach='room_types' t-as='room_type'>
-                                                <t t-set='room_id' t-value='len(room_type.room_ids) == 1 and room_type.room_ids[:1].id or False' />
-                                                <option t-att-value="room_type.id" t-att-data-rooms="len(room_type.room_ids)" t-att-data-roomid="room_id" t-esc='room_type.name'/>
-                                            </t>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="reservation_type_id">Reservation Type</label>
-                                        <select id="reservation_type_id" name="reservation_type_id" class="form-control">
-                                            <option value="">Choose</option>
-                                            <t t-foreach='reservation_types' t-as='reservation_type'>
-                                                <option t-att-data-code="reservation_type.code" t-att-value="reservation_type.id" t-esc='reservation_type.name'/>
-                                            </t>
-                                        </select>
-                                    </div>
-                                </div>
-                            </section>
-                            <section class="js_reservation_day d-none">
-                                <h4 class="" >Daily</h4>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="checkin">Checkin</label>
-                                        <input type="text" name="checkin" class="form-control ou-daterangepicker"/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="checkout">Checkout</label>
-                                        <input type="text" name="checkout" class="form-control ou-daterangepicker"/>
-                                    </div>
-                                </div>
-                                <span>Questions about how to fill this field? <a href="https://youtu.be/VmjNqpTlTyA">Click here</a></span>
-                            </section>
-                            <section class="js_reservation_hour d-none">
-                                <h4 class="" >Hourly</h4>
-                                <div class="form-row">
-                                    <div class="form-group col-12">
-                                        <label class="col-form-label" for="checkin">Day</label>
-                                        <input type="text" name="checkin" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="arrival_hour">Arrival Hour</label>
-                                        <select id="arrival_hour" name="arrival_hour" class="form-control ou-reset">
-                                            <option value="06:00">06:00 A.M</option>
-                                            <option value="07:00">07:00 A.M</option>
-                                            <option value="08:00">08:00 A.M</option>
-                                            <option value="09:00">09:00 A.M</option>
-                                            <option value="10:00">10:00 A.M</option>
-                                            <option value="11:00">11:00 A.M</option>
-                                            <option value="12:00">12:00 P.M</option>
-                                            <option value="13:00">01:00 P.M</option>
-                                            <option value="14:00">02:00 P.M</option>
-                                            <option value="15:00">03:00 P.M</option>
-                                            <option value="16:00">04:00 P.M</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="departure_hour">Departure Hour</label>
-                                        <select id="departure_hour" name="departure_hour" class="form-control ou-reset">
-                                            <option value="08:00">08:00 A.M</option>
-                                            <option value="09:00">09:00 A.M</option>
-                                            <option value="10:00">10:00 A.M</option>
-                                            <option value="11:00">11:00 A.M</option>
-                                            <option value="12:00">12:00 A.M</option>
-                                            <option value="13:00">01:00 P.M</option>
-                                            <option value="14:00">02:00 P.M</option>
-                                            <option value="15:00">03:00 P.M</option>
-                                            <option value="16:00">04:00 P.M</option>
-                                            <option value="17:00">05:00 P.M</option>
-                                            <option value="18:00">06:00 P.M</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </section>
-                            <section class="js_reservation_half d-none">
-                                <h4 class="" >1/2 Day</h4>
-                                <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="checkin">Day</label>
-                                        <input type="text" name="checkin" data-singledatepicker='1' class="form-control ou-daterangepicker single"/>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="col-form-label" for="hour">Time</label>
-                                        <select id="hour" name="hour" class="form-control ou-reset">
-                                            <option value="06:00-12:00">Morning (06:00 A.M - 12:00 P.M)</option>
-                                            <option value="12:30-18:00">Afternoon (12:30 P.M - 06:00 P.M)</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </section>
-                            <section class="js_reservation_button d-none border-bottom-0">
-                                <t t-call='outpostnosara.reservation_validator_button'/>
-                            </section>
-                            <section class="js_reservation_price d-none text-right border-bottom-0 text-bold">
-                                <h5>Reservation Total: $ <span class="oe_currency_value"/></h5>
-                            </section>
-                        </form>
-
-                        <section class="js_reservation_payment d-none border-bottom-0">
-                            <div id="payment_method" class="" t-if="(acquirers or pms)">
-                                <h4 class="">Payment</h4>
-                                <t t-call="payment.payment_tokens_list">
-                                    <t t-set="mode" t-value="'payment'"/>
-                                    <t t-set="submit_txt">Pay Now</t>
-                                    <t t-set="icon_right" t-value="1"/>
-                                    <t t-set="icon_class" t-value="'fa-chevron-right'"/>
-                                    <t t-set="submit_class" t-value="'btn btn-primary'"/>
-                                    <t t-set="pms" t-value="pms"/>
-                                    <t t-set="form_action" t-value="'/outpost/pay/invoice'"/>
-                                    <t t-set="prepare_tx_url" t-value="'/outpost/pay/invoice'"/>
-                                    <t t-set="partner_id" t-value="partner"/>
-                                    <t t-set="success_url" t-value="'/outpost/reservation/confirmation'"/>
-                                    <t t-set="error_url" t-value="'/outpost/reservation/confirmation'"/>
-                                </t>
-                            </div>
-
-                            <div t-if="not acquirers" class="mt-2">
-                                <a role="button" class="btn-link" groups="base.group_system" t-attf-href="/web#action=#{payment_action_id}">
-                                        <i class="fa fa-arrow-right"/> Add payment acquirers
-                                </a>
-                            </div>
-                        </section>
-                    </div>
-                </div>
+                <t t-call="outpostnosara.reservation_form"/>
             </div>
         </t>
+    </template>
+    <template id="confirm_harmony_reservation_button" name="Reservation validator button">
+        <div class="text-right mt-3">
+            <button id="validate_harmony_reservation" type="button" class="btn btn-primary">
+                Confirm Reservation
+            </button>
+        </div>
     </template>
     <template id="reservation_validator_button" name="Reservation validator button">
         <div class="text-right mt-3">
@@ -209,7 +241,7 @@
                         <!-- Page Content -->
                         <div id="invoice_content" class="col-12 col-lg">
                             <div class="row mr16">
-                                <div t-if="transaction.state == 'done'" class="col-lg-12 mr16 ml16 alert alert-dismissable alert-success" role="alert">
+                                <div t-if="(transaction and transaction.state == 'done') or reservation.preconfirm" class="col-lg-12 mr16 ml16 alert alert-dismissable alert-success" role="alert">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
                                     <h3>Thank you for your Reservation!</h3>
                                 </div>

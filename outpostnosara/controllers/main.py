@@ -47,6 +47,7 @@ class WebsiteOutpost(WebsiteSale):
 
         room_types = request.env['pms.room.type'].search(domain)
         render_values.update({
+            'user': request.env.user,
             'room_types': room_types,
             'reservation_types': room_types[:1].type_lines_ids,
         })
@@ -154,25 +155,29 @@ class OutpostNosaraController(http.Controller):
             return portal_payment.invoice_pay_form(acquirer_id, invoice_id, **post)
         return request.redirect('/outpost/reservation')
 
+    def confirm_website_reservation(self, reservation):
+        reservation.write({
+            'preconfirm': True,
+            'overbooking': False,
+        })
+        reservation.confirm()
+
     @http.route('/outpost/reservation/confirmation', type='http', auth="user", website=True)
     def reservation_confirmation(self, **post):
         if not request.session.get('last_invoice_id'):
             return request.redirect('/outpost/reservation')
         invoice_id = request.session.get('last_invoice_id')
         invoice = request.env['account.move'].sudo().browse(invoice_id)
-        values = {}
-        error = False
-        transaction = invoice.get_portal_last_transaction()
         reservation_obj = request.env['pms.reservation'].with_company(request.website.company_id.id).sudo()
         reservation = reservation_obj.browse(request.session.get('reservation_id'))
-        if transaction.state == 'done':
-            reservation.write({
-                'preconfirm': True,
-                'overbooking': False,
-            })
-            reservation.confirm()
-        if transaction.state == 'error':
-            error = transaction.state_message
+        values = {}
+        error = transaction = False
+        if not reservation.preconfirm and not request.env.user.partner_id.is_harmony:
+            transaction = invoice.get_portal_last_transaction()
+            if transaction.state == 'done':
+                self.confirm_website_reservation(reservation)
+            if transaction.state == 'error':
+                error = transaction.state_message
         values.update({
             'reservation': reservation,
             'invoice': invoice,
@@ -180,6 +185,18 @@ class OutpostNosaraController(http.Controller):
             'error': error,
         })
         return request.render("outpostnosara.reservation_confirmation", values)
+
+    @http.route('/outpost/create_harmony_reservation', type='json', methods=['POST'], auth="user", website=True)
+    def create_harmony_reservation(self, **post):
+        reservation_obj = request.env['pms.reservation'].with_company(request.website.company_id.id).sudo()
+        reservation = reservation_obj.browse(request.session.get('reservation_id'))
+        self.confirm_website_reservation(reservation)
+        guest_name = post.get('guest_name', False)
+        guest_email = post.get('guest_email', False)
+        msg_body = _("""A Reservation has been confirmed by a Harmony User.\n
+                     The reservation is for %s with the email %s""") % (guest_name, guest_email)
+        reservation.message_post(body=msg_body)
+        return True
 
 
 class CredomaticOutpost(Credomatic):

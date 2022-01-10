@@ -14,6 +14,7 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             "change .ou-reset": "_resertValidation",
             "click #validate_reservation": "_onValidateReservation",
             "apply.daterangepicker .ou-daterangepicker": "_onApplyDaterange",
+            "click #validate_harmony_reservation": "_onCreateHarmonyReservation",
         },
         init: function () {
             this._super.apply(this, arguments);
@@ -50,7 +51,7 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             this.$('.ou-daterangepicker[name="checkout"]').val(picker.endDate.format(this._format));
 
             this.$('.js_reservation_button').removeClass('d-none');
-            this.$('.js_reservation_payment,.js_reservation_price').addClass('d-none');
+            this.$('.js_reservation_payment,.js_reservation_price,.js_harmony_reservation').addClass('d-none');
         },
         async _setReservedDate() {
             this._invalid_dates = await this._getReservedDate();
@@ -86,7 +87,7 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             if (!this._validateForm()) return false;
             var reservation = await this._getValidateReservation();
             this.$('.js_reservation_price .oe_currency_value').html(reservation[0].price_room_services_set);
-            this.$('.js_reservation_payment,.js_reservation_price').removeClass('d-none');
+            this.$('.js_reservation_payment,.js_reservation_price,.js_harmony_reservation').removeClass('d-none');
             this.$('.js_reservation_button').addClass('d-none');
         },
         _get_hour(time){
@@ -119,7 +120,7 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
         },
         _resertValidation() {
             this.$('.js_reservation_button').removeClass('d-none');
-            this.$('.js_reservation_payment,.js_reservation_price').addClass('d-none');
+            this.$('.js_reservation_payment,.js_reservation_price,.js_harmony_reservation').addClass('d-none');
         },
         // --------------------------------------------------------------------------
         // Geters
@@ -159,6 +160,35 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
                 route: `/outpost/validate_reservation/${room_type_id}/${reservation_type_id}`,
                 params,
             })
+        },
+        _getFormValues(form_fields) {
+            var form_values = {};
+            _.each(form_fields, function (input) {
+                if (input.name in form_values) {
+                    if (Array.isArray(form_values[input.name])) {
+                        form_values[input.name].push(input.value);
+                    } else {
+                        form_values[input.name] = [form_values[input.name], input.value];
+                    }
+                } else {
+                    if (input.value !== '') {
+                        form_values[input.name] = input.value;
+                    }
+                }
+            });
+            return form_values;
+        },
+        _confirmHarmonyReservation(params) {
+            return this._rpc({
+                route: "/outpost/create_harmony_reservation",
+                params,
+            })
+        },
+        async _onCreateHarmonyReservation() {
+            this.guest_inputs =  this.$('.harmony_reservation input');
+            var params = this._getFormValues(this.guest_inputs);
+            await this._confirmHarmonyReservation(params);
+            window.location.href = "/outpost/reservation/confirmation";
         },
     });
 });
