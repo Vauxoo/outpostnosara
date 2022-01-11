@@ -15,22 +15,17 @@ def set_external_id_room_type(cr):
                 'noupdate': True}], update=True)
 
 
-def update_reservation_view(cr):
+def delete_reservation_view(cr):
     env = api.Environment(cr, SUPERUSER_ID, {})
 
     reservation_views = env['ir.ui.view'].search(
         [('name', '=', 'Reservation Page'), ('key', '=', 'outpostnosara.reservation')])
 
-    if reservation_views:
-        for view in reservation_views:
-            env['ir.model.data']._update_xmlids([{
-                'xml_id': 'outpostnosara.reservation',
-                'record': view,
-                'noupdate': False}], update=True)
+    reservation_views.unlink()
 
 
 def migrate(cr, version):
     if not version:
         return
     set_external_id_room_type(cr)
-    update_reservation_view(cr)
+    delete_reservation_view(cr)

@@ -155,11 +155,17 @@ class OutpostNosaraController(http.Controller):
             return portal_payment.invoice_pay_form(acquirer_id, invoice_id, **post)
         return request.redirect('/outpost/reservation')
 
-    def confirm_website_reservation(self, reservation):
+    def confirm_website_reservation(self, reservation, guest=None):
         reservation.write({
             'preconfirm': True,
             'overbooking': False,
         })
+        template = request.env.ref('pms.confirmed_reservation_email', raise_if_not_found=False)
+        if template:
+            partner_id = request.env.user.partner_id.id
+            email_values = {'email_to': guest if guest else None,
+                            'recipient_ids': [(4, partner_id)]}
+            template.sudo().send_mail(reservation.id, email_values=email_values, force_send=True)
         reservation.confirm()
 
     @http.route('/outpost/reservation/confirmation', type='http', auth="user", website=True)
@@ -190,9 +196,9 @@ class OutpostNosaraController(http.Controller):
     def create_harmony_reservation(self, **post):
         reservation_obj = request.env['pms.reservation'].with_company(request.website.company_id.id).sudo()
         reservation = reservation_obj.browse(request.session.get('reservation_id'))
-        self.confirm_website_reservation(reservation)
         guest_name = post.get('guest_name', False)
         guest_email = post.get('guest_email', False)
+        self.confirm_website_reservation(reservation, guest_email)
         msg_body = _("""A Reservation has been confirmed by a Harmony User.\n
                      The reservation is for %s with the email %s""") % (guest_name, guest_email)
         reservation.message_post(body=msg_body)
