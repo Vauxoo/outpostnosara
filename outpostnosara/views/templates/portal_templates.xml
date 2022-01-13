@@ -39,6 +39,8 @@
                                 <label class="col-form-label" for="checkout">Checkout</label>
                                 <input type="text" name="checkout" class="form-control ou-daterangepicker"/>
                             </div>
+                            <t t-set="reservation_daily_id" t-value="request.env.ref('outpostnosara.reservation_type_by_day').id"/>
+                            <t t-if="reservation_daily_id in podcast_types" t-call="outpostnosara.add_podcast_addon"/>
                         </div>
                         <span>Questions about how to fill this field? <a href="https://youtu.be/VmjNqpTlTyA">Click here</a></span>
                     </section>
@@ -82,6 +84,8 @@
                                 </select>
                             </div>
                         </div>
+                        <t t-set="reservation_hour_id" t-value="request.env.ref('outpostnosara.reservation_type_by_hour').id"/>
+                        <t t-if="reservation_hour_id in podcast_types" t-call="outpostnosara.add_podcast_addon"/>
                     </section>
                     <section class="js_reservation_half d-none">
                         <h4 class="" >1/2 Day</h4>
@@ -98,6 +102,8 @@
                                 </select>
                             </div>
                         </div>
+                        <t t-set="reservation_half_id" t-value="request.env.ref('outpostnosara.reservation_type_by_half_day').id"/>
+                        <t t-if="reservation_half_id in podcast_types" t-call="outpostnosara.add_podcast_addon"/>
                     </section>
                     <section class="js_reservation_button d-none border-bottom-0">
                         <t t-call='outpostnosara.reservation_validator_button'/>
@@ -136,6 +142,12 @@
                 </section>
                 <t t-else="" t-call="outpostnosara.harmony_reservation_form"/>
             </div>
+        </div>
+    </template>
+    <template id="add_podcast_addon" name="Podcast Addon for Reservations">
+        <div t-if="podcast_types" class="form-group col-md-6 mt-2">
+            <input type="checkbox" class="ou-reset" id="add_podcast_studio" name="add_podcast_studio"/>
+            <label class="ml-2 mb-0" for="add_podcast_studio">Add Podcast Studio Equipment</label><br/>
         </div>
     </template>
     <template id="harmony_reservation_form" name="Harmony Reservation Form">

@@ -41,17 +41,29 @@ class WebsiteOutpost(WebsiteSale):
             ('website_published', '=', True)
         ]
 
+        podcast_room = request.env.ref('outpost.podcast_studio_room_type')
+        podcast_available = podcast_room.website_published
+        exclude_room_type_ids = []
+
+        if podcast_available:
+            podcast_reservation_types = podcast_room.type_lines_ids.mapped('reservation_type_id').ids
+            exclude_room_type_ids.append(podcast_room.id)
+
         if partner.is_harmony:
             domain = expression.AND([domain, [('show_harmony', '=', True)]])
         else:
             harmony_room = request.env.ref('outpost.harmony_office_room_type')
-            domain = expression.AND([domain, [('id', '!=', harmony_room.id)]])
+            exclude_room_type_ids.append(harmony_room.id)
+
+        if exclude_room_type_ids:
+            domain = expression.AND([domain, [('id', 'not in', exclude_room_type_ids)]])
 
         room_types = request.env['pms.room.type'].search(domain)
         render_values.update({
             'user': request.env.user,
             'room_types': room_types,
             'reservation_types': room_types[:1].type_lines_ids,
+            'podcast_types': podcast_reservation_types if podcast_available else [],
         })
 
         return request.render("outpostnosara.reservation", render_values)
@@ -73,7 +85,7 @@ class WebsiteOutpost(WebsiteSale):
         type='json', auth="user", website=True)
     def validate_reservation(self, room_type, reservation_type_id, start_date, end_date, **post):
         """Get rooms_availables of a room kind."""
-        reservation = request.website.get_reservation()
+        reservation = request.website.get_reservation('reservation_id')
         reservation_lines = reservation.reservation_line_ids
         values = {
             'type_id': reservation_type_id,
@@ -84,17 +96,37 @@ class WebsiteOutpost(WebsiteSale):
             'arrival_hour': reservation.pms_property_id.default_arrival_hour,
             'departure_hour': reservation.pms_property_id.default_departure_hour,
         }
+        add_podcast_reservation = post.get('podcast')
+        if post.get('podcast'):
+            del post['podcast']
         reservation.write({**values, **post})
         # preferred_room_id is autoselect by the room_type_id
         reservation.flush()
+        podcast_reservation = False
+        if add_podcast_reservation:
+            podcast_room_id = request.env.ref('outpost.podcast_studio_room_type')
+            podcast_reservation = request.website.get_reservation('podcast_reservation_id')
+            podcast_reservation_lines = podcast_reservation.reservation_line_ids
+            values.update({
+                'room_type_id': podcast_room_id.id,
+                'arrival_hour': podcast_reservation.pms_property_id.default_arrival_hour,
+                'departure_hour': podcast_reservation.pms_property_id.default_departure_hour,
+            })
+            podcast_reservation.write({**values, **post})
+            podcast_reservation.flush()
+            if podcast_reservation_lines.get_reservation_availability(
+                    podcast_reservation.preferred_room_id.id, start_date=start_date, end_date=end_date):
+                raise ValidationError(_("Podcast Equipment Occupied"))
         if reservation_lines.get_reservation_availability(
             reservation.preferred_room_id.id, start_date=start_date, end_date=end_date
         ):
             raise ValidationError(_("Room Occupied"))
-        self.update_invoice(reservation)
+        self.update_invoice(reservation, podcast_reservation)
+        if add_podcast_reservation:
+            reservation |= podcast_reservation
         return reservation.read(['id', 'price_room_services_set'])
 
-    def update_invoice(self, reservation):
+    def update_invoice(self, reservation, podcast_reservation=None):
         """  Use this method to create an invoice or update the invoice lines
         for reservations in order to process the payment.
 
@@ -104,6 +136,10 @@ class WebsiteOutpost(WebsiteSale):
         """
         folio = reservation.folio_id
         lines_to_invoice = folio.sale_line_ids.filtered(lambda l: l.reservation_id.id == reservation.id)
+        if podcast_reservation:
+            podcast_folio = podcast_reservation.folio_id
+            lines_to_invoice |= podcast_folio.sale_line_ids.filtered(
+                lambda l: l.reservation_id.id == podcast_reservation.id)
         dict_lines = {}
         for line in lines_to_invoice:
             line.qty_to_invoice = 0 if line.display_type else 1

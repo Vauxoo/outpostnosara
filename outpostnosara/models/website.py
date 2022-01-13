@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 class Website(models.Model):
     _inherit = 'website'
 
-    def get_reservation(self, invoice_create=None):
+    def get_reservation(self, reservation_key, invoice_create=None):
         """ Return the last pre-reservation of the partner by:
                 - session reservation_id
                 - last pms.reservation.state = draft
@@ -28,7 +28,7 @@ class Website(models.Model):
         partner = user.partner_id
         # Default Property
         pms_property = user.pms_property_id
-        reservation_id = request.session.get('reservation_id')
+        reservation_id = request.session.get(reservation_key)
 
         # Test validity of the reservation_id
         if reservation_id:
@@ -43,10 +43,19 @@ class Website(models.Model):
                 return reservation
 
         # Search last validity of the reservation
-        reservation = reservation_obj.search([
-            ('state', '=', 'draft'),
-            ('partner_id', '=', partner.id),
-        ], limit=1)
+        podcast_room_id = self.env.ref('outpost.podcast_studio_room_type')
+        if reservation_key == 'reservation_id':
+            reservation = reservation_obj.search([
+                ('state', '=', 'draft'),
+                ('partner_id', '=', partner.id),
+                ('room_type_id', '!=', podcast_room_id.id)
+            ], limit=1)
+        else:
+            reservation = reservation_obj.search([
+                ('state', '=', 'draft'),
+                ('partner_id', '=', partner.id),
+                ('room_type_id', '=', podcast_room_id.id),
+            ], limit=1)
 
         # Create a validity of the reservation
         if not reservation:
@@ -63,5 +72,5 @@ class Website(models.Model):
             'preferred_room_id': False,
         })
 
-        request.session['reservation_id'] = reservation.id
+        request.session[reservation_key] = reservation.id
         return reservation

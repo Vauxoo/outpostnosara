@@ -86,9 +86,20 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
         async _onValidateReservation() {
             if (!this._validateForm()) return false;
             var reservation = await this._getValidateReservation();
-            this.$('.js_reservation_price .oe_currency_value').html(reservation[0].price_room_services_set);
+            var reservation_price = reservation[0].price_room_services_set;
+            if (reservation.length > 1){
+                reservation_price = this._get_total_price(reservation)
+            }
+            this.$('.js_reservation_price .oe_currency_value').html(reservation_price);
             this.$('.js_reservation_payment,.js_reservation_price,.js_harmony_reservation').removeClass('d-none');
             this.$('.js_reservation_button').addClass('d-none');
+        },
+        _get_total_price(reservations){
+            var total = 0;
+            reservations.forEach(reservation => {
+                total += reservation.price_room_services_set;
+            });
+            return total;
         },
         _get_hour(time){
             time = time.split(':');
@@ -142,6 +153,9 @@ odoo.define("outpostnosara.reservation_widget", function (require) {
             var params = {
                 start_date: this._startDate.format('YYYY-MM-DD'),
                 end_date: this._endDate.format('YYYY-MM-DD'),
+            }
+            if (this.$('[name="add_podcast_studio"]').is(":checked")){
+                params.podcast = true;
             }
             switch (this._code) {
                 case 'hour':

@@ -16,7 +16,7 @@ class ResPartner(models.Model):
         for partner in self:
             is_public = any(u._is_public() for u in partner.with_context(active_test=False).user_ids)
             website = ir_http.get_request_website()
-            reservation = website.get_reservation(invoice_create=True) if website else False
+            reservation = website.get_reservation('reservation_id', invoice_create=True) if website else False
             if website and not is_public and reservation:
                 folio = reservation.folio_id
                 invoices = folio.move_ids.filtered(lambda i: i.website_id.id == website.id and i.state == 'draft')
