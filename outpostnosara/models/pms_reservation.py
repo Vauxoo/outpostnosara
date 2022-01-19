@@ -26,6 +26,24 @@ class PmsReservation(models.Model):
         string='PIN State', default='inactive',
         help="Indicates if the PIN code is active in the door locks for this reservation.")
 
+    def confirm(self):
+        response = super().confirm()
+        if response:
+            message_post = self.env.context.get('message_post')
+            values = self.env.context.get('values')
+            guest_name = values.get('guest_name') if values else False
+            guest_email = values.get('guest_email') if values else False
+            template = self.env.ref('pms.confirmed_reservation_email', raise_if_not_found=False)
+            if template:
+                partner_id = self.env.user.partner_id.id
+                email_values = {'email_to': guest_email if guest_email else None,
+                                'recipient_ids': [(4, partner_id)]}
+                template.sudo().send_mail(self.id, email_values=email_values, force_send=True)
+            if message_post:
+                msg_body = _("""A Reservation has been confirmed by a Harmony User.\n
+                     The reservation is for %s with the email %s""") % (guest_name, guest_email)
+                self.message_post(body=msg_body)
+
     def check_in_out_dates(self):
         """Overwritten this method since outpost needs to register reservations not only for days but hours.
         Now this constraint is performed with exact checkin/checkout info,
