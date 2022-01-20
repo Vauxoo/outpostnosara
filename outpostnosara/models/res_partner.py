@@ -9,6 +9,7 @@ class ResPartner(models.Model):
                                               compute='_compute_last_website_invoice_id',
                                               string='Last Online Invoice')
     is_harmony = fields.Boolean()
+    pin = fields.Char(string='PIN', size=8, help="PIN code for the door locks.")
 
     def _compute_last_website_invoice_id(self):
         account_move = self.env['account.move']

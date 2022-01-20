@@ -42,3 +42,5 @@ class PmsRoomType(models.Model):
     # We can't use active because active remove it in backend too
     website_published = fields.Boolean(
         default=True, help="Set active to false to hide in reservation page without removing it.")
+    show_harmony = fields.Boolean(
+        help="Set active to show this room for harmony users.")

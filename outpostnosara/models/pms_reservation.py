@@ -33,16 +33,31 @@ class PmsReservation(models.Model):
             values = self.env.context.get('values')
             guest_name = values.get('guest_name') if values else False
             guest_email = values.get('guest_email') if values else False
-            template = self.env.ref('pms.confirmed_reservation_email', raise_if_not_found=False)
+            nosara_temp = self.env.ref('pms.confirmed_reservation_email', raise_if_not_found=False)
+            harmony_temp = self.env.ref('outpostnosara.harmony_confirmed_reservation_email', raise_if_not_found=False)
+            template = harmony_temp if self.env.user.partner_id.is_harmony else nosara_temp
             if template:
                 partner_id = self.env.user.partner_id.id
+                arrival_obj = datetime.datetime.strptime(self.arrival_hour,'%H:%M')
+                departure_obj = datetime.datetime.strptime(self.departure_hour,'%H:%M')
+                arrival = arrival_obj.strftime("%I:%M %p") if arrival_obj else False
+                departure = departure_obj.strftime("%I:%M %p") if departure_obj else False
                 email_values = {'email_to': guest_email if guest_email else None,
                                 'recipient_ids': [(4, partner_id)]}
-                template.sudo().send_mail(self.id, email_values=email_values, force_send=True)
+                template.sudo().with_context(guest_name=guest_name,
+                                             arrival_hour=arrival,
+                                             departure_hour=departure).send_mail(
+                    self.id, email_values=email_values, force_send=True)
             if message_post:
-                msg_body = _("""A Reservation has been confirmed by a Harmony User.\n
-                     The reservation is for %s with the email %s""") % (guest_name, guest_email)
+                msg_body = _("""A Reservation has been confirmed by a Harmony User.\n""")
+                if guest_name:
+                    msg_name = _("""The reservation is for %s""") % (guest_name)
+                    msg_body = "%s %s" % (msg_body, msg_name)
+                if guest_email:
+                    msg_email = _("""with the email %s""") % (guest_email)
+                    msg_body = "%s %s" % (msg_body, msg_email)
                 self.message_post(body=msg_body)
+        return response
 
     def check_in_out_dates(self):
         """Overwritten this method since outpost needs to register reservations not only for days but hours.

@@ -18,6 +18,7 @@
             </xpath>
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="website_published"/>
+                <field name="show_harmony"/>
             </xpath>
         </field>
     </record>
