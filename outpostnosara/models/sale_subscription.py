@@ -26,25 +26,29 @@ class SaleSubscription(models.Model):
     @api.model
     def create(self, vals):
         subscription = super().create(vals)
-        if subscription.room_type_id and not subscription.folio_ids and subscription.stage_category == "progress":
+        if subscription.stage_category == "progress":
             subscription.create_reservation()
         return subscription
 
     def write(self, vals):
         old_not_in_progress = self.filtered(lambda sub: sub.stage_category != "progress")
         result = super().write(vals)
-        for subscription in old_not_in_progress.filtered(
-                lambda sub: sub.stage_category == "progress" and sub.room_type_id and not sub.folio_ids):
+        for subscription in old_not_in_progress.filtered(lambda sub: sub.stage_category == "progress"):
             subscription.create_reservation()
         return result
 
     def create_reservation(self):
         self.ensure_one()
+        if not self.folio_ids:
+            self.create_folio()
         reservation = self.env['pms.reservation']
+        if not self.room_type_id:
+            return reservation
         try:
             self.onchange_date_start()
             self.set_pin()
             with Form(reservation) as reservation_form:
+                reservation_form.folio_id = self.folio_ids[0]
                 reservation_form.partner_id = self.partner_id
                 reservation_form.checkin = self.date_start
                 if self.date:
@@ -55,6 +59,18 @@ class SaleSubscription(models.Model):
         except BaseException as error:
             raise UserError(_('An error occurred during the creation of the reservation\n\n%s') % error)
         return reservation
+
+    def create_folio(self):
+        self.ensure_one()
+        folio = self.env['pms.folio']
+        try:
+            with Form(folio) as folio_form:
+                folio_form.partner_id = self.partner_id
+                folio_form.subscription_id = self
+            folio = folio_form.save()
+        except BaseException as error:
+            raise UserError(_('An error occurred during the creation of the folio\n\n%s') % error)
+        return folio
 
     def set_pin(self):
         self.ensure_one()

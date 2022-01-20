@@ -27,6 +27,10 @@
                 <field name="checkin_datetime"/>
                 <field name="checkout_datetime"/>
             </xpath>
+            <xpath expr="//field[@name='folio_id']" position="attributes">
+                <attribute name="readonly"></attribute>
+                <attribute name="attrs">{'readonly': ['|', ('state', '!=', 'draft'), ('folio_id', '!=', False)]}</attribute>
+            </xpath>
         </field>
     </record>
 
