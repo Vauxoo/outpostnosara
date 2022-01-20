@@ -1,6 +1,7 @@
 [submodule "outpostnosara"]
 	path = outpostnosara
 	url = git@git.vauxoo.com:vauxoo/outpostnosara.git
+    branch = 14.0-subscription-folio-dev-keylor2906
 [submodule "sh-tools"]
 	path = sh-tools
 	url = git@git.vauxoo.com:vauxoo/sh-tools.git
