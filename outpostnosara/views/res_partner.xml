@@ -18,7 +18,7 @@
                     attrs="{'invisible': [('is_harmony', '=', False)]}"
                     string="Is Harmony"/>
             </xpath>
-            <xpath expr="//notebook/page[last()]" position="after">
+            <xpath expr="//notebook/page[@name='sales_purchases']" position="after">
                 <page string="Reservation Info" name="reservation_info" attrs="{'invisible': [('is_harmony', '=', False)]}">
                     <group string="Reservation Info" name="reservation_info">
                         <group>

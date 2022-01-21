@@ -8,6 +8,8 @@ class PmsProperty(models.Model):
 
     default_arrival_hour = fields.Char(default="12:00")
     default_departure_hour = fields.Char(default="14:00")
+    wifi_name = fields.Char(help="Name of the WiFi Network")
+    wifi_password = fields.Char(help="Pasword of the WiFi Network")
 
     def date_property_timezone(self, dtimezone):
         """Overwritten this because the following error when user does not have timezone set

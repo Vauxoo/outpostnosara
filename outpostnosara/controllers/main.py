@@ -41,11 +41,11 @@ class WebsiteOutpost(WebsiteSale):
             ('website_published', '=', True)
         ]
 
-        if not partner.is_harmony:
+        if partner.is_harmony:
+            domain = expression.AND([domain, [('show_harmony', '=', True)]])
+        else:
             harmony_room = request.env.ref('outpost.harmony_office_room_type')
             domain = expression.AND([domain, [('id', '!=', harmony_room.id)]])
-        else:
-            domain = expression.AND([domain, [('show_harmony', '=', True)]])
 
         room_types = request.env['pms.room.type'].search(domain)
         render_values.update({

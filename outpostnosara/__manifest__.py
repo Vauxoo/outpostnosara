@@ -56,6 +56,7 @@
         'views/pms_lock_views.xml',
         'views/pms_folio_views.xml',
         'views/res_partner.xml',
+        'views/pms_property_views.xml',
 
         # Website
         'views/assets.xml',

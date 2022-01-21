@@ -104,8 +104,8 @@
                     </section>
                     <section class="js_reservation_price d-none text-right border-bottom-0 text-bold">
                         <h5>Reservation Total: $ 
-                            <span t-if="not user.partner_id.is_harmony" class="oe_currency_value"/>
-                            <span t-else="">0</span>
+                            <span t-if="user.partner_id.is_harmony">0</span>
+                            <span t-else="" class="oe_currency_value"/>
                         </h5>
                     </section>
                 </form>
