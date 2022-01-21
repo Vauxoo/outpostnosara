@@ -9,7 +9,7 @@
     'website': 'https://www.vauxoo.com',
     'license': 'LGPL-3',
     'category': 'Installer',
-    'version': '14.0.1.1.1',
+    'version': '14.0.1.1.2',
     'depends': [
         'l10n_cr',
         'l10n_cr_edi',
@@ -34,6 +34,7 @@
         'crm',
         'theme_nosara',
         'payment_credomatic',
+        'website_helpdesk',
     ],
     'test': [
     ],
