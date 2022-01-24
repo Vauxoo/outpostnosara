@@ -80,12 +80,8 @@ class WebsiteOutpost(WebsiteSale):
         """Get reservation types_availables of a room kind."""
         return {'data': room_type.type_lines_ids.read(['id', 'name', 'code'])}
 
-    @http.route(
-        '/outpost/validate_reservation/<model("pms.room.type"):room_type>/<int:reservation_type_id>',
-        type='json', auth="user", website=True)
-    def validate_reservation(self, room_type, reservation_type_id, start_date, end_date, **post):
-        """Get rooms_availables of a room kind."""
-        reservation = request.website.get_reservation('reservation_id')
+    def add_reservation_room(self, room_type, reservation_type_id, start_date, end_date, reservation_key, post):
+        reservation = request.website.get_reservation(reservation_key)
         reservation_lines = reservation.reservation_line_ids
         values = {
             'type_id': reservation_type_id,
@@ -96,33 +92,41 @@ class WebsiteOutpost(WebsiteSale):
             'arrival_hour': reservation.pms_property_id.default_arrival_hour,
             'departure_hour': reservation.pms_property_id.default_departure_hour,
         }
-        add_podcast_reservation = post.get('podcast')
-        if post.get('podcast'):
-            del post['podcast']
         reservation.write({**values, **post})
         # preferred_room_id is autoselect by the room_type_id
         reservation.flush()
-        podcast_reservation = False
-        if add_podcast_reservation:
-            podcast_room_id = request.env.ref('outpost.podcast_studio_room_type')
-            podcast_reservation = request.website.get_reservation('podcast_reservation_id')
-            podcast_reservation_lines = podcast_reservation.reservation_line_ids
-            values.update({
-                'room_type_id': podcast_room_id.id,
-                'arrival_hour': podcast_reservation.pms_property_id.default_arrival_hour,
-                'departure_hour': podcast_reservation.pms_property_id.default_departure_hour,
-            })
-            podcast_reservation.write({**values, **post})
-            podcast_reservation.flush()
-            if podcast_reservation_lines.get_reservation_availability(
-                    podcast_reservation.preferred_room_id.id, start_date=start_date, end_date=end_date):
-                raise ValidationError(_("Podcast Equipment Occupied"))
+        room_name = 'Room'
+        if reservation_key == 'podcast_reservation_id':
+            room_name = 'Podcast Equipment'
+
         if reservation_lines.get_reservation_availability(
             reservation.preferred_room_id.id, start_date=start_date, end_date=end_date
         ):
-            raise ValidationError(_("Room Occupied"))
+            raise ValidationError(_("%s Occupied") % room_name)
+        return reservation
+
+    @http.route(
+        '/outpost/validate_reservation/<model("pms.room.type"):room_type>/<int:reservation_type_id>',
+        type='json', auth="user", website=True)
+    def validate_reservation(self, room_type, reservation_type_id, start_date, end_date, **post):
+        """Get rooms_availables of a room kind."""
+        podcast_reservation = post.get('podcast')
+
+        if podcast_reservation:
+            del post['podcast']
+            podcast_room_id = request.env.ref('outpost.podcast_studio_room_type')
+            room_type_lines = request.env['pms.room.type.lines']
+            type_lines = room_type_lines.search([('id', '=', reservation_type_id)])
+            podcast_type_id = room_type_lines.search([('code', '=', type_lines.code),
+                                                      ('room_type_id', '=', podcast_room_id.id)])
+            podcast_reservation = self.add_reservation_room(
+                podcast_room_id, podcast_type_id, start_date, end_date, 'podcast_reservation_id', post)
+
+        reservation = self.add_reservation_room(
+            room_type, reservation_type_id, start_date, end_date, 'reservation_id', post)
+
         self.update_invoice(reservation, podcast_reservation)
-        if add_podcast_reservation:
+        if podcast_reservation:
             reservation |= podcast_reservation
         return reservation.read(['id', 'price_room_services_set'])
 
