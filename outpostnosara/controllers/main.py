@@ -82,7 +82,6 @@ class WebsiteOutpost(WebsiteSale):
 
     def add_reservation_room(self, room_type, reservation_type_id, start_date, end_date, reservation_key, post):
         reservation = request.website.get_reservation(reservation_key)
-        reservation_lines = reservation.reservation_line_ids
         values = {
             'type_id': reservation_type_id,
             'room_type_id': room_type.id,
@@ -97,7 +96,7 @@ class WebsiteOutpost(WebsiteSale):
         reservation.flush()
         room_name = 'Podcast Equipment' if reservation_key == 'podcast_reservation_id' else 'Room'
 
-        if reservation_lines.get_reservation_availability(
+        if reservation.reservation_line_ids.get_reservation_availability(
             reservation.preferred_room_id.id, start_date=start_date, end_date=end_date
         ):
             raise ValidationError(_("%s Occupied") % room_name)

@@ -60,7 +60,6 @@ class Website(models.Model):
                 'partner_id': partner.id,
                 'pms_property_id': pms_property.id,
                 'preconfirm': self._context.get('preconfirm', False),
-                'overbooking': self._context.get('overbooking', True),
             })
 
         # We have to reset in this specific order or the room won't update

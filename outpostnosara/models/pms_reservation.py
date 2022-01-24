@@ -217,3 +217,49 @@ class PmsReservation(models.Model):
             reservation.preferred_room_id._set_lock(reservation.folio_id.subscription_id.pin)
             reservation.pin_state = 'active'
         return res
+
+    @api.depends(
+        "reservation_line_ids.date", "reservation_line_ids.room_id",
+        "reservation_line_ids.occupies_availability", "preferred_room_id",
+        "pricelist_id", "pms_property_id",
+    )
+    def _compute_allowed_room_ids(self):
+        """OVERWRITTEN"""
+        for reservation in self:
+            if not (reservation.checkin and reservation.checkout):
+                reservation.allowed_room_ids = False
+                continue
+
+            if reservation.overbooking or reservation.state == "cancel":
+                reservation.allowed_room_ids = self.env["pms.room"].search([("active", "=", True)])
+                return
+            # Here is the change, propagate reservation checkin and checkout with datetimes
+            pms_property = reservation.pms_property_id.with_context(
+                checkin=reservation.checkin_datetime,
+                checkout=reservation.checkout_datetime,
+                room_type_id=reservation.room_type_id.id or False,  # Force to uses always a room type. # noqa
+                current_lines=reservation.reservation_line_ids.ids,
+                pricelist_id=reservation.pricelist_id.id,
+            )
+            reservation.allowed_room_ids = pms_property.free_room_ids
+
+    def open_reservation_wizard(self):
+        """OVERWRITTEN"""
+        # Here is the change, propagate reservation checkin and checkout with datetimes
+        pms_property = self.pms_property_id.with_context(
+            checkin=self.checkin_datetime,
+            checkout=self.checkout_datetime,
+            current_lines=self.reservation_line_ids.ids,
+            pricelist_id=self.pricelist_id.id,
+        )
+        return {
+            "view_type": "form",
+            "view_mode": "form",
+            "name": "Unify the reservation",
+            "res_model": "pms.reservation.split.join.swap.wizard",
+            "target": "new",
+            "type": "ir.actions.act_window",
+            "context": {
+                "rooms_available": pms_property.free_room_ids.ids,
+            },
+        }

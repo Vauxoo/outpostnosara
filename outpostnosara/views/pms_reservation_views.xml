@@ -23,6 +23,10 @@
             <xpath expr="//field[@name='document_number']" position="after">
                 <field name="pin_state"/>
             </xpath>
+            <xpath expr="//tree//field[@name='date']" position="after">
+                <field name="checkin_datetime"/>
+                <field name="checkout_datetime"/>
+            </xpath>
         </field>
     </record>
 

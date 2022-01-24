@@ -23,8 +23,14 @@ class TestPmsReservation(TransactionCase):
             'default_code': 'STT01',
             'class_id': self.room_type_class.id,
         })
+        self.room = self.env['pms.room'].create({
+            'name': 'Single Room Test',
+            'pms_property_id': self.property.id,
+            'room_type_id': self.room_type.id,
+            'capacity': 1,
+        })
 
-    def _create_reservation(self):
+    def _create_reservation(self, arrival_hour=False, departure_hour=False):
         today = datetime.today().date()
         reservation = self.env['pms.reservation'].create({
             'room_type_id': self.room_type.id,
@@ -32,6 +38,8 @@ class TestPmsReservation(TransactionCase):
             'pms_property_id': self.property.id,
             'checkin': today,
             'checkout': today,
+            'arrival_hour': arrival_hour or self.property.default_arrival_hour,
+            'departure_hour': departure_hour or self.property.default_departure_hour,
             "reservation_line_ids": [
                 (0, False, {"date": today}),
             ],
@@ -50,3 +58,16 @@ class TestPmsReservation(TransactionCase):
             'arrival_hour': '12:00',
             'departure_hour': '14:00',
         }])
+
+    def test_002_reserve_datetime(self):
+        self.property.write({
+            'default_arrival_hour': '06:00',
+            'default_departure_hour': '18:00',
+        })
+        reservation = self._create_reservation(arrival_hour='06:00', departure_hour='12:00')
+        self.assertEqual(reservation.preferred_room_id, self.room, 'The reservation room should be auto assigned')
+
+        second_reservation = self._create_reservation(arrival_hour='13:00', departure_hour='18:00')
+        self.assertEqual(second_reservation.preferred_room_id, self.room,
+                         'The reservation room should be auto assigned and should be the same room.'
+                         'The hours are not collapsed')

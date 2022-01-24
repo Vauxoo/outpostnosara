@@ -6,6 +6,7 @@ from . import reservation_type
 from . import sale_subscription
 from . import sale_order
 from . import pm_property
+from . import pms_availability
 from . import pms_reservation
 from . import res_users
 from . import website
