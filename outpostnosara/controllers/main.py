@@ -111,7 +111,7 @@ class WebsiteOutpost(WebsiteSale):
     def validate_reservation(self, room_type, reservation_type_id, start_date, end_date, **post):
         """Get rooms_availables of a room kind."""
         podcast_reservation = post.get('podcast')
-
+        request.session['add_podcast'] = post.get('podcast')
         if podcast_reservation:
             del post['podcast']
             podcast_room_id = request.env.ref('outpost.podcast_studio_room_type')
@@ -198,11 +198,13 @@ class OutpostNosaraController(http.Controller):
         return request.redirect('/outpost/reservation')
 
     def confirm_website_reservation(self, reservation, values=None):
-        reservation.write({
-            'preconfirm': True,
-            'overbooking': False,
-        })
+        reservation_values = {'preconfirm': True, 'overbooking': False}
         message = values.get('message_post') if values else False
+        if request.session.get('add_podcast'):
+            reservation_obj = request.env['pms.reservation'].with_company(request.website.company_id.id).sudo()
+            podcast_reservation = reservation_obj.browse(request.session.get('podcast_reservation_id'))
+            reservation |= podcast_reservation
+        reservation.write(reservation_values)
         reservation.with_context(values=values, message_post=message).confirm()
 
     @http.route('/outpost/reservation/confirmation', type='http', auth="user", website=True)

@@ -29,22 +29,11 @@ class PmsReservation(models.Model):
     def confirm(self):
         response = super().confirm()
         if response:
-            message_post = self.env.context.get('message_post')
+            msg_body = message_post = self.env.context.get('message_post')
             values = self.env.context.get('values')
             guest_name = values.get('guest_name') if values else False
             guest_email = values.get('guest_email') if values else False
             template = self.env.ref('pms.confirmed_reservation_email', raise_if_not_found=False)
-            if template:
-                partner_id = self.env.user.partner_id.id
-                arrival_datetime = datetime.datetime.strptime(self.arrival_hour, '%H:%M')
-                departure_datetime = datetime.datetime.strptime(self.departure_hour, '%H:%M')
-                arrival = arrival_datetime.strftime("%I:%M %p") if arrival_datetime else False
-                departure = departure_datetime.strftime("%I:%M %p") if departure_datetime else False
-                email_values = {'email_to': guest_email if guest_email else None,
-                                'recipient_ids': [(4, partner_id)]}
-                template.sudo().with_context(
-                    guest_name=guest_name, arrival_hour=arrival, departure_hour=departure).send_mail(
-                        self.id, email_values=email_values, force_send=True)
             if message_post:
                 msg_body = _("A Reservation has been confirmed by a Harmony User.\n")
                 if guest_name:
@@ -53,7 +42,20 @@ class PmsReservation(models.Model):
                 if guest_email:
                     msg_email = _("with the email %s") % (guest_email)
                     msg_body = "%s %s" % (msg_body, msg_email)
-                self.message_post(body=msg_body)
+            if template:
+                for record in self:
+                    partner_id = record.env.user.partner_id.id
+                    arrival_datetime = datetime.datetime.strptime(record.arrival_hour, '%H:%M')
+                    departure_datetime = datetime.datetime.strptime(record.departure_hour, '%H:%M')
+                    arrival = arrival_datetime.strftime("%I:%M %p") if arrival_datetime else False
+                    departure = departure_datetime.strftime("%I:%M %p") if departure_datetime else False
+                    email_values = {'email_to': guest_email if guest_email else None,
+                                    'recipient_ids': [(4, partner_id)]}
+                    template.sudo().with_context(
+                        guest_name=guest_name, arrival_hour=arrival, departure_hour=departure).send_mail(
+                            record.id, email_values=email_values, force_send=True)
+                if msg_body:
+                    record.message_post(body=msg_body)
         return response
 
     def check_in_out_dates(self):
