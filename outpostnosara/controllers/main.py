@@ -103,6 +103,8 @@ class WebsiteOutpost(WebsiteSale):
             reservation.preferred_room_id.id, start_date=start_date, end_date=end_date
         ):
             raise ValidationError(_("%s Occupied") % room_name)
+        if request.env.user.partner_id.is_harmony:
+            reservation.reservation_line_ids.write({'price': 0})
         return reservation
 
     @http.route(
@@ -237,6 +239,10 @@ class OutpostNosaraController(http.Controller):
         reservation = reservation_obj.browse(request.session.get('reservation_id'))
         post['message_post'] = True
         self.confirm_website_reservation(reservation, values=post)
+        invoice_id = request.session.get('last_invoice_id')
+        invoice = request.env['account.move'].sudo().browse(invoice_id)
+        if invoice.state == 'draft':
+            invoice.action_post()
         return True
 
 

@@ -54,8 +54,8 @@ class PmsReservation(models.Model):
                     template.sudo().with_context(
                         guest_name=guest_name, arrival_hour=arrival, departure_hour=departure).send_mail(
                             record.id, email_values=email_values, force_send=True)
-                if msg_body:
-                    record.message_post(body=msg_body)
+                    if msg_body:
+                        record.message_post(body=msg_body)
         return response
 
     def check_in_out_dates(self):
