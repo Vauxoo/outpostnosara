@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="contactus" inherit_id="website.contactus">
+        <xpath expr="//div[@id='wrap']/div[hasclass('container')]//t[@t-call='website.company_description']" position="replace"/>
+    </template>
+    <record id="contactus_thanks" model="ir.ui.view">
+        <field name="name">Contact Thanks Inherit View</field>
+        <field name="inherit_id" search="[('website_id','=', False),('key', '=', 'website_form.contactus_thanks')]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='wrap']/div[hasclass('container')]//t[@t-call='website.company_description']" position="replace"/>
+        </field>
+    </record>
+</odoo>

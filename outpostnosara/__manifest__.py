@@ -66,6 +66,7 @@
         'views/templates/portal_templates.xml',
         'views/templates/website_sale_templates.xml',
         'views/templates/website_application_templates.xml',
+        'views/templates/contact_page.xml',
 
         # Security
         'security/ir.model.access.csv',
