@@ -44,18 +44,15 @@ class Website(models.Model):
 
         # Search last validity of the reservation
         podcast_room_id = self.env.ref('outpost.podcast_studio_room_type')
+        domain = [
+            ('state', '=', 'draft'),
+            ('partner_id', '=', partner.id)
+        ]
         if reservation_key == 'reservation_id':
-            reservation = reservation_obj.search([
-                ('state', '=', 'draft'),
-                ('partner_id', '=', partner.id),
-                ('room_type_id', '!=', podcast_room_id.id)
-            ], limit=1)
+            domain.append(('room_type_id', '!=', podcast_room_id.id))
         else:
-            reservation = reservation_obj.search([
-                ('state', '=', 'draft'),
-                ('partner_id', '=', partner.id),
-                ('room_type_id', '=', podcast_room_id.id),
-            ], limit=1)
+            domain.append(('room_type_id', '=', podcast_room_id.id))
+        reservation = reservation_obj.search(domain, limit=1)
 
         # Create a validity of the reservation
         if not reservation:

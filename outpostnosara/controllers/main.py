@@ -41,11 +41,11 @@ class WebsiteOutpost(WebsiteSale):
             ('website_published', '=', True)
         ]
 
-        podcast_room = request.env.ref('outpost.podcast_studio_room_type')
-        podcast_available = podcast_room.website_published
+        podcast_room = request.env.ref('outpost.podcast_studio_room_type', False)
+        podcast_reservation_types = []
         exclude_room_type_ids = []
 
-        if podcast_available:
+        if podcast_room and podcast_room.website_published:
             podcast_reservation_types = podcast_room.type_lines_ids.mapped('reservation_type_id').ids
             exclude_room_type_ids.append(podcast_room.id)
 
@@ -63,7 +63,7 @@ class WebsiteOutpost(WebsiteSale):
             'user': request.env.user,
             'room_types': room_types,
             'reservation_types': room_types[:1].type_lines_ids,
-            'podcast_types': podcast_reservation_types if podcast_available else [],
+            'podcast_types': podcast_reservation_types,
         })
 
         return request.render("outpostnosara.reservation", render_values)
@@ -95,9 +95,7 @@ class WebsiteOutpost(WebsiteSale):
         reservation.write({**values, **post})
         # preferred_room_id is autoselect by the room_type_id
         reservation.flush()
-        room_name = 'Room'
-        if reservation_key == 'podcast_reservation_id':
-            room_name = 'Podcast Equipment'
+        room_name = 'Podcast Equipment' if reservation_key == 'podcast_reservation_id' else 'Room'
 
         if reservation_lines.get_reservation_availability(
             reservation.preferred_room_id.id, start_date=start_date, end_date=end_date
@@ -118,9 +116,9 @@ class WebsiteOutpost(WebsiteSale):
             del post['podcast']
             podcast_room_id = request.env.ref('outpost.podcast_studio_room_type')
             room_type_lines = request.env['pms.room.type.lines']
-            type_lines = room_type_lines.search([('id', '=', reservation_type_id)])
+            type_lines = room_type_lines.browse(reservation_type_id)
             podcast_type_id = room_type_lines.search([('code', '=', type_lines.code),
-                                                      ('room_type_id', '=', podcast_room_id.id)])
+                                                      ('room_type_id', '=', podcast_room_id.id)], limit=1)
             podcast_reservation = self.add_reservation_room(
                 podcast_room_id, podcast_type_id, start_date, end_date, 'podcast_reservation_id', post)
 
@@ -142,10 +140,6 @@ class WebsiteOutpost(WebsiteSale):
         """
         folio = reservation.folio_id
         lines_to_invoice = folio.sale_line_ids.filtered(lambda l: l.reservation_id.id == reservation.id)
-        if podcast_reservation:
-            podcast_folio = podcast_reservation.folio_id
-            lines_to_invoice |= podcast_folio.sale_line_ids.filtered(
-                lambda l: l.reservation_id.id == podcast_reservation.id)
         dict_lines = {}
         for line in lines_to_invoice:
             line.qty_to_invoice = 0 if line.display_type else 1
@@ -157,6 +151,16 @@ class WebsiteOutpost(WebsiteSale):
         else:
             lines = [(5, 0)]
             for line in lines_to_invoice:
+                invoice_line_values = line._prepare_invoice_line(qty=line.qty_to_invoice)
+                new_line = (0, False, invoice_line_values)
+                lines.append(new_line)
+            invoice.write({'invoice_line_ids': lines})
+        if podcast_reservation:
+            podcast_lines = podcast_reservation.folio_id.sale_line_ids.filtered(
+                lambda l: l.reservation_id.id == podcast_reservation.id)
+            lines = [(3, 0)]
+            for line in podcast_lines:
+                line.qty_to_invoice = 0 if line.display_type else 1
                 invoice_line_values = line._prepare_invoice_line(qty=line.qty_to_invoice)
                 new_line = (0, False, invoice_line_values)
                 lines.append(new_line)
@@ -204,8 +208,7 @@ class OutpostNosaraController(http.Controller):
         message = values.get('message_post') if values else False
         if request.session.get('add_podcast'):
             reservation_obj = request.env['pms.reservation'].with_company(request.website.company_id.id).sudo()
-            podcast_reservation = reservation_obj.browse(request.session.get('podcast_reservation_id'))
-            reservation |= podcast_reservation
+            reservation |= reservation_obj.browse(request.session.get('podcast_reservation_id'))
         reservation.write(reservation_values)
         reservation.with_context(values=values, message_post=message).confirm()
 
@@ -239,8 +242,7 @@ class OutpostNosaraController(http.Controller):
         reservation = reservation_obj.browse(request.session.get('reservation_id'))
         post['message_post'] = True
         self.confirm_website_reservation(reservation, values=post)
-        invoice_id = request.session.get('last_invoice_id')
-        invoice = request.env['account.move'].sudo().browse(invoice_id)
+        invoice = request.env['account.move'].sudo().browse(request.session.get('last_invoice_id'))
         if invoice.state == 'draft':
             invoice.action_post()
         return True
