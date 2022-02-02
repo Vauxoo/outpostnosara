@@ -74,7 +74,8 @@
                                                             style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"
                                                         />
                                             <div style="margin-top: 32px;">
-                                                <p>Hello
+                                                <p style="margin-bottom: 8px">
+                                                    <span>Hi</span>
                                                     % if object.partner_id.is_harmony:
                                                         % if ctx.get('guest_name'):
                                                             ${ctx.get('guest_name').split(' ')[0]}
@@ -88,9 +89,8 @@
                                                             ${object.partner_id.name.split(' ')[0]}
                                                         % endif
                                                     % endif
-                                                    ,
+                                                    <span style="margin-left: -3px;">,</span>
                                                 </p>
-                                                <br/>
                                                 <p>
                                                     Your reservation has been confirmed. Please see the details below.
                                                 </p>
@@ -99,8 +99,7 @@
                                                     at <a href="mailto:reservations@outpostnosara.com">reservations@outpostnosara.com</a>.
                                                 </p>
                                                 <br/>
-                                                <p>Thank you,</p>
-                                                <br/>
+                                                <p style="margin-bottom: 8px">Thank you,</p>
                                                 <p>Outpost Management</p>
                                             </div>
                                         </td>
@@ -128,15 +127,12 @@
                                         <td valign="top" style="font-size: 14px;">
                                             <table style="width:60%;">
                                                 <tr>
-                                                    <td>
-                                                        <div class="far fa-calendar-alt fa-2x" style="margin: 0px 16px 0px 0px;"/>
-                                                    </td>
                                                     <td style="margin: 16px 0px 16px 0px; font-size: 14px;">
                                                         <div>
                                                             <strong>From:</strong> ${format_date(object.checkin, 'EEEE, MMMM d, Y')}
                                                             <strong> At</strong>
-                                                            % if ctx.get('arrival_hour'):
-                                                                ${ctx.get('arrival_hour')}
+                                                            % if object.arrival_hour_formatted:
+                                                                ${object.arrival_hour_formatted}
                                                             % else:
                                                                 ${object.arrival_hour}
                                                             % endif
@@ -144,8 +140,8 @@
                                                         <div>
                                                             <strong>To:</strong> ${format_date(object.checkout, 'EEEE, MMMM d, Y')}
                                                             <strong> At</strong>
-                                                            % if ctx.get('departure_hour'):
-                                                                ${ctx.get('departure_hour')}
+                                                            % if object.departure_hour_formatted:
+                                                                ${object.departure_hour_formatted}
                                                             % else:
                                                                 ${object.departure_hour}
                                                             % endif
@@ -156,24 +152,20 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td style="margin: 16px 0px 16px 0px;">
-                                                        <br/>
-                                                        <div class="fas fa-laptop fa-2x" style="margin: 0px 16px 0px 0px;"/>
-                                                    </td>
-                                                    <td style="vertical-align:top;">
-                                                        <br/>
-                                                        <div><strong>Room:</strong> ${object.room_type_id.name}</div>
+                                                    <td style="margin: 16px 0px 16px 0px; font-size: 14px;">
+                                                        % if object.preferred_room_id:
+                                                        <div style="margin-top: 16px;">
+                                                            <strong>Office:</strong>
+                                                            ${object.preferred_room_id.name}
+                                                        </div>
+                                                        % endif
                                                     </td>
                                                 </tr>
                                                 % if object.folio_id.subscription_id.pin or (object.partner_id.is_harmony and object.partner_id.pin)
                                                 <tr>
-                                                    <td style="margin: 16px 0px 16px 0px;">
-                                                        <br/>
-                                                        <div class="fas fa-key fa-2x" style="margin: 0px 16px 0px 0px;"/>
-                                                    </td>
                                                     <td style="vertical-align:top;">
-                                                        <br />
-                                                        <div><strong>Access Code for the Locks:  </strong>
+                                                        <div style="margin-top: 16px;">
+                                                            <strong>Access Code for the Locks:  </strong>
                                                             % if object.partner_id.is_harmony:
                                                                 ${object.partner_id.pin}
                                                             % else:
@@ -185,10 +177,6 @@
                                                 % endif
                                                 % if object.pms_property_id.wifi_name and object.pms_property_id.wifi_password
                                                 <tr>
-                                                    <td style="margin: 16px 0px 16px 0px;">
-                                                        <br/>
-                                                        <div class="fas fa-wifi fa-2x" style="margin: 0px 16px 0px 0px;"/>
-                                                    </td>
                                                     <td style="margin: 16px 0px 16px 0px; font-size: 14px;">
                                                         <div style="margin-top: 16px;">
                                                             <strong>Network:</strong> ${object.pms_property_id.wifi_name}
@@ -200,13 +188,8 @@
                                                 </tr>
                                                 % endif
                                                 <tr>
-                                                    <td style="margin: 16px 0px 16px 0px;">
-                                                        <br/>
-                                                        <div class="fas fa-coins fa-2x" style="margin: 0px 16px 0px 0px;"/>
-                                                    </td>
                                                     <td style="margin: 16px 0px 16px 0px; font-size: 14px;">
-                                                        <br/>
-                                                        <div><strong>Price: </strong> ${object.currency_id.symbol} ${object.price_room_services_set}</div>
+                                                        <div style="margin-top: 16px;"><strong>Price: </strong> ${object.currency_id.symbol} ${object.price_room_services_set}</div>
                                                     </td>
                                                 </tr>
                                             </table>

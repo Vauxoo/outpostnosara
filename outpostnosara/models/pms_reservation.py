@@ -4,6 +4,7 @@ from odoo import api, models, fields, _
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import const_eval
 
+ARRIVAL_FORMAT = "%I:%M %p"
 
 class PmsReservation(models.Model):
     _inherit = 'pms.reservation'
@@ -26,6 +27,26 @@ class PmsReservation(models.Model):
         string='PIN State', default='inactive',
         help="Indicates if the PIN code is active in the door locks for this reservation.")
     state = fields.Selection(selection_add=[('in_payment', 'Waiting for payment')])
+    arrival_hour_formatted = fields.Char(help="AM/PM format of the arrival hour",
+                                         store=True,
+                                         compute="_compute_arrival_hour_formatted")
+    departure_hour_formatted = fields.Char(help="AM/PM format of the departure hour",
+                                           store=True,
+                                           compute="_compute_departure_hour_formatted")
+
+    @api.depends("arrival_hour")
+    def _compute_arrival_hour_formatted(self):
+        for res in self:
+            arrival_datetime = datetime.datetime.strptime(res.arrival_hour, '%H:%M')
+            arrival = arrival_datetime.strftime(ARRIVAL_FORMAT) if arrival_datetime else False
+            res.arrival_hour_formatted = arrival
+
+    @api.depends("departure_hour")
+    def _compute_departure_hour_formatted(self):
+        for res in self:
+            departure_datetime = datetime.datetime.strptime(res.departure_hour, '%H:%M')
+            departure = departure_datetime.strftime(ARRIVAL_FORMAT) if departure_datetime else False
+            res.departure_hour_formatted = departure
 
     def confirm(self):
         response = super().confirm()
@@ -38,17 +59,12 @@ class PmsReservation(models.Model):
             for record in self:
                 if template:
                     partner_id = record.partner_id.id
-                    arrival_datetime = datetime.datetime.strptime(record.arrival_hour, '%H:%M')
-                    departure_datetime = datetime.datetime.strptime(record.departure_hour, '%H:%M')
-                    arrival = arrival_datetime.strftime("%I:%M %p") if arrival_datetime else False
-                    departure = departure_datetime.strftime("%I:%M %p") if departure_datetime else False
                     property_email = self.pms_property_id.partner_id.email
                     emails = "%s,%s" % (property_email, guest_email) if guest_email else property_email
                     email_values = {'email_to': emails,
                                     'recipient_ids': [(4, partner_id)]}
-                    template.sudo().with_context(
-                        guest_name=guest_name, arrival_hour=arrival, departure_hour=departure).send_mail(
-                            record.id, email_values=email_values, force_send=True)
+                    template.sudo().with_context(guest_name=guest_name).send_mail(
+                        record.id, email_values=email_values, force_send=True)
                 if message_post:
                     msg_body = _("A Reservation has been confirmed by a Harmony User.\n")
                     if guest_name:

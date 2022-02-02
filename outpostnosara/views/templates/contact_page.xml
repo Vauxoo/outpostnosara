@@ -2,6 +2,9 @@
 <odoo>
     <template id="contactus" inherit_id="website.contactus">
         <xpath expr="//div[@id='wrap']/div[hasclass('container')]//t[@t-call='website.company_description']" position="replace"/>
+        <xpath expr="//div[@id='wrap']/div[hasclass('oe_structure')]/section" position="attributes">
+            <attribute name="style" separator=" " add="text-transform: capitalize;"/>
+        </xpath>
     </template>
     <record id="contactus_thanks" model="ir.ui.view">
         <field name="name">Contact Thanks Inherit View</field>
