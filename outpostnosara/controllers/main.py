@@ -142,8 +142,8 @@ class WebsiteOutpost(WebsiteSale):
         lines_to_invoice = folio.sale_line_ids.filtered(lambda l: l.reservation_id.id == reservation.id)
         dict_lines = {}
         for line in lines_to_invoice:
-            line.qty_to_invoice = 0 if line.display_type else 1
-            dict_lines[line.id] = 0 if line.display_type else 1
+            line.qty_to_invoice = 0 if line.display_type else reservation.nights
+            dict_lines[line.id] = 0 if line.display_type else reservation.nights
         partner = request.env.user.partner_id
         invoice = partner.last_website_invoice_id
         if not invoice or invoice.state == 'post':
@@ -160,7 +160,7 @@ class WebsiteOutpost(WebsiteSale):
                 lambda l: l.reservation_id.id == podcast_reservation.id)
             lines = [(3, 0)]
             for line in podcast_lines:
-                line.qty_to_invoice = 0 if line.display_type else 1
+                line.qty_to_invoice = 0 if line.display_type else podcast_reservation.nights
                 invoice_line_values = line._prepare_invoice_line(qty=line.qty_to_invoice)
                 new_line = (0, False, invoice_line_values)
                 lines.append(new_line)
@@ -238,6 +238,13 @@ class OutpostNosaraController(http.Controller):
 
     @http.route('/outpost/create_harmony_reservation', type='json', methods=['POST'], auth="user", website=True)
     def create_harmony_reservation(self, **post):
+        """ This method allows the confirmation of the reservation for harmony users
+            that do not need to use a payment method for their reservations cause the
+            cost for reserving a room is 0.
+
+            We retrieve the last invoice created and we posted it once the reservation
+            is confirmed. """
+
         reservation_obj = request.env['pms.reservation'].with_company(request.website.company_id.id).sudo()
         reservation = reservation_obj.browse(request.session.get('reservation_id'))
         post['message_post'] = True
