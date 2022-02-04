@@ -41,7 +41,7 @@
                                 <div class="col-6">
                                     <div class="form-group form-field o_website_form_required mt0">
                                         <label class="" for="cvv">CVV</label>
-                                        <input name="cvv" id="cvv" type="text" class="form-control credomatic-input o_website_form_input text-center" maxlength="3" placeholder="123" data-is-required="true" data-value-type="number"/>
+                                        <input name="cvv" id="cvv" type="text" class="form-control credomatic-input o_website_form_input text-center" maxlength="4" placeholder="1234" data-is-required="true" data-value-type="number"/>
                                     </div>
                                 </div>
                             </div>
