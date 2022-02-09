@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend" inherit_id="web.assets_frontend">
+        <xpath expr="//script[last()]" position="after">
+            <script src="/payment_immediate_credit/static/src/js/payment_processing.js" type="text/javascript"/>
+        </xpath>
+    </template>
+</odoo>

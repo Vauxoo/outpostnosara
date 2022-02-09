@@ -234,7 +234,7 @@ class OutpostNosaraController(http.Controller):
         error = transaction = False
         if not reservation.preconfirm and not request.env.user.partner_id.is_harmony:
             transaction = invoice.get_portal_last_transaction()
-            if transaction.state == 'done':
+            if transaction.acquirer_id.provider == 'immediate_credit' or transaction.state == 'done':
                 self.confirm_website_reservation(reservation)
             if invoice.state == 'draft' and transaction.state == 'pending':
                 invoice.action_post()

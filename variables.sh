@@ -12,4 +12,4 @@ export COVERAGE_MIN=40
 export COVERAGE_PRECISION=2
 export OPTIONS="--load=multi_pms_properties"
 export INSTALL_OPTIONS="--load=multi_pms_properties"
-export EXCLUDE_COVERAGE="*/payment_credomatic/*,*/website_point_of_sale/*"
+export EXCLUDE_COVERAGE="*/payment_credomatic/*,*/website_point_of_sale/*,*/payment_immediate_credit/*"

@@ -253,11 +253,11 @@
                         <!-- Page Content -->
                         <div id="invoice_content" class="col-12 col-lg">
                             <div class="row mr16">
-                                <div t-if="(transaction and transaction.state == 'done') or reservation.preconfirm" class="col-lg-12 mr16 ml16 alert alert-dismissable alert-success" role="alert">
+                                <div t-if="(transaction and (transaction.state == 'done' or transaction.acquirer_id.provider == 'immediate_credit')) or reservation.preconfirm" class="col-lg-12 mr16 ml16 alert alert-dismissable alert-success" role="alert">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
-                                    <h3>Thank you for your Reservation!</h3>
+                                    <h4>Thank you for your Reservation!</h4>
                                 </div>
-                                <div t-if="(transaction and transaction.state == 'pending')" class="col-lg-12 mr16 ml16 alert alert-dismissable alert-warning" role="alert">
+                                <div t-elif="(transaction and transaction.state == 'pending')" class="col-lg-12 mr16 ml16 alert alert-dismissable alert-warning" role="alert">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
                                     <h4>Your reservation will be confirmed after your pay.</h4>
                                     <span t-if="transaction.acquirer_id.pending_msg" t-raw="transaction.acquirer_id.pending_msg"/>

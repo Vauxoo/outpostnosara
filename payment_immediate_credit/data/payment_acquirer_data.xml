@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="payment_acquirer_immediate_credit" model="payment.acquirer">
+        <field name="name">Credit Payments</field>
+        <field name="provider">immediate_credit</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="view_template_id" ref="immediate_credit_form"/>
+        <field name="state">test</field>
+        <field name="payment_flow">form</field>
+        <field name="pending_msg">
+            <![CDATA[
+            <span>Please make your payment as soon as possible</span>
+            ]]>
+        </field>
+    </record>
+</odoo>
