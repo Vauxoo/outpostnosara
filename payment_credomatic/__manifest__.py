@@ -9,7 +9,7 @@
     'website': 'http://www.vauxoo.com',
     'license': 'OPL-1',
     'category': 'Installer',
-    'version': '14.0.0.0.0',
+    'version': '14.0.0.0.1',
     'price': 570,
     'currency': 'USD',
     'depends': [

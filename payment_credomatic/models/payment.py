@@ -67,6 +67,7 @@ class PaymentAcquirerCredomatic(models.Model):
     credomatic_public_id = fields.Char(
         string='Merchant key public id',
         groups='base.group_user')
+    error_ref = fields.Char(default="REFID")
 
     def toggle_environment_value(self):
         self.ensure_one()

@@ -123,8 +123,8 @@
                             <t t-set="icon_class" t-value="'fa-chevron-right'"/>
                             <t t-set="submit_class" t-value="'btn btn-primary'"/>
                             <t t-set="pms" t-value="pms"/>
-                            <t t-set="form_action" t-value="'/outpost/pay/invoice'"/>
-                            <t t-set="prepare_tx_url" t-value="'/outpost/pay/invoice'"/>
+                            <t t-set="form_action" t-value="'/outpost/pay/invoice/token'"/>
+                            <t t-set="prepare_tx_url" t-value="'/outpost/pay/invoice/form_tx'"/>
                             <t t-set="partner_id" t-value="partner"/>
                             <t t-set="success_url" t-value="'/outpost/reservation/confirmation'"/>
                             <t t-set="error_url" t-value="'/outpost/reservation/confirmation'"/>

@@ -191,17 +191,30 @@ class OutpostNosaraController(http.Controller):
         }
         return request.render("outpostnosara.membership_contact", values)
 
-    @http.route('/outpost/pay/invoice', type='http', auth="user", website=True)
-    def redirect_pay_invoice(self, **post):
+    @http.route('/outpost/pay/invoice/token', type='http', auth="user", website=True)
+    def redirect_pay_invoice_token(self, **post):
+        """
+            This method is used to process the payments with payment_flow of s2s or tokens.
+            The invoice_id value is a parameter of the method because in the case of reservations
+            the invoice_id of the actual session is not in the form.
+        """
         if request.session.get('last_invoice_id'):
             invoice_id = request.session.get('last_invoice_id')
-            portal_payment = PaymentPortal()
-            acquirer_id = post.get('acquirer_id')
-            acquirer = request.env['payment.acquirer'].browse(int(acquirer_id))
-            if acquirer.payment_flow == 's2s':
-                return portal_payment.invoice_pay_token(invoice_id, **post)
-            return portal_payment.invoice_pay_form(acquirer_id, invoice_id, **post)
+            return PaymentPortal().invoice_pay_token(invoice_id, **post)
         return request.redirect('/outpost/reservation')
+
+    @http.route('/outpost/pay/invoice/form_tx', type='json', auth="public", website=True)
+    def redirect_pay_invoice_form_tx(self, **post):
+        """
+            This method is used to process the payments with payment_flow of form.
+            The invoice_id value is replaced because in the case of reservations the invoice_id
+            of the actual session is not in the form.
+        """
+        if request.session.get('last_invoice_id'):
+            post['invoice_id'] = request.session.get('last_invoice_id')
+            return PaymentPortal().invoice_pay_form(**post)
+        return request.redirect('/outpost/reservation')
+
 
     def confirm_website_reservation(self, reservation, values=None):
         reservation_values = {'preconfirm': True, 'overbooking': False}
