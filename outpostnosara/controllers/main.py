@@ -193,8 +193,7 @@ class OutpostNosaraController(http.Controller):
 
     @http.route('/outpost/pay/invoice/token', type='http', auth="user", website=True)
     def redirect_pay_invoice_token(self, **post):
-        """
-            This method is used to process the payments with payment_flow of s2s or tokens.
+        """ This method is used to process the payments with payment_flow of s2s or tokens.
             The invoice_id value is a parameter of the method because in the case of reservations
             the invoice_id of the actual session is not in the form.
         """
@@ -205,8 +204,7 @@ class OutpostNosaraController(http.Controller):
 
     @http.route('/outpost/pay/invoice/form_tx', type='json', auth="public", website=True)
     def redirect_pay_invoice_form_tx(self, **post):
-        """
-            This method is used to process the payments with payment_flow of form.
+        """ This method is used to process the payments with payment_flow of form.
             The invoice_id value is replaced because in the case of reservations the invoice_id
             of the actual session is not in the form.
         """
@@ -214,7 +212,6 @@ class OutpostNosaraController(http.Controller):
             post['invoice_id'] = request.session.get('last_invoice_id')
             return PaymentPortal().invoice_pay_form(**post)
         return request.redirect('/outpost/reservation')
-
 
     def confirm_website_reservation(self, reservation, values=None):
         reservation_values = {'preconfirm': True, 'overbooking': False}
@@ -239,6 +236,10 @@ class OutpostNosaraController(http.Controller):
             transaction = invoice.get_portal_last_transaction()
             if transaction.state == 'done':
                 self.confirm_website_reservation(reservation)
+            if invoice.state == 'draft' and transaction.state == 'pending':
+                invoice.action_post()
+                if not reservation.state == 'confirm':
+                    reservation.write({'state': 'in_payment'})
             if transaction.state == 'error':
                 error = transaction.state_message
         values.update({

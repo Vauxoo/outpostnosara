@@ -257,6 +257,11 @@
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
                                     <h3>Thank you for your Reservation!</h3>
                                 </div>
+                                <div t-if="(transaction and transaction.state == 'pending')" class="col-lg-12 mr16 ml16 alert alert-dismissable alert-warning" role="alert">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                                    <h4>Your reservation will be confirmed after your pay.</h4>
+                                    <span t-if="transaction.acquirer_id.pending_msg" t-raw="transaction.acquirer_id.pending_msg"/>
+                                </div>
                                 <div t-if="error" t-attf-class="'col-lg-12 mr16 ml16 alert alert-dismissable' #{'alert-danger' if error else 'alert-warning'}" role="alert">
                                     <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
                                     <h3>Error: <t t-esc="error"/></h3>

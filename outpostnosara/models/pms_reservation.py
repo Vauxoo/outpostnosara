@@ -25,6 +25,7 @@ class PmsReservation(models.Model):
         ],
         string='PIN State', default='inactive',
         help="Indicates if the PIN code is active in the door locks for this reservation.")
+    state = fields.Selection(selection_add=[('in_payment', 'Waiting for payment')])
 
     def confirm(self):
         response = super().confirm()
