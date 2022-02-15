@@ -6,6 +6,7 @@ from odoo.tools.safe_eval import const_eval
 
 ARRIVAL_FORMAT = "%I:%M %p"
 
+
 class PmsReservation(models.Model):
     _inherit = 'pms.reservation'
 
