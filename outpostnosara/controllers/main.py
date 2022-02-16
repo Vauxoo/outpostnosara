@@ -143,7 +143,8 @@ class WebsiteOutpost(WebsiteSale):
         dict_lines = {}
         for line in lines_to_invoice:
             line.qty_to_invoice = 0 if line.display_type else reservation.nights
-            dict_lines[line.id] = 0 if line.display_type else reservation.nights
+            if not line.display_type:
+                dict_lines[line.id] = reservation.nights
         partner = request.env.user.partner_id
         invoice = partner.last_website_invoice_id
         if not invoice or invoice.state == 'post':
