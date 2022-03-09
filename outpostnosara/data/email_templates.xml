@@ -98,7 +98,7 @@
                                                             % endif
                                                         % endif
                                                     % endif
-                                                    <span style="margin-left: -3px;">,</span>
+                                                    <span style="margin-left: -5px;">,</span>
                                                 </p>
                                                 <p>
                                                     Your reservation has been confirmed. Please see the details below.
@@ -108,8 +108,10 @@
                                                     at <a href="mailto:reservations@outpostnosara.com">reservations@outpostnosara.com</a>.
                                                 </p>
                                                 <br/>
-                                                <p style="margin-bottom: 8px">Thank you,</p>
-                                                <p>Outpost Management</p>
+                                                <p>
+                                                    Thank you, <br/>
+                                                    Outpost Management
+                                                </p>
                                             </div>
                                         </td>
                                     </tr>
@@ -139,7 +141,7 @@
                                                     <td style="margin: 16px 0px 16px 0px; font-size: 14px;">
                                                         <div>
                                                             <strong>From:</strong> ${format_date(object.checkin, 'EEEE, MMMM d, Y')}
-                                                            <strong> At</strong>
+                                                            <strong> at</strong>
                                                             % if object.arrival_hour_formatted:
                                                                 ${object.arrival_hour_formatted}
                                                             % else:
@@ -148,7 +150,7 @@
                                                         </div>
                                                         <div>
                                                             <strong>To:</strong> ${format_date(object.checkout, 'EEEE, MMMM d, Y')}
-                                                            <strong> At</strong>
+                                                            <strong> at</strong>
                                                             % if object.departure_hour_formatted:
                                                                 ${object.departure_hour_formatted}
                                                             % else:
@@ -165,7 +167,7 @@
                                                         % if object.preferred_room_id:
                                                         <div style="margin-top: 16px;">
                                                             <strong>Office:</strong>
-                                                            ${object.preferred_room_id.name}
+                                                            ${ (object.preferred_room_id.name or '').replace('Office', '') }
                                                         </div>
                                                         % endif
                                                     </td>
@@ -196,11 +198,13 @@
                                                     </td>
                                                 </tr>
                                                 % endif
+                                                % if object.price_room_services_set:
                                                 <tr>
                                                     <td style="margin: 16px 0px 16px 0px; font-size: 14px;">
                                                         <div style="margin-top: 16px;"><strong>Price: </strong> ${object.currency_id.symbol} ${object.price_room_services_set}</div>
                                                     </td>
                                                 </tr>
+                                                % endif
                                             </table>
                                         </td>
                                     </tr>
