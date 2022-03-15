@@ -61,9 +61,10 @@ class PmsReservation(models.Model):
                 if template:
                     partner_id = record.partner_id.id
                     property_email = self.pms_property_id.partner_id.email
-                    emails = "%s,%s" % (property_email, guest_email) if guest_email else property_email
-                    email_values = {'email_to': emails,
-                                    'recipient_ids': [(4, partner_id)]}
+                    emails = ','.join(email for email in [property_email, record.email, guest_email] if email)
+                    email_values = {'email_to': emails}
+                    if partner_id:
+                        email_values.update({'recipient_ids': [(4, partner_id)]})
                     template.sudo().with_context(guest_name=guest_name).send_mail(
                         record.id, email_values=email_values, force_send=True)
                 if message_post:
