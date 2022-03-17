@@ -77,7 +77,8 @@ class SaleSubscription(models.Model):
         duplicated = True
         while duplicated:
             pin = ''.join((random.choice(string.digits) for x in range(8)))
-            duplicated = self.search([('pin', '=', pin)], limit=1)
+            domain = [('pin', '=', pin)]
+            duplicated = self.search(domain, limit=1) or self.env['pms.reservation'].search(domain, limit=1)
         self.pin = pin
 
     def _get_default_l10n_cr_edi_economic_activity(self):

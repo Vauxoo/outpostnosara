@@ -19,6 +19,8 @@ class PmsLock(models.Model):
         help="""Identifier of the lock in Home Assistant, you can set this from the device's configuration in HA."""
     )
     slot_ids = fields.One2many('pms.lock.slot', 'lock_id', help="Memory slots where the keys are saved in the lock.")
+    max_slots = fields.Integer(default=30, help="Max number of slots that the lock can save.")
+    room_id = fields.Many2one('pms.room', help="Room on which the lock is installed on.")
 
     def action_set_user_code(self, slot_name, usercode):
         self.ensure_one()
@@ -60,6 +62,7 @@ class PmsLockSlot(models.Model):
 
     def _set_user_code(self, usercode=None):
         if os.environ.get('ODOO_STAGE', False) != 'production':
+            self.write({'usercode': usercode})
             return True
         parameters = self._get_connection_parameters()
         usercode = usercode or self.usercode
@@ -83,6 +86,7 @@ class PmsLockSlot(models.Model):
 
     def _clear_user_code(self):
         if os.environ.get('ODOO_STAGE', False) != 'production':
+            self.write({'usercode': False})
             return True
         parameters = self._get_connection_parameters()
         payload = {
@@ -101,9 +105,9 @@ class PmsLockSlot(models.Model):
         self.write({'usercode': False})
         return response
 
-    def action_set_user_code(self):
+    def action_set_user_code(self, usercode=None):
         self.ensure_one()
-        return self._set_user_code(self.usercode)
+        return self._set_user_code(usercode or self.usercode)
 
     def action_clear_user_code(self):
         self.ensure_one()

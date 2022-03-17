@@ -1,4 +1,6 @@
 import datetime
+import string
+import random
 
 from odoo import api, models, fields, _
 from odoo.exceptions import UserError
@@ -20,6 +22,7 @@ class PmsReservation(models.Model):
     checkout_datetime = fields.Datetime(
         store=True,
     )
+    pin = fields.Char(string='PIN', size=8, index=True, readonly=True, help="PIN code for the door locks.")
     pin_state = fields.Selection(
         selection=[
             ('active', "Active"),
@@ -34,6 +37,29 @@ class PmsReservation(models.Model):
     departure_hour_formatted = fields.Char(help="AM/PM format of the departure hour",
                                            store=True,
                                            compute="_compute_departure_hour_formatted")
+
+    def set_pin(self):
+        for rec in self:
+            if rec.pin:
+                continue
+            subscription = rec.folio_id.subscription_id
+            if subscription and not subscription.partner_id.is_harmony and subscription.pin:
+                rec.pin = rec.folio_id.subscription_id.pin
+                continue
+            pin = ''
+            duplicated = True
+            while duplicated:
+                pin = ''.join((random.choice(string.digits) for x in range(8)))
+                domain = [('pin', '=', pin)]
+                duplicated = rec.search(domain, limit=1) or rec.env['sale.subscription'].search(domain, limit=1)
+            rec.pin = pin
+
+    @api.model
+    def create(self, vals):
+        record = super().create(vals)
+        if not vals.get('pin'):
+            record.set_pin()
+        return record
 
     @api.depends("arrival_hour")
     def _compute_arrival_hour_formatted(self):
@@ -198,7 +224,7 @@ class PmsReservation(models.Model):
             ("pin_state", "=", "active"),
         ])
         for reservation in reservations:
-            reservation.preferred_room_id._clear_lock(reservation.folio_id.subscription_id.pin)
+            reservation.preferred_room_id._clear_lock(reservation.pin)
             reservation.pin_state = 'inactive'
         return res
 
@@ -215,7 +241,7 @@ class PmsReservation(models.Model):
             ("pin_state", "=", "inactive"),
         ])
         for reservation in reservations:
-            reservation.preferred_room_id._set_lock(reservation.folio_id.subscription_id.pin)
+            reservation.preferred_room_id._set_lock(reservation.pin)
             reservation.pin_state = 'active'
         return res
 

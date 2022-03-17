@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="pms_room_view_form" model="ir.ui.view">
+        <field name="name">pms.room_type.form</field>
+        <field name="model">pms.room.type</field>
+        <field name="inherit_id" ref="pms.pms_room_view_form" />
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Locks">
+                    <group>
+                        <field name="lock_ids" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
