@@ -3,6 +3,7 @@
 from odoo import _, fields, http
 from odoo.http import request
 from odoo.osv import expression
+from odoo.addons.website.controllers.main import Website
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 from odoo.addons.account_payment.controllers.payment import PaymentPortal
 from odoo.addons.payment_credomatic.controllers.main import safe_int, FacBacController as Credomatic
@@ -280,3 +281,11 @@ class CredomaticOutpost(Credomatic):
             invoice_id = request.session.get('last_invoice_id')
             return request.env['account.move'].browse(safe_int(invoice_id))
         return request.website.sale_get_order()
+
+
+class WebsiteNosara(Website):
+
+    @http.route(auth="user")
+    def index(self, **kw):
+        """Change index authentication method to user"""
+        return super().index(**kw)
