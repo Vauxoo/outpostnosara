@@ -186,9 +186,11 @@ class OutpostNosaraController(http.Controller):
             if tag:
                 crm_tags |= tag
         subject_name = _("Membership Application")
+        # pageName is to set a main class and be able to modify the menu only in this page
         values = {
             'membership_tags': crm_tags,
             'membership_subject': subject_name,
+            'pageName': 'ou-membership-apply',
         }
         return request.render("outpostnosara.membership_contact", values)
 

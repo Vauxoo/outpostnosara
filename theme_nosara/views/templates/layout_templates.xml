@@ -27,7 +27,7 @@
               inherit_id="website.template_header_default_oe_structure_header_default_1"
               name="Contact Us Header Button">
         <xpath expr="//div[@id='oe_structure_header_default_1']//a" position="replace">
-            <a href="/membership/apply" class="btn btn-outline-dark ml-4">Apply</a>
+            <a href="/membership/apply" class="btn btn-outline-dark btn-apply ml-4">Apply</a>
         </xpath>
         <xpath expr="//div[@id='oe_structure_header_default_1']//a" position="attributes">
             <attribute name="class" separator=" " add="d-none d-lg-block"/>
@@ -98,7 +98,7 @@
                 <div class="row">
                     <div class="col-sm text-center text-sm-left text-muted">
                         <span class="o_footer_copyright_name mr-2">
-                            &amp;copy; Copyright 2021 <br class="d-md-none"/> <span class="d-none d-md-inline">&amp;centerdot;</span> All Rights Reserved
+                            &amp;copy; Copyright 2022 <br class="d-md-none"/> <span class="d-none d-md-inline">&amp;centerdot;</span> All Rights Reserved
                             <span>Outpost Nosara.</span>
                         </span>
                     </div>

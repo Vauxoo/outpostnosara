@@ -10,7 +10,30 @@
         <field name="name">Contact Thanks Inherit View</field>
         <field name="inherit_id" search="[('website_id','=', False),('key', '=', 'website_form.contactus_thanks')]"/>
         <field name="arch" type="xml">
-            <xpath expr="//div[@id='wrap']/div[hasclass('container')]//t[@t-call='website.company_description']" position="replace"/>
+            <xpath expr="//div[@id='wrap']" position="replace">
+                <div id="wrap">
+                    <div class="oe_structure" id="oe_structure_website_form_contact_us_thanks_1"/>
+                    <div class="container mt-4">
+                        <div class="row">
+                            <div class="col-12 mr-lg-auto oe_structure">
+                                <section class="pt40 s_text_block pb40 o_colored_level o_cc o_cc1" data-snippet="s_text_block" data-name="Text">
+                                    <div class="container text-center">
+                                        <img class="img img-fluid" src="/web/image/theme_nosara.mark_logo" t-att-alt="res_company.name"/>
+                                        <h1 class="text-center mt-4">Thank you for your interest in an Outpost membership.</h1>
+                                        <div class="pb16 pt16 s_hr" data-snippet="s_hr" data-name="Separator">
+                                            <hr class="mx-auto border-top w-50 border-dark text-center"/>
+                                        </div>
+                                        <h5 class="text-center">
+                                            <span>Please allow our management team 24 hours to contact you. <br/>Thank you.</span>
+                                        </h5>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="oe_structure" id="oe_structure_website_form_contact_us_thanks_2"/>
+                </div>
+            </xpath>
         </field>
     </record>
 </odoo>

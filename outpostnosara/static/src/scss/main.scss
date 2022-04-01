@@ -1,13 +1,13 @@
-// =============================================
-// =========== DEFINE MAIN VARIABLES ===========
-// =============================================
+//----------------------------------------------------
+// VARIABLES
+//----------------------------------------------------
 $max-width-form: 640px;
+$normal-weight: 300;
+$reservation-font: 18px;
 
-
-// =============================================
-// ============ DEFINE MAIN STYLES =============
-// =============================================
-
+//----------------------------------------------------
+//  DEFINE MAIN STYLES 
+//----------------------------------------------------
 .ou {
     max-width: $max-width-form;
     margin-inline: auto;
@@ -18,9 +18,9 @@ $max-width-form: 640px;
     }
 }
 
-// =============================================
-// === DEFINE MEMBERSHIP APPLICATION STYLES ====
-// =============================================
+//----------------------------------------------------
+//  DEFINE MEMBERSHIP APPLICATION STYLES 
+//----------------------------------------------------
 
 .ou-membership {
     .js_membership_type {
@@ -36,6 +36,60 @@ $max-width-form: 640px;
     }
 }
 
-// =============================================
-// === DEFINE RESERVATION APPLICATION STYLES ====
-// =============================================
+//----------------------------------------------------
+//  DEFINE MEMBERSHIP APPLICATION CONTACT STYLES 
+//----------------------------------------------------
+#membership-description {
+    font-size: $reservation-font;
+    font-weight: $normal-weight;
+}
+
+.ou {
+    &-membership-apply {
+        header nav.navbar {
+            &.navbar.navbar-light {
+                // The original has !importanto too
+                box-shadow: none !important;
+            }
+        }
+    }
+    &-membership-form {
+        font-size: $reservation-font;
+        form label, h4 {
+            font-weight: $normal-weight;
+        }
+    }
+}
+
+//----------------------------------------------------
+//  DEFINE RESERVATION FORM STYLES 
+//----------------------------------------------------
+.ou-reservation {
+    &, & input, & select, .o_payment_form .payment_option_name {
+        font-size: $reservation-font + 2;
+        font-weight: bold;
+    }
+
+    h4, h5 {
+        font-family: "Antonio";
+        font-size: $reservation-font + 6;
+        text-transform: uppercase;
+    }
+
+    .js_reservation_payment {
+        // Fix input#year
+        .credomatic-card-form .labeled-div {
+            height: auto;
+        }
+        .o_payment_acquirer_select {
+            p {
+                font-weight: normal;
+                font-size: $reservation-font;
+            }
+            // Center the radio and the text
+            input[type='radio'] {
+                vertical-align: baseline;
+            }
+        }       
+    }
+}

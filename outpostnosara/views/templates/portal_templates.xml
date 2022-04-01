@@ -121,7 +121,7 @@
                             <t t-set="submit_txt">Pay Now</t>
                             <t t-set="icon_right" t-value="1"/>
                             <t t-set="icon_class" t-value="'fa-chevron-right'"/>
-                            <t t-set="submit_class" t-value="'btn btn-primary'"/>
+                            <t t-set="submit_class" t-value="'btn btn-primary text-uppercase'"/>
                             <t t-set="pms" t-value="pms"/>
                             <t t-set="form_action" t-value="'/outpost/pay/invoice/token'"/>
                             <t t-set="prepare_tx_url" t-value="'/outpost/pay/invoice/form_tx'"/>
@@ -199,7 +199,7 @@
     </template>
     <template id="reservation_validator_button" name="Reservation validator button">
         <div class="text-right mt-3">
-            <button id='validate_reservation' type='button' class="btn btn-primary">
+            <button id='validate_reservation' type='button' class="btn btn-primary text-uppercase">
                 Validate Reservation
                 <i class="fa fa-chevron-right"></i>
             </button>

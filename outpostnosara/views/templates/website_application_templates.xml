@@ -60,7 +60,7 @@
                         </div>
                     </section>
                     <!--  form  -->
-                    <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                    <section class="s_website_form ou-membership-form" data-vcss="001" data-snippet="s_website_form">
                         <div class="row mt-5">
                             <div class="col-12 offset-0 col-md-8 offset-md-2">
                                 <div class="text-center border-top">
@@ -70,7 +70,6 @@
                         </div>
                         <div class="row mt-3 mb-5">
                             <div class="col-12 offset-0 col-md-8 offset-md-2">
-                                <h4 class="my-3" >Personal Info</h4>
                                 <form id="mermership_contact_form" action="/website_form/" method="post"
                                     enctype="multipart/form-data" data-model_name="crm.lead" data-success-mode="redirect"
                                     data-success-page="/application-thank-you" class="o_mark_required" data-mark="*"

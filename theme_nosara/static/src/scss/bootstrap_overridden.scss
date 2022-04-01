@@ -10,6 +10,9 @@ $btn-font-weight:             bold;
 $btn-active-box-shadow:       none;
 $btn-focus-width:             0px;
 $btn-border-radius:           24px;
+$btn-border-radius-lg:        $btn-border-radius;
+$btn-font-size:               14px;
+$btn-font-size-lg:            $btn-font-size;
 
 // Inputs
 $input-bg: rgba(0, 0, 0, 0.09);
@@ -17,5 +20,27 @@ $input-bg: rgba(0, 0, 0, 0.09);
 //------------------------------------------------------------------------------
 // Mixins
 //------------------------------------------------------------------------------
-// Change the btn-outline to fit the layout design
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius) {
+    // we will only modify the .btn class ( not btn-large, btn-sm)
+    $padding-bottom: $padding-y;
+    @if $font-size == $btn-font-size {
+        // this change is to center the font because SENLOT is aligned upwards
+        $padding-bottom: $padding-y - ($padding-y / 3);
+    }
 
+    padding: $padding-y $padding-x $padding-bottom;
+    @include font-size($font-size);
+    line-height: $line-height;
+    // Manually declare to provide an override to the browser default
+    @include border-radius($border-radius, 0);
+}
+
+@mixin antonio($letter-spacing, $font-size: false) {
+    font-family: "Antonio";
+    letter-spacing: $letter-spacing;
+    text-transform: uppercase;
+    @if $font-size {
+        font-size: $font-size;
+    }
+}

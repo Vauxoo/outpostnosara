@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="team" inherit_id='website_helpdesk.team' name="Helpdesk Team">
+        <!-- Add main class -->
+        <xpath expr='//t[@t-call="website.layout"]' position="inside">
+            <t t-set="pageName">oe-helpdesk-form</t>
+        </xpath>
+    </template>
+</odoo>

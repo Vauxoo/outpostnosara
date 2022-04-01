@@ -2,17 +2,22 @@
 // VARIABLES
 //------------------------------------------------------------------------------
 $default-gray: #B6BDB6;
+$normal-weight: 400;
+$light-weight:  300;
+$letter-spacing: 0.06em;
+$font-size: 18px;
+$h1-font-size: 32px;
 
+$footer-logo-height: 2rem;
 //------------------------------------------------------------------------------
 // NAVBAR
 //------------------------------------------------------------------------------
 header {
     .navbar-light {
         background-color: $secondary;
-        .nav-link {
-            font-weight: bold;
+        .btn-apply {
+            border-width: 1px;
         }
-
     }
 }
 
@@ -28,12 +33,6 @@ header {
 
 
 //------------------------------------------------------------------------------
-// HOMEPAGE
-//------------------------------------------------------------------------------
-
-
-
-//------------------------------------------------------------------------------
 // FOOTER
 //------------------------------------------------------------------------------
 #footer{
@@ -43,9 +42,9 @@ header {
     .fa.rounded-circle{
         background-color: $secondary;
         color: $black;
-        width: 2rem;
-        height: 2rem;
-        line-height: 2rem;
+        width: $footer-logo-height;
+        height: $footer-logo-height;
+        line-height: $footer-logo-height;
     }
     ul > li{
         font-size: $h5-font-size;
@@ -65,11 +64,71 @@ header {
 }
 
 //------------------------------------------------------------------------------
+// HOMEPAGE
+//------------------------------------------------------------------------------
+.homepage {
+    font-size: $font-size;
+    h2 { @include antonio($letter-spacing, $h1-font-size); }
+    p {
+        font-weight: $light-weight;
+    }
+}
+
+//------------------------------------------------------------------------------
+// CONTACT PAGE
+//------------------------------------------------------------------------------
+#contactus_section {
+    @extend %btn-uppercase;
+}
+
+//------------------------------------------------------------------------------
+// LOGIN
+//------------------------------------------------------------------------------
+.oe_website_login_container {
+    // Should all be capitals
+    .form-group, .btn {
+        text-transform: uppercase;
+    }
+}
+
+//----------------------------------------------------
+//  TICKET SUBMIT FORM - /helpdesk
+//----------------------------------------------------
+// we cant inherit website_helpdesk_form.ticket_submit_for because each team has a dynamic template
+.oe-helpdesk-form {
+    display: none;
+    h2 { 
+        @include antonio($letter-spacing);
+    }
+    // Make all button to the same color - https://prnt.sc/C_uq7equDfhd
+    .js_publish_management {
+        // btn-success is the second button its left side has no radio
+        .btn-success.js_publish_btn {
+            border-top-left-radius: $btn-border-radius;;
+            border-bottom-left-radius: $btn-border-radius;;
+        }
+        &.css_published {
+            .btn-default {
+                @extend .btn-success;
+            }
+        }
+        &.css_unpublished {
+            .btn-default {
+                @extend .btn-danger;
+            }
+        }
+    }
+    // Make all buttons Capital
+    @extend %btn-uppercase;
+}
+
+
+//------------------------------------------------------------------------------
 // TOOLS
 //------------------------------------------------------------------------------
 .antonio {
     &, & * {
-        font-family: "Antonio";
+        @include antonio($letter-spacing);
     }
 }
 
@@ -79,10 +138,21 @@ header {
 }
 
 //------------------------------------------------------------------------------
-// MAIN
+// GLOBAL STYLES
 //------------------------------------------------------------------------------
-.icon-square{
+.icon-square {
     @extend .p-3;
     border-radius: $input-border-radius;
     background-color: $default-gray;
+}
+
+// Center the input - https://prnt.sc/xE3Pgxow_T8M
+.form-control[type='file'] {
+    height: auto;
+}
+
+%btn-uppercase {
+    .btn {
+        text-transform: uppercase;
+    }
 }

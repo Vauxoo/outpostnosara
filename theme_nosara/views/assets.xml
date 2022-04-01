@@ -27,4 +27,30 @@
         </xpath>
     </template>
 
+    <!-- Preload Fonts -->
+    <template id="frontend_layout" inherit_id="web.frontend_layout" name="Preload Fonts">
+        <xpath expr="//link[@rel='preload' and contains(@href, 'fontawesome')]" position="after">
+            <link
+                rel="preload"
+                href="/theme_nosara/static/src/fonts/Antonio.woff2"
+                as="font"
+                crossorigin="" />
+            <link
+                rel="preload"
+                href="/theme_nosara/static/src/fonts/Senlot-Sans-Norm-Bold.otf"
+                as="font"
+                crossorigin="" />
+            <link
+                rel="preload"
+                href="/theme_nosara/static/src/fonts/Senlot-Sans-Norm-Light.woff2"
+                as="font"
+                crossorigin="" />
+            <link
+                rel="preload"
+                href="/theme_nosara/static/src/fonts/Senlot-Sans-Norm-Regular.woff2"
+                as="font"
+                crossorigin="" />
+        </xpath>
+    </template>
+
 </odoo>

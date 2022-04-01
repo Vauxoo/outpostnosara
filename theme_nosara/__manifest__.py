@@ -3,7 +3,7 @@
 {
     'name': 'Theme Nosara',
     'summary': 'Nosara Official Theme',
-    'version': '14.0.1.0.5',
+    'version': '14.0.1.0.6',
     'author': 'Vauxoo',
     'website': 'https://www.vauxoo.com',
     'license': 'LGPL-3',
@@ -12,6 +12,7 @@
         'views/assets.xml',
         'views/images_library.xml',
         # Templates
+        'views/templates/helpdesk_templates.xml',
         'views/templates/layout_templates.xml',
         'views/templates/snippets.xml',
     ],
@@ -20,7 +21,7 @@
     ],
     'category': 'Theme/Creative',
     'depends': [
-        'website',
+        'website_helpdesk_form',
     ],
     'images': [
         'static/description/theme_nosara_screenshot.jpg',
