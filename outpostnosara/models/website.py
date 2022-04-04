@@ -1,10 +1,14 @@
-from odoo import _, models
+from odoo import _, fields, models
 from odoo.http import request
 from odoo.exceptions import ValidationError
 
 
 class Website(models.Model):
     _inherit = 'website'
+
+    logo_url = fields.Char(
+        'Logo url', help="""When someone clicks on their logo, instead of directing them to their Odoo's website.
+        it directs them to their own site: www.outpostnosara.com where there's more information about nosara""")
 
     def get_reservation(self, reservation_key, invoice_create=None):
         """ Return the last pre-reservation of the partner by:

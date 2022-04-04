@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- website.option_header_brand_logo is optional view -->
+    <template id="option_header_brand_logo" inherit_id="website.option_header_brand_logo" name="Header Brand Nosara Logo">
+        <!-- logo_url is no set, the template will use the original value / -->
+        <xpath expr="//a" position="attributes">
+            <attribute name='t-att-href'>website.logo_url or '/'</attribute>
+        </xpath>
+    </template>
+
+</odoo>
