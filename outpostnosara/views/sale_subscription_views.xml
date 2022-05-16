@@ -11,6 +11,14 @@
                 <field name="folio_ids"/>
                 <field name="pin"/>
             </xpath>
+            <!-- Show taxes -->
+            <xpath expr="//field[@name='recurring_total']" position="after">
+                <field name="recurring_tax" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                    <label for="recurring_total_incl"/>
+                </div>
+                <field name="recurring_total_incl" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            </xpath>
         </field>
     </record>
 
