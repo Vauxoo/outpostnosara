@@ -176,12 +176,22 @@
                                                 <tr>
                                                     <td style="vertical-align:top;">
                                                         <div style="margin-top: 16px;">
-                                                            <strong>Access Code for the Locks:  </strong>
+                                                            <strong>Subscription Access Code for the Locks:  </strong>
                                                             % if object.partner_id.is_harmony:
                                                                 ${object.partner_id.pin}
                                                             % else:
                                                                 ${object.folio_id.subscription_id.pin}
                                                             % endif
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                % endif
+                                                % if object.pin
+                                                <tr>
+                                                    <td style="vertical-align:top;">
+                                                        <div style="margin-top: 16px;">
+                                                            <strong>Reservation Access Code for the Locks:  </strong>
+                                                                ${object.pin}
                                                         </div>
                                                     </td>
                                                 </tr>
