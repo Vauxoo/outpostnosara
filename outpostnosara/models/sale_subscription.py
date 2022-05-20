@@ -1,7 +1,6 @@
 import string
 import random
 
-
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tests.common import Form
@@ -80,3 +79,23 @@ class SaleSubscription(models.Model):
             pin = ''.join((random.choice(string.digits) for x in range(8)))
             duplicated = self.search([('pin', '=', pin)], limit=1)
         self.pin = pin
+
+    def _get_default_l10n_cr_edi_economic_activity(self):
+        company = self.company_id or self.env.company
+        return company._get_default_l10n_cr_edi_economic_activity()
+
+    def domain_economic_activity(self):
+        return [('id', 'in', self.env.company.l10n_cr_edi_economic_activity_ids.ids)]
+
+    l10n_cr_edi_economic_activity_id = fields.Many2one(
+        'l10n.cr.account.invoice.economic.activity',
+        help='Economic activity whicih corresponds to electronic document. Required', string='Economic Activity',
+        default=_get_default_l10n_cr_edi_economic_activity, domain=lambda self: self.domain_economic_activity())
+
+    def _prepare_invoice_data(self):
+        vals = super()._prepare_invoice_data()
+        if 'l10n_cr_edi_economic_activity_id' not in vals:
+            vals.update({
+                'l10n_cr_edi_economic_activity_id': self.l10n_cr_edi_economic_activity_id.id
+            })
+        return vals

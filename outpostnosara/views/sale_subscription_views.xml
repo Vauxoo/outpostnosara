@@ -19,6 +19,10 @@
                 </div>
                 <field name="recurring_total_incl" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
             </xpath>
+
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="l10n_cr_edi_economic_activity_id" options='{"no_open": True, "no_create": True}' required="True"/>
+            </xpath>
         </field>
     </record>
 

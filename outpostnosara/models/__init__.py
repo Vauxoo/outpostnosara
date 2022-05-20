@@ -11,6 +11,7 @@ from . import pms_reservation
 from . import res_users
 from . import website
 from . import res_partner
+from . import res_company
 from . import pms_lock
 from . import pms_room
 from . import pms_folio
