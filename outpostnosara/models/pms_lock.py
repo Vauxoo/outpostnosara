@@ -77,7 +77,7 @@ class PmsLockSlot(models.Model):
             "content-type": "application/json"
         }
         try:
-            response = post(url, headers=headers, data=json.dumps(payload))
+            response = post(url, headers=headers, data=json.dumps(payload), timeout=10)
         except BaseException as error:
             raise UserError(_('Error setting code %s in slot: %s from lock: %s\n\n%s') % (
                 usercode, self.name, self.lock_id.name, error))
@@ -99,7 +99,7 @@ class PmsLockSlot(models.Model):
             "content-type": "application/json"
         }
         try:
-            response = post(url, headers=headers, data=json.dumps(payload))
+            response = post(url, headers=headers, data=json.dumps(payload), timeout=10)
         except BaseException as error:
             raise UserError(_('Error clearing slot: %s from lock: %s\n\n%s') % (self.name, self.lock_id.name, error))
         self.write({'usercode': False})

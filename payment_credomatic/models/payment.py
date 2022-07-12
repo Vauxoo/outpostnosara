@@ -90,7 +90,7 @@ class PaymentAcquirerCredomatic(models.Model):
         self.ensure_one()
         assert self.provider == 'credomatic'
         _logger.warning('CREDOMATIC API CALL: %s', params)
-        response = requests.get(self.get_form_action_url(), params=params)
+        response = requests.get(self.get_form_action_url(), params=params, timeout=10)
         response.raise_for_status()
         return parse_qs(response.text)
 

@@ -193,11 +193,6 @@ msgid "Home address"
 msgstr ""
 
 #. module: outpostnosara
-#: model:ir.model.fields.selection,name:outpostnosara.selection__pms_reservation_type__time_type__hourly
-msgid "Hourly"
-msgstr "Horario"
-
-#. module: outpostnosara
 #: model:ir.model.fields,field_description:outpostnosara.field_hr_employee__housekeeping_task
 msgid "Housekeeping Tasks"
 msgstr ""

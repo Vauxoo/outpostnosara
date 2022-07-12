@@ -32,7 +32,7 @@
         <xpath expr="//link[@rel='preload' and contains(@href, 'fontawesome')]" position="after">
             <link
                 rel="preload"
-                href="/theme_nosara/static/src/fonts/Antonio.woff2"
+                href="/theme_nosara/static/src/fonts/Antonio.otf"
                 as="font"
                 crossorigin="" />
             <link
@@ -42,12 +42,12 @@
                 crossorigin="" />
             <link
                 rel="preload"
-                href="/theme_nosara/static/src/fonts/Senlot-Sans-Norm-Light.woff2"
+                href="/theme_nosara/static/src/fonts/Senlot-Sans-Norm-Light.otf"
                 as="font"
                 crossorigin="" />
             <link
                 rel="preload"
-                href="/theme_nosara/static/src/fonts/Senlot-Sans-Norm-Regular.woff2"
+                href="/theme_nosara/static/src/fonts/Senlot-Sans-Norm-Regular.otf"
                 as="font"
                 crossorigin="" />
         </xpath>
