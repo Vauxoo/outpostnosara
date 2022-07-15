@@ -7,7 +7,7 @@
 	branch = 14.0
 [submodule "costarica"]
 	path = costarica
-	url = git@git.vauxoo.com:vauxoo/costarica.git
+	url = git@git.vauxoo.com:vauxoo-dev/costarica.git
 	branch = 14.0
 [submodule "pms"]
 	path = pms
