@@ -163,6 +163,8 @@ class WebsiteOutpost(WebsiteSale):
             reservation.preferred_room_id.id, start_date=start_date, end_date=end_date
         ):
             raise ValidationError(_("%s Occupied") % room_name)
+        if not reservation.preferred_room_id:
+            raise ValidationError(_("All Rooms of this type are occupied"))
         if request.env.user.partner_id.is_harmony:
             reservation.reservation_line_ids.write({'price': 0})
         return reservation

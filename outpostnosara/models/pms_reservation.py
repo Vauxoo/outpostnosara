@@ -3,7 +3,7 @@ import string
 import random
 
 from odoo import api, models, fields, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools.safe_eval import const_eval
 
 ARRIVAL_FORMAT = "%I:%M %p"
@@ -269,6 +269,12 @@ class PmsReservation(models.Model):
                 pricelist_id=reservation.pricelist_id.id,
             )
             reservation.allowed_room_ids = pms_property.free_room_ids
+
+    @api.onchange('room_type_id')
+    def _onchange_room_type_id(self):
+        for reservation in self.filtered('room_type_id'):
+            if not reservation.allowed_room_ids:
+                raise ValidationError(_("All Rooms of this type are occupied"))
 
     def open_reservation_wizard(self):
         """OVERWRITTEN"""

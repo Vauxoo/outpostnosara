@@ -51,6 +51,13 @@ msgid "Afternoon"
 msgstr ""
 
 #. module: outpostnosara
+#: code:addons/outpostnosara/controllers/main.py:0
+#: code:addons/outpostnosara/models/pms_reservation.py:0
+#, python-format
+msgid "All Rooms of this type are occupied"
+msgstr "Todas las habitaciones de este tipo están ocupadas"
+
+#. module: outpostnosara
 #: model_terms:ir.ui.view,arch_db:outpostnosara.membership
 msgid ""
 "All memberships provide access to all communal work and social spaces, "
