@@ -31,6 +31,8 @@ class PmsProperty(models.Model):
     @api.depends_context(
         "checkin",
         "checkout",
+        "arrival_hour",
+        "departure_hour",
         "room_type_id",
         "ubication_id",
         "capacity",

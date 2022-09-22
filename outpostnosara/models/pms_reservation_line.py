@@ -151,6 +151,9 @@ class PmsReservationLine(models.Model):
                 checkin=reservation.checkin_datetime,
                 checkout=reservation.checkout_datetime,
                 room_type_id=reservation.room_type_id.id if not free_room_select else False,
+                arrival_hour=reservation.arrival_hour,
+                departure_hour=reservation.departure_hour,
+                annual_reservation=reservation.annual_reservation,
                 current_lines=reservation.reservation_line_ids.ids,
                 pricelist_id=reservation.pricelist_id.id,
             )
@@ -190,9 +193,10 @@ class PmsReservationLine(models.Model):
                 # otherwise we assign the first of those
                 # available for the entire stay
                 line.room_id = rooms_available[0]
+                continue
             # check that the reservation cannot be allocated even by dividing it
             # Here is the change, propagate reservation checkin and checkout with datetimes
-            elif not self.env["pms.property"].splitted_availability(
+            if not self.env["pms.property"].splitted_availability(
                 checkin=reservation.checkin_datetime,
                 checkout=reservation.checkout_datetime,
                 room_type_id=reservation.room_type_id.id,

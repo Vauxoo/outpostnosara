@@ -1,6 +1,7 @@
 import datetime
 
 from odoo import api, models
+from odoo.osv import expression
 
 
 class PmsAvailability(models.Model):
@@ -28,12 +29,32 @@ class PmsAvailability(models.Model):
             occupied_room_ids.extend(room_lines.search(date_domain).mapped("room_id.id"))
             return occupied_room_ids
 
-        # Search by datetime
-        diff_days = (checkout - checkin).days + 1
-        # TODO: Check if it is possible to search in just one search, all in just one domain
-        for day in range(0, diff_days):
-            day_checkin = checkin + datetime.timedelta(days=day)
-            day_checkout = checkout - datetime.timedelta(days=diff_days - 1) + datetime.timedelta(days=day)
-            date_time_domain = room_lines.get_datetime_domain(day_checkin, day_checkout, domain, occupied_room_ids)
-            occupied_room_ids.extend(room_lines.search(date_time_domain).mapped("room_id.id"))
+        arrival_hour = self._context.get("arrival_hour", False)
+        departure_hour = self._context.get("departure_hour", False)
+        room_type_id = self._context.get("room_type_id", False)
+        annual_reservation = self._context.get("annual_reservation", False)
+
+        reserved_domain = [
+            ("pms_property_id", "=", pms_property_id),
+            ("room_type_id", "=", room_type_id),
+            ("state", "!=", "cancel"),
+        ]
+        if isinstance(checkin, datetime.datetime):
+            checkin = checkin.date()
+            checkout = checkout.date()
+        dates_part = expression.OR([
+            [("checkin", "<=", checkin), ("checkout", ">=", checkin)],
+            [("checkin", "<=", checkout), ("checkout", ">=", checkout)],
+        ])
+        times_part = []
+        if not annual_reservation:
+            times_part = expression.OR([
+                [("annual_reservation", "=", True)],
+                [("arrival_hour", "<=", departure_hour), ("departure_hour", ">=", departure_hour)],
+                [("arrival_hour", "<=", arrival_hour), ("departure_hour", ">=", arrival_hour)],
+            ])
+        reserved_domain = expression.AND([reserved_domain, dates_part, times_part])
+
+        occupied_room_ids.extend(self.env['pms.reservation'].search(reserved_domain).mapped('preferred_room_id.id'))
+
         return occupied_room_ids

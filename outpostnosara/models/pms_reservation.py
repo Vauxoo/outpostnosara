@@ -37,6 +37,7 @@ class PmsReservation(models.Model):
     departure_hour_formatted = fields.Char(help="AM/PM format of the departure hour",
                                            store=True,
                                            compute="_compute_departure_hour_formatted")
+    annual_reservation = fields.Boolean(default=False)
 
     def set_pin(self):
         for rec in self:
@@ -267,6 +268,9 @@ class PmsReservation(models.Model):
                 room_type_id=reservation.room_type_id.id or False,  # Force to uses always a room type. # noqa
                 current_lines=reservation.reservation_line_ids.ids,
                 pricelist_id=reservation.pricelist_id.id,
+                arrival_hour=reservation.arrival_hour,
+                departure_hour=reservation.departure_hour,
+                annual_reservation=reservation.annual_reservation,
             )
             reservation.allowed_room_ids = pms_property.free_room_ids
 

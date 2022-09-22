@@ -11,6 +11,7 @@
                 <field name="type_id"/>
             </xpath>
             <xpath expr="//field[@name='arrival_hour']" position="before">
+                <field name="annual_reservation" invisible="1"/>
                 <field name="checkin_datetime"/>
                 <field name="checkout_datetime"/>
             </xpath>

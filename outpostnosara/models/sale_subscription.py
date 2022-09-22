@@ -53,6 +53,7 @@ class SaleSubscription(models.Model):
                 if self.date:
                     reservation_form.checkout = self.date
                 reservation_form.room_type_id = self.room_type_id
+                reservation_form.annual_reservation = True
             reservation = reservation_form.save()
             reservation.reservation_line_ids.write({'price': 0})
         except BaseException as error:
@@ -100,3 +101,10 @@ class SaleSubscription(models.Model):
                 'l10n_cr_edi_economic_activity_id': self.l10n_cr_edi_economic_activity_id.id
             })
         return vals
+
+    @api.onchange('template_id')
+    def _onchange_subscription_template_id(self):
+        for subscription in self:
+            if not subscription.template_id:
+                continue
+            subscription.room_type_id = subscription.template_id.room_type_id
