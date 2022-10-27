@@ -49,6 +49,7 @@
         'data/crm_tags.xml',
         'data/website_crm.xml',
         'data/ir_config_parameter.xml',
+        'data/ir_cron_data.xml',
         'data/email_templates.xml',
 
         # Views
