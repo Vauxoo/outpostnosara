@@ -21,3 +21,7 @@
 	path = partner-contact
 	url = git@github.com:Vauxoo/partner-contact.git
 	branch = 14.0
+[submodule "account-reconcile"]
+	path = account-reconcile
+	url = git@github.com:OCA/account-reconcile.git
+	branch = 14.0
