@@ -12,7 +12,7 @@
 [submodule "pms"]
 	path = pms
 	url = git@github.com:Vauxoo/pms.git
-	branch = 14.0
+	branch = 14.0-outpost
 [submodule "reporting-engine"]
 	path = reporting-engine
 	url = git@github.com:OCA/reporting-engine.git
